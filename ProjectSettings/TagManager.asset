@@ -44,3 +44,6 @@ TagManager:
   - name: Grid
     uniqueID: 2189851559
     locked: 0
+  - name: Piece
+    uniqueID: 3335125915
+    locked: 0

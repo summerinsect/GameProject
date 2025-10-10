@@ -6,19 +6,40 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 public class GridManager : MonoBehaviour {
+    public static GridManager instance { get; private set; }
     [SerializeField] private GameObject gridPrefab;
-    [SerializeField] private int size;
+    public int size;
+
+    private void Awake() {
+        if (instance != null && instance != this) {
+            Destroy(this);
+        }
+        else {
+            instance = this;
+        }
+    }
+
+    public bool CheckPosition(Vector3Int coordinate) {
+        int x = coordinate.x, y = coordinate.y, z = coordinate.z;
+        if (x + y + z != 0) return false;
+        if (x < -size || x > size) return false;
+        if (y < -size || y > size) return false;
+        if (z < -size || z > size) return false;
+        return true;
+    }
+
+    public Vector3 ComputeOffset(Vector3Int coordinate) {
+        Debug.Assert(CheckPosition(coordinate), "Invalid position!");
+        int x = coordinate.x, y = coordinate.y, z = coordinate.z;
+        float xOffset = x * .75f;
+        float yOffset = (y - z) * Mathf.Sqrt(3) / 4f;
+        return new Vector3(xOffset, yOffset);
+    }
 
     private void Start() {
-        for (int xOffset = -size; xOffset <= size; xOffset++) {
-            int countY = 2 * size + 1 - Mathf.Abs(xOffset);
-            float minY = Mathf.Abs(xOffset) * .5f - size;
-            for (int yOffset = 0; yOffset < countY; yOffset++) {
-                Vector3 offset = new Vector3(xOffset, minY + yOffset);
-                offset.x *= .75f;
-                offset.y *= Mathf.Sqrt(3) * .5f;
-                Instantiate(gridPrefab, transform.position + offset, Quaternion.identity, transform);
-            }
-        }
+        for (int x = -size; x <= size; x++)
+            for (int y = -size; y <= size; y++)
+                if (CheckPosition(new Vector3Int(x, y, - x - y)))
+                    Instantiate(gridPrefab, transform.position + ComputeOffset(new Vector3Int(x, y, - x - y)), Quaternion.identity, transform);
     }
 }
