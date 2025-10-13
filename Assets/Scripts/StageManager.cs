@@ -5,7 +5,9 @@ using UnityEngine;
 public class StageManager : MonoBehaviour
 {
     private bool isStarted = false;
-    BattleManager battleManager;
+    private bool isFinished = false;
+
+	BattleManager battleManager;
 
 	// Start is called before the first frame update
 	void Start()
@@ -16,9 +18,9 @@ public class StageManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isStarted)
+        if(isStarted && !isFinished)
         {
-            battleManager.Battle();
+            isFinished = battleManager.Battle();
         }
 
     }

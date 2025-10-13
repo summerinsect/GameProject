@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Character : MonoBehaviour
 {
-	[Header(" Ù–‘")]
+	[Header("Attributes")]
 	public string characterName;
 	public int health = 100;
 	public int attackDamage = 10;

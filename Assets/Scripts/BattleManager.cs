@@ -57,7 +57,7 @@ public class BattleManager : MonoBehaviour
 		return next;
 	}
 
-	public void Battle()
+	public bool Battle() // bool: is finished
 	{
 		if (isMoving)
 		{
@@ -78,6 +78,12 @@ public class BattleManager : MonoBehaviour
 		else
 		{
 			current[turn] = GetNextAlive(current[turn], turn);
+			if(current[turn] == -1)
+			{
+				Debug.Log($"Team {turn ^ 1} wins!");
+				return true;
+			}
+
 			int state = currentCharacter.SingleRound();
 			if (state == 0)
 			{
@@ -92,8 +98,9 @@ public class BattleManager : MonoBehaviour
 			{
 				Debug.LogError("Invalid State!");
 			}
+
 			turn ^= 1;
 		}
-
+		return false;
 	}
 }
