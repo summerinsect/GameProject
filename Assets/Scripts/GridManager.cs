@@ -5,21 +5,26 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class GridManager : MonoBehaviour {
+public class GridManager : MonoBehaviour 
+{
     public static GridManager instance { get; private set; }
     [SerializeField] private GameObject gridPrefab;
     public int size;
 
-    private void Awake() {
-        if (instance != null && instance != this) {
+    private void Awake() 
+    {
+        if (instance != null && instance != this) 
+        {
             Destroy(this);
         }
-        else {
+        else 
+        {
             instance = this;
         }
     }
 
-    public bool CheckPosition(Vector3Int coordinate) {
+    public bool CheckPosition(Vector3Int coordinate) 
+    {
         int x = coordinate.x, y = coordinate.y, z = coordinate.z;
         if (x + y + z != 0) return false;
         if (x < -size || x > size) return false;
@@ -28,7 +33,8 @@ public class GridManager : MonoBehaviour {
         return true;
     }
 
-    public Vector3 ComputeOffset(Vector3Int coordinate) {
+    public Vector3 ComputeOffset(Vector3Int coordinate) 
+    {
         Debug.Assert(CheckPosition(coordinate), "Invalid position!");
         int x = coordinate.x, y = coordinate.y, z = coordinate.z;
         float xOffset = x * .75f;
@@ -36,7 +42,8 @@ public class GridManager : MonoBehaviour {
         return new Vector3(xOffset, yOffset);
     }
 
-    private void Start() {
+    private void Start() 
+    {
         for (int x = -size; x <= size; x++)
             for (int y = -size; y <= size; y++)
                 if (CheckPosition(new Vector3Int(x, y, - x - y)))
