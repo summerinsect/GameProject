@@ -19,13 +19,4 @@ public class BagManager : MonoBehaviour
 	public int coin;
 	public List<Character> members = new List<Character>();
 
-	public void Start()
-	{
-
-	}
-
-	private void Update()
-	{
-		
-	}
 }
