@@ -78,12 +78,21 @@ public class GridManager : MonoBehaviour
         foreach (var dir in directionsArray)
             if (CheckPosition(cur + dir) && !HasCharacter(cur + dir))
                 res.Add(cur + dir);
-        return res;
+
+		for (int i = res.Count - 1; i > 0; i--)
+		{
+			int randomIndex = Random.Range(0, i + 1);  // 随机选择 [0, i] 范围内的索引
+			Vector3Int temp = res[i];
+			res[i] = res[randomIndex];
+			res[randomIndex] = temp;
+		}
+
+		return res;
 	}
 
     public int Distance(Vector3Int a, Vector3Int b) 
     {
-        return (Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y) + Mathf.Abs(a.z - b.z)) / 2;
+		return (Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y) + Mathf.Abs(a.z - b.z)) / 2;
 	}
 
 	public int GetMinDistInTargets(Vector3Int pos, List<Character> targets) {

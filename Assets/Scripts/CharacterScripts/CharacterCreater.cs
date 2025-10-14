@@ -32,7 +32,7 @@ public class CharacterCreater : MonoBehaviour
 		character.position = pos;
 	}
 
-	public Character CreateCharacter(string characterName, int teamId, Vector3Int pos)
+	public Character CreateCharacter(string characterName, int teamId = 0, Vector3Int pos = new Vector3Int())
 	{
 		if (prefabDict.TryGetValue(characterName, out Character character))
 		{

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 
@@ -25,11 +26,11 @@ public class BattleManager : MonoBehaviour
 	private int turn;
 	public int[] current = new int[2];
 
-	public float moveTurnTime = 0.5f;
-	private float moveTimer;
 	private bool isMoving;
-
 	private bool isAttacking;
+	public float waitMoveTime;
+	public float waitAttackTime; 
+	public float waitTimer;
 
 	private Character currentCharacter => team[turn].GetMember(current[turn]);
 
@@ -40,6 +41,8 @@ public class BattleManager : MonoBehaviour
 		team[1] = new TeamManager();
 		current[0] = 0;
 		current[1] = 0;
+		waitMoveTime = 0.15f;
+		waitAttackTime = 0.5f;
 	}
 
 	public void AddMember(int teamId, Character character)
@@ -70,26 +73,43 @@ public class BattleManager : MonoBehaviour
 		target.IsDamagedBy(damage);
 	}
 
-	public bool Battle() // bool: is finished
+	void WaitSomeTime(float t)
 	{
+		waitTimer = t;
+	}
+	bool StillWaiting()
+	{
+		return waitTimer > 0f;
+	}
+	void DealTimer()
+	{
+		waitTimer -= Time.deltaTime;
+	}
+
+	public bool Battle() // bool -> is finished
+	{
+		DealTimer();
 		if (isMoving)
 		{
-			moveTimer -= Time.deltaTime;
-			if (moveTimer <= 0)
+			if(currentCharacter.IsMovementComplete())
 			{
 				isMoving = false;
-			}
-			else
-			{
-				currentCharacter.TryMove();
+				turn ^= 1;
+				WaitSomeTime(waitMoveTime);
 			}
 		}
 		else if (isAttacking)
 		{
 			isAttacking = false;
+			turn ^= 1;
+			WaitSomeTime(waitAttackTime);
 		}
 		else
 		{
+			if(StillWaiting())
+			{
+				return false;
+			}
 			current[turn] = team[turn].GetNextAlive(current[turn]);
 			if(current[turn] == -1)
 			{
@@ -101,7 +121,7 @@ public class BattleManager : MonoBehaviour
 			if (state == 0)
 			{
 				isMoving = true;
-				moveTimer = moveTurnTime;
+				currentCharacter.InitMove();
 			}
 			else if (state == 1)
 			{
@@ -111,8 +131,6 @@ public class BattleManager : MonoBehaviour
 			{
 				Debug.LogError("Invalid State!");
 			}
-
-			turn ^= 1;
 		}
 		return false;
 	}

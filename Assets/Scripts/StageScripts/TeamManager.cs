@@ -15,7 +15,8 @@ public class TeamManager
     public void AddMember(Character character)
     {
         members.Add(character);
-    }
+		character.TeleportToPosition();
+	}
 
 
 	public List<Character> GetTeamMember()

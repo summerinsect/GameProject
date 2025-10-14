@@ -54,6 +54,7 @@ public class GameScene : MonoBehaviour // Manages scene transitions and initiali
 		BattleManager.instance.BattleInit();
 		StageManager.instance.StageInit();
 		GridManager.instance.GridInit();
+		StageLoader.instance.StageInit();
 	}
 
 	// Main Scene

@@ -4,36 +4,29 @@ using UnityEngine;
 
 public abstract class Character : MonoBehaviour // Base class for all characters in the game
 {
-
-	private Vector3Int[] directionsArray = new Vector3Int[]{
-		new Vector3Int(1, -1, 0),
-		new Vector3Int(0, 1, -1),
-		new Vector3Int(-1, 0, 1),
-		new Vector3Int(-1, 1, 0),
-		new Vector3Int(0, -1, 1),
-		new Vector3Int(1, 0, -1)
-	};
-
 	[Header("Attributes")]
 	public int health;
-
 	public string characterName;
 	public string uid;
 	public int teamId;
-
 	public Vector3Int position;
 
+	// 动画组件引用
+	protected CharacterAnimator characterAnimator;
 
 	public bool isAlive => health > 0;
 
-	protected virtual void BattleInit()
+	protected virtual void Awake()
 	{
-
+		characterAnimator = GetComponent<CharacterAnimator>();
+		if (characterAnimator == null)
+			characterAnimator = gameObject.AddComponent<CharacterAnimator>();
 	}
 
 	public virtual void IsDamagedBy(int damage)
 	{
 		health -= damage;
+		characterAnimator.PlayDamageEffect();
 	}
 
 	public virtual int SingleRound() 
@@ -44,9 +37,24 @@ public abstract class Character : MonoBehaviour // Base class for all characters
 
 	protected abstract int ProcessSingleRound();
 
-	public void TryMove() // Animation
+	public void InitMove()
 	{
-
+		Vector3 targetWorldPos = GridManager.instance.ComputeOffset(position);
+		characterAnimator.StartMoveTo(targetWorldPos);
 	}
 
+
+	public void TeleportTo(Vector3 pos)
+	{
+		characterAnimator.TeleportTo(pos);
+	}
+
+	public void TeleportToPosition()
+	{
+		TeleportTo(GridManager.instance.ComputeOffset(position));
+	}
+	public bool IsMovementComplete()
+	{
+		return !characterAnimator.IsMoving;
+	}
 }
