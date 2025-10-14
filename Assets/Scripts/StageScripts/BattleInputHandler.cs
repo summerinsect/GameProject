@@ -20,7 +20,7 @@ public class BattleInputHandler : MonoBehaviour // Handles input specific to the
 
 	private void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.F8))
+		if (Input.GetKeyDown(KeyCode.K))
 			StartBattle();
 	}
 
@@ -28,6 +28,7 @@ public class BattleInputHandler : MonoBehaviour // Handles input specific to the
 	{
 		Debug.Log("Battle Start!");
 		StageManager.instance.StartBattle();
+		// unity is sb
 	}
 
 }
