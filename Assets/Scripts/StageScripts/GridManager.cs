@@ -1,0 +1,95 @@
+using JetBrains.Annotations;
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.UIElements;
+
+public class GridManager : MonoBehaviour
+{
+	Vector3Int[] directionsArray = new Vector3Int[]{
+		new Vector3Int(1, -1, 0),
+		new Vector3Int(0, 1, -1),
+		new Vector3Int(-1, 0, 1),
+		new Vector3Int(-1, 1, 0),
+		new Vector3Int(0, -1, 1),
+		new Vector3Int(1, 0, -1)
+	};
+	public static GridManager instance { get; private set; }
+	private void Awake()
+	{
+		if (instance != null && instance != this)
+		{
+			Destroy(gameObject);
+			return;
+		}
+		instance = this;
+	}
+	private void OnDestroy()
+	{
+		if (instance == this)
+			instance = null;
+	}
+
+	[SerializeField] private GameObject gridPrefab;
+    public int size;
+
+    public void GridInit()
+    {
+		for (int x = -size; x <= size; x++)
+			for (int y = -size; y <= size; y++)
+				if (CheckPosition(new Vector3Int(x, y, -x - y)))
+					Instantiate(gridPrefab, transform.position + ComputeOffset(new Vector3Int(x, y, -x - y)), Quaternion.identity, transform);
+	}
+	public bool CheckPosition(Vector3Int coordinate) 
+    {
+        int x = coordinate.x, y = coordinate.y, z = coordinate.z;
+        if (x + y + z != 0) return false;
+        if (x < -size || x > size) return false;
+        if (y < -size || y > size) return false;
+        if (z < -size || z > size) return false;
+        return true;
+    }
+
+    public Vector3 ComputeOffset(Vector3Int coordinate) 
+    {
+        Debug.Assert(CheckPosition(coordinate), "Invalid position!");
+        int x = coordinate.x, y = coordinate.y, z = coordinate.z;
+        float xOffset = x * .75f;
+        float yOffset = (y - z) * Mathf.Sqrt(3) / 4f;
+        return new Vector3(xOffset, yOffset);
+    }
+
+    public bool HasCharacter(Vector3Int pos)
+    {
+        foreach (var character in BattleManager.instance.GetTeamMember(0))
+            if (character.position == pos && character.isAlive)
+                return true;
+        foreach (var character in BattleManager.instance.GetTeamMember(1))
+            if (character.position == pos && character.isAlive)
+                return true;
+        return false;
+    }
+
+
+	public List<Vector3Int> ValidPositions(Vector3Int cur)
+    {
+        List<Vector3Int> res = new List<Vector3Int>();
+        foreach (var dir in directionsArray)
+            if (CheckPosition(cur + dir) && !HasCharacter(cur + dir))
+                res.Add(cur + dir);
+        return res;
+	}
+
+    public int Distance(Vector3Int a, Vector3Int b) 
+    {
+        return (Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y) + Mathf.Abs(a.z - b.z)) / 2;
+	}
+
+	public int GetMinDistInTargets(Vector3Int pos, List<Character> targets) {
+        int mi = int.MaxValue;
+		foreach (var target in targets)
+            mi = Mathf.Min(mi, Distance(pos, target.position));
+        return mi;
+	}
+}
