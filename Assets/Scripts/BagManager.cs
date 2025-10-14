@@ -5,16 +5,15 @@ using UnityEngine;
 public class BagManager : MonoBehaviour
 {
 	public static BagManager instance { get; private set; }
-	private void Awake()
+	private void Awake() // appear in all scenes
 	{
 		if (instance != null && instance != this)
 		{
-			Destroy(this);
+			Destroy(gameObject);
+			return;
 		}
-		else
-		{
-			instance = this;
-		}
+		instance = this;
+		DontDestroyOnLoad(gameObject);
 	}
 
 	public int coin;

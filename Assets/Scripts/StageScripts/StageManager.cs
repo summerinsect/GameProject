@@ -2,26 +2,52 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StageManager : MonoBehaviour
+public class StageManager : MonoBehaviour // Manages the stage setup and battle flow
 {
-    private bool isStarted = false;
-    private bool isFinished = false;
+	public static StageManager instance { get; private set; }
+	private void Awake()
+	{
+		if (instance != null && instance != this)
+		{
+			Destroy(gameObject);
+			return;
+		}
+		instance = this;
+	}
+	private void OnDestroy()
+	{
+		if (instance == this)
+			instance = null;
+	}
 
-	BattleManager battleManager;
+	private bool isStarted;
+	private bool isFinished;
 
-	// Start is called before the first frame update
-	void Start()
-    {
-        
-    }
+	public void StageInit() // init the stage
+	{
+		isStarted = false;
+		isFinished = false;
+		BattleManager.instance.AddMember(1, CharacterCreater.instance.CreateCharacter("melee", 1, new Vector3Int(1, 1, -2)));
+		BattleManager.instance.AddMember(0, CharacterCreater.instance.CreateCharacter("melee", 0, new Vector3Int(-1, -1, 2)));
+	}
+	public void StartBattle() // start the battle
+	{
+		isStarted = true;
+	}
 
-    // Update is called once per frame
-    void Update()
+	void Update()
     {
         if(isStarted && !isFinished)
         {
-            isFinished = battleManager.Battle();
-        }
+            isFinished = BattleManager.instance.Battle();
+			if(isFinished)
+				Debug.Log($"Battle Finished! {BattleManager.instance.GetWinner()} wins!");
+
+		}
+		else if(isFinished)
+		{
+
+		}
 
     }
 }
