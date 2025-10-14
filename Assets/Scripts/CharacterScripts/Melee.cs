@@ -13,6 +13,8 @@ public class Melee : Character // A melee character that can attack and move
 		string targetId = FindTarget();
 		if (targetId != null)
 		{
+			//Debug.Log($"{uid} found target {targetId} in range and prepares to attack, distance: {GridManager.instance.Distance(position, BattleManager.instance.FindCharacter(targetId).position)}");
+			//Debug.Log($"position: {position}, target position: {BattleManager.instance.FindCharacter(targetId).position}");
 			Attack(targetId);
 			return 1;
 		}
@@ -30,7 +32,8 @@ public class Melee : Character // A melee character that can attack and move
 		foreach (Character target in targets)
 			if(GridManager.instance.Distance(position, target.position) <= attackRange)
 				return target.uid;
-		
+
+
 		return null;
 	}
 

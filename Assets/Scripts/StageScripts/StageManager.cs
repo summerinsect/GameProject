@@ -27,8 +27,6 @@ public class StageManager : MonoBehaviour // Manages the stage setup and battle 
 	{
 		isStarted = false;
 		isFinished = false;
-		BattleManager.instance.AddMember(1, CharacterCreater.instance.CreateCharacter("melee", 1, new Vector3Int(1, 1, -2)));
-		BattleManager.instance.AddMember(0, CharacterCreater.instance.CreateCharacter("melee", 0, new Vector3Int(-1, -1, 2)));
 	}
 	public void StartBattle() // start the battle
 	{
