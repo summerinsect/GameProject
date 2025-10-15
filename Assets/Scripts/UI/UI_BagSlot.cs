@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine.EventSystems;
 using Unity.VisualScripting;
 
-public class UI_BagSlot : MonoBehaviour, IPointerDownHandler {
+public class UI_BagSlot : MonoBehaviour, IPointerClickHandler {
     public Character characterScript;
     public Image image;
 
@@ -12,8 +12,8 @@ public class UI_BagSlot : MonoBehaviour, IPointerDownHandler {
         image = GetComponent<Image>();
     }
 
-    public void UpdateSlot(string _character) {
-        characterScript = CharacterCreater.instance.CreateCharacter(_character, 0, new Vector3Int(0, 0, 0));
+    public void UpdateSlot(Character _character) {
+        characterScript = _character;
         SpriteRenderer sr = characterScript.GetComponent<SpriteRenderer>();
         image.sprite = sr.sprite;
         image.color = sr.color;
@@ -23,7 +23,10 @@ public class UI_BagSlot : MonoBehaviour, IPointerDownHandler {
         characterScript = null;
     }
 
-    public void OnPointerDown(PointerEventData eventData) {
-        Debug.Log("Choose character - " + characterScript.characterName);
+    public void OnPointerClick(PointerEventData eventData) {
+        if (characterScript == null)
+            return;
+        if (eventData.button == PointerEventData.InputButton.Left)
+            StageInputHandler.instance.HandleSlotClick(characterScript);
     }
 }
