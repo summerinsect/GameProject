@@ -11,22 +11,21 @@ public abstract class Character : MonoBehaviour // Base class for all characters
 	public int teamId;
 	public Vector3Int position;
 
-	// 动画组件引用
-	protected CharacterAnimator characterAnimator;
+	protected CharacterBattleAnimator characterBattleAnimator;
 
 	public bool isAlive => health > 0;
 
 	protected virtual void Awake()
 	{
-		characterAnimator = GetComponent<CharacterAnimator>();
-		if (characterAnimator == null)
-			characterAnimator = gameObject.AddComponent<CharacterAnimator>();
+		characterBattleAnimator = GetComponent<CharacterBattleAnimator>();
+		if (characterBattleAnimator == null)
+			characterBattleAnimator = gameObject.AddComponent<CharacterBattleAnimator>();
 	}
 
 	public virtual void IsDamagedBy(int damage)
 	{
 		health -= damage;
-		characterAnimator.PlayDamageEffect();
+		characterBattleAnimator.PlayDamageEffect();
 	}
 
 	public virtual int SingleRound() 
@@ -40,13 +39,13 @@ public abstract class Character : MonoBehaviour // Base class for all characters
 	public void InitMove()
 	{
 		Vector3 targetWorldPos = GridManager.instance.ComputeOffset(position);
-		characterAnimator.StartMoveTo(targetWorldPos);
+		characterBattleAnimator.StartMoveTo(targetWorldPos);
 	}
 
-
+	// Animation related methods
 	public void TeleportTo(Vector3 pos)
 	{
-		characterAnimator.TeleportTo(pos);
+		characterBattleAnimator.TeleportTo(pos);
 	}
 
 	public void TeleportToPosition()
@@ -55,6 +54,6 @@ public abstract class Character : MonoBehaviour // Base class for all characters
 	}
 	public bool IsMovementComplete()
 	{
-		return !characterAnimator.IsMoving;
+		return !characterBattleAnimator.IsMoving;
 	}
 }

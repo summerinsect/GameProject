@@ -34,15 +34,16 @@ public class BattleManager : MonoBehaviour
 	public float waitAttackTime;
 	private float waitTimer;
 
-	private Character currentCharacter => team[turn].GetMember(current[turn]);
+	private Character currentCharacter;
 
 
 	public void BattleInit()
 	{
 		team[0] = new TeamManager();
 		team[1] = new TeamManager();
-		current[0] = 0;
-		current[1] = 0;
+		turn = 1; // player first
+		current[0] = -1;
+		current[1] = -1;
 	}
 
 	public void AddMember(int teamId, Character character)
@@ -85,7 +86,33 @@ public class BattleManager : MonoBehaviour
 	{
 		waitTimer -= Time.deltaTime;
 	}
-
+	void NextAlive()
+	{
+		current[turn]++;
+		while (current[turn] < team[turn].MemberCount() && !team[turn].GetMember(current[turn]).isAlive)
+			current[turn]++;
+	}
+	bool FindedNextMember()
+	{
+		NextAlive();
+		return current[turn] < team[turn].MemberCount();
+	}
+	void NextMember()
+	{
+		turn ^= 1;
+		while (!FindedNextMember())
+		{
+			turn ^= 1;
+			if (current[0] >= team[0].MemberCount() && current[1] >= team[1].MemberCount())
+			{
+				turn = 0; // player first
+				current[0] = -1;
+				current[1] = -1;
+				Debug.Log("New Round Started");
+			}
+		}
+		currentCharacter = team[turn].GetMember(current[turn]);
+	}
 	public bool Battle() // bool -> is finished
 	{
 		DealTimer();
@@ -94,14 +121,12 @@ public class BattleManager : MonoBehaviour
 			if(currentCharacter.IsMovementComplete())
 			{
 				isMoving = false;
-				turn ^= 1;
 				WaitSomeTime(waitMoveTime);
 			}
 		}
 		else if (isAttacking)
 		{
 			isAttacking = false;
-			turn ^= 1;
 			WaitSomeTime(waitAttackTime);
 		}
 		else
@@ -110,12 +135,13 @@ public class BattleManager : MonoBehaviour
 			{
 				return false;
 			}
-			current[turn] = team[turn].GetNextAlive(current[turn]);
-			if(current[turn] == -1)
+
+			if (team[0].AllDead()|| team[1].AllDead())
 			{
-				Debug.Log($"Team {turn ^ 1} wins!");
 				return true;
 			}
+
+			NextMember();
 
 			int state = currentCharacter.SingleRound();
 			if (state == 0)
@@ -137,9 +163,9 @@ public class BattleManager : MonoBehaviour
 
 	public int GetWinner()
 	{
-		if (team[0].GetNextAlive(0) == -1)
+		if (team[0].AllDead())
 			return 1;
-		else if(team[1].GetNextAlive(0) == -1)
+		else if(team[1].AllDead())
 			return 0;
 		else
 		{
