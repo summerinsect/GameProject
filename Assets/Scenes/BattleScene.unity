@@ -3121,9 +3121,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   current: 0000000000000000
-  waitMoveTime: 0
-  waitAttackTime: 0
-  waitTimer: 0
+  waitMoveTime: 0.15
+  waitAttackTime: 0.5
 --- !u!4 &1982967435
 Transform:
   m_ObjectHideFlags: 0

@@ -28,9 +28,11 @@ public class BattleManager : MonoBehaviour
 
 	private bool isMoving;
 	private bool isAttacking;
+	
+	[Header("Battle Timing")]
 	public float waitMoveTime;
-	public float waitAttackTime; 
-	public float waitTimer;
+	public float waitAttackTime;
+	private float waitTimer;
 
 	private Character currentCharacter => team[turn].GetMember(current[turn]);
 
@@ -41,8 +43,6 @@ public class BattleManager : MonoBehaviour
 		team[1] = new TeamManager();
 		current[0] = 0;
 		current[1] = 0;
-		waitMoveTime = 0.15f;
-		waitAttackTime = 0.5f;
 	}
 
 	public void AddMember(int teamId, Character character)
@@ -53,7 +53,7 @@ public class BattleManager : MonoBehaviour
 
 	public List<Character> GetTeamMember(int teamId)
 	{
-		return team[teamId].GetTeamMember();
+		return team[teamId].GetAliveMembers();
 	}
 
 	public Character FindCharacter(string uid)
