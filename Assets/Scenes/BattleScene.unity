@@ -1627,14 +1627,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bagSlotsParent: {fileID: 2083271831}
-  characters:
-  - YouKnowWho
-  - YouKnowWho
-  - melee
-  - YouKnowWho
-  - melee
-  - melee
-  - melee
   bagSlots: []
 --- !u!4 &999259476
 Transform:
@@ -2228,6 +2220,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b66ca9b4b9cf07e44823abcb2a74676c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedCharacter: {fileID: 0}
+  gridLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!4 &1446917089
 Transform:
   m_ObjectHideFlags: 0
@@ -2666,7 +2662,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1951362408}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.9999948
+  m_Size: 0.9999983
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3394,7 +3390,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00003802631}
+  m_AnchoredPosition: {x: 0, y: 0.00027754658}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2083271832

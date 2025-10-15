@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class UI_BagManager : MonoBehaviour {
     [SerializeField] public Transform bagSlotsParent;
-    public List<string> characters;
     public UI_BagSlot[] bagSlots;
 
     private void Start() {
@@ -15,7 +14,8 @@ public class UI_BagManager : MonoBehaviour {
     private void UpdateSlotUI() {
         for (int i = 0; i < bagSlots.Length; i++)
             bagSlots[i].CleanUpSlot();
-        for (int i = 0; i < characters.Count; i++)
-            bagSlots[i].UpdateSlot(characters[i]);
+        List<Character> members = BagManager.instance.members;
+        for (int i = 0; i < members.Count; i++)
+            bagSlots[i].UpdateSlot(members[i]);
     }
 }

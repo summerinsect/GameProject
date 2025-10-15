@@ -37,9 +37,13 @@ public class GridManager : MonoBehaviour
     public void GridInit()
     {
 		for (int x = -size; x <= size; x++)
-			for (int y = -size; y <= size; y++)
-				if (CheckPosition(new Vector3Int(x, y, -x - y)))
-					Instantiate(gridPrefab, transform.position + ComputeOffset(new Vector3Int(x, y, -x - y)), Quaternion.identity, transform);
+			for (int y = -size; y <= size; y++) {
+				Vector3Int coordinate = new Vector3Int(x, y, -x - y);
+                if (CheckPosition(coordinate)) {
+					GameObject newGrid = Instantiate(gridPrefab, transform.position + ComputeOffset(coordinate), Quaternion.identity, transform);
+					newGrid.GetComponent<GridScript>().coordinate = coordinate;	
+                }
+			}
 	}
 	public bool CheckPosition(Vector3Int coordinate) 
     {
@@ -72,6 +76,8 @@ public class GridManager : MonoBehaviour
         return false;
     }
 
+
+	
 
 	public List<Vector3Int> ValidPositions(Vector3Int cur)
     {
