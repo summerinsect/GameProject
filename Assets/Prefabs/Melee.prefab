@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d06d673b3e4178b42909172a96f1f493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 40
   characterName: melee
   uid: 
   teamId: 0
