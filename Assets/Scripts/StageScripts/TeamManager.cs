@@ -19,9 +19,13 @@ public class TeamManager
 	}
 
 
-	public List<Character> GetTeamMember()
+	public List<Character> GetAliveMembers()
     {
-        return members;
+		List<Character> characters = new List<Character>();
+		foreach (Character character in members)
+			if(character.isAlive)
+				characters.Add(character);
+		return characters;
 	}
 
     public Character GetMember(int index)

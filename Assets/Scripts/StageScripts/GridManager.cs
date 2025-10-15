@@ -53,8 +53,9 @@ public class GridManager : MonoBehaviour
 
     public Vector3 ComputeOffset(Vector3Int coordinate) 
     {
-        Debug.Assert(CheckPosition(coordinate), "Invalid position!");
-        int x = coordinate.x, y = coordinate.y, z = coordinate.z;
+		Debug.Assert(CheckPosition(coordinate), $"Invalid position, coordinate: {coordinate.x}, {coordinate.y}, {coordinate.z}");
+
+		int x = coordinate.x, y = coordinate.y, z = coordinate.z;
         float xOffset = x * .75f;
         float yOffset = (y - z) * Mathf.Sqrt(3) / 4f;
         return new Vector3(xOffset, yOffset);
