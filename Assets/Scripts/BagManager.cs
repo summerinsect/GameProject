@@ -24,6 +24,7 @@ public class BagManager : MonoBehaviour
 	public void AddMember(Character _character) {
 		Debug.Log($"Add member {_character.uid} to bag");
 		members.Add(_character);
+		_character.characterBattleAnimator.DisableBattleAnimation();
         UI_BagManager.instance.UpdateSlotUI();
     }
 

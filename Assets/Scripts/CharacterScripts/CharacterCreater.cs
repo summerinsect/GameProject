@@ -30,6 +30,7 @@ public class CharacterCreater : MonoBehaviour
 		character.uid = System.Guid.NewGuid().ToString();
 		character.teamId = teamId;
 		character.position = pos;
+		character.characterBattleAnimator.TeleportToPosition();
 	}
 
 	public Character CreateCharacter(string characterName, int teamId = 0, Vector3Int pos = new Vector3Int())
