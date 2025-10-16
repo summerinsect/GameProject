@@ -67,7 +67,23 @@ public class BattleManager : MonoBehaviour
 		return null;
 	}
 
-	public void DamageCharacter(string uid, int damage)
+	public int GetTeamID (Character _character) {
+		for (int i = 0; i <= 1; i++)
+			foreach (var member in team[i].members)
+				if (member.uid == _character.uid)
+					return i;
+		Debug.LogError($"Character with UID {_character.uid} not found!");
+		return -1;	
+    }
+
+	public void RemoveMember(Character character)
+	{
+		int teamId = GetTeamID(character);
+		if (teamId != -1)
+			team[teamId].RemoveMember(character);
+    }
+
+    public void DamageCharacter(string uid, int damage)
 	{
 		Character target = FindCharacter(uid);
 		target.IsDamagedBy(damage);

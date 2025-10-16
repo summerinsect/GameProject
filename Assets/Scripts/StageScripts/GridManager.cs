@@ -76,7 +76,15 @@ public class GridManager : MonoBehaviour
         return false;
     }
 
-
+	public Character FindCharacter(Vector3Int pos) {
+		foreach (var character in BattleManager.instance.GetTeamMember(0))
+			if (character.position == pos && character.isAlive)
+				return character;
+		foreach (var character in BattleManager.instance.GetTeamMember(1))
+			if (character.position == pos && character.isAlive)
+				return character;
+		return null;
+    }
 	
 
 	public List<Vector3Int> ValidPositions(Vector3Int cur)
