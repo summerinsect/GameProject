@@ -25,15 +25,17 @@ public class BagManager : MonoBehaviour
 		Debug.Log($"Add member {_character.uid} to bag");
 		members.Add(_character);
 		_character.characterBattleAnimator.DisableBattleAnimation();
-	}
+        UI_BagManager.instance.UpdateSlotUI();
+    }
 
-	public void RemoveMember(Character _character) {
+    public void RemoveMember(Character _character) {
 		foreach (Character _char in members) {
 			if (_char.uid == _character.uid) {
 				members.Remove(_char);
-				return;
+				break;
             }
         }
+		UI_BagManager.instance.UpdateSlotUI();
 	}
 
 }

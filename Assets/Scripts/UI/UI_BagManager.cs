@@ -3,6 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class UI_BagManager : MonoBehaviour {
+    public static UI_BagManager instance { get; private set; }
+    private void Awake() // appear in all scenes
+    {
+        if (instance != null && instance != this) {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+    }
+
     [SerializeField] public Transform bagSlotsParent;
     public UI_BagSlot[] bagSlots;
 
@@ -11,7 +21,7 @@ public class UI_BagManager : MonoBehaviour {
         UpdateSlotUI();
     }
 
-    private void UpdateSlotUI() {
+    public void UpdateSlotUI() {
         for (int i = 0; i < bagSlots.Length; i++)
             bagSlots[i].CleanUpSlot();
         List<Character> members = BagManager.instance.members;
