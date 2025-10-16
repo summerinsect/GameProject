@@ -18,8 +18,12 @@ public class TeamManager
 		character.TeleportToPosition();
 	}
 
+	public void RemoveMember(Character character)
+	{
+		members.Remove(character);
+    }	
 
-	public List<Character> GetAliveMembers()
+    public List<Character> GetAliveMembers()
     {
 		List<Character> characters = new List<Character>();
 		foreach (Character character in members)

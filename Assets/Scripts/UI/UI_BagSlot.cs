@@ -21,11 +21,11 @@ public class UI_BagSlot : MonoBehaviour, IPointerClickHandler {
 
     public void CleanUpSlot() {
         characterScript = null;
+        image.sprite = null;
+        image.color = Color.clear;
     }
 
     public void OnPointerClick(PointerEventData eventData) {
-        if (characterScript == null)
-            return;
         if (eventData.button == PointerEventData.InputButton.Left)
             StageInputHandler.instance.HandleSlotClick(characterScript);
     }
