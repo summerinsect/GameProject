@@ -21,7 +21,8 @@ public class CharacterBattleAnimator : MonoBehaviour
 	private Character character;
 
 	public bool IsMoving => isMoving;
-	public bool IsAnimating => isMoving || isBlinking;
+	public bool enableBattleAnimation;
+
 
 	private void Awake()
 	{
@@ -30,19 +31,31 @@ public class CharacterBattleAnimator : MonoBehaviour
 		moveSpeed = 2f;
 		spriteRenderer = GetComponent<SpriteRenderer>();
 		character = GetComponent<Character>();
+		enableBattleAnimation = false;
 	}
 
 	private void Update()
 	{
 		if (isMoving)
-		{
 			UpdateMoveAnimation();
-		}
-
 		if (isBlinking)
-		{
 			UpdateDamageBlinkEffect();
-		}
+	}
+
+
+	public void EnableBattleAnimation()
+	{
+		enableBattleAnimation = true;
+		spriteRenderer.enabled = true;
+		TeleportToPosition();
+		Debug.Log($"[{gameObject.name}] Battle animation enabled, sprite shown");
+	}
+
+	public void DisableBattleAnimation()
+	{
+		enableBattleAnimation = false;
+		spriteRenderer.enabled = false;
+		Debug.Log($"[{gameObject.name}] Battle animation disabled, sprite hidden");
 	}
 
 	public void StartMoveTo(Vector3 targetPosition)
@@ -60,6 +73,10 @@ public class CharacterBattleAnimator : MonoBehaviour
 		transform.position = position;
 		isMoving = false;
 		moveProgress = 0f;
+	}
+	public void TeleportToPosition()
+	{
+		TeleportTo(GridManager.instance.ComputeOffset(character.position));
 	}
 
 	private void UpdateMoveAnimation()
@@ -98,15 +115,15 @@ public class CharacterBattleAnimator : MonoBehaviour
 		{
 			isBlinking = false;
 
-			if (character != null && !character.isAlive)
+			if (!character.isAlive)
 			{
 				spriteRenderer.enabled = false;
 				Debug.Log($"[{gameObject.name}] Character died, sprite hidden");
 			}
-			else
-			{
-				spriteRenderer.enabled = true;
-			}
 		}
+	}
+	public bool IsMovementComplete()
+	{
+		return !IsMoving;
 	}
 }

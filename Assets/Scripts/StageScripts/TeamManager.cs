@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class TeamManager
 {
@@ -13,10 +14,20 @@ public class TeamManager
 
     }
 
-    public void AddMember(Character character)
-    {
-        members.Add(character);
-		character.TeleportToPosition();
+	public void AddMember(Character character)
+	{
+		members.Add(character);
+	}
+	public void RemoveMember(Character character)
+	{
+		foreach (Character _character in members)
+		{
+			if (_character.uid == character.uid)
+			{
+				members.Remove(_character);
+				return;
+			}
+		}
 	}
 
 	public int MemberCount()

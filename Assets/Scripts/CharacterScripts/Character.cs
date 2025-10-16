@@ -11,7 +11,7 @@ public abstract class Character : MonoBehaviour // Base class for all characters
 	public int teamId;
 	public Vector3Int position;
 
-	protected CharacterBattleAnimator characterBattleAnimator;
+	public CharacterBattleAnimator characterBattleAnimator;
 
 	public bool isAlive => health > 0;
 
@@ -42,18 +42,4 @@ public abstract class Character : MonoBehaviour // Base class for all characters
 		characterBattleAnimator.StartMoveTo(targetWorldPos);
 	}
 
-	// Animation related methods
-	public void TeleportTo(Vector3 pos)
-	{
-		characterBattleAnimator.TeleportTo(pos);
-	}
-
-	public void TeleportToPosition()
-	{
-		TeleportTo(GridManager.instance.ComputeOffset(position));
-	}
-	public bool IsMovementComplete()
-	{
-		return !characterBattleAnimator.IsMoving;
-	}
 }

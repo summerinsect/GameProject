@@ -50,6 +50,13 @@ public class BattleManager : MonoBehaviour
 	{
 		Debug.Log($"Add member {character.uid} to team {teamId}");
 		team[teamId].AddMember(character);
+		character.characterBattleAnimator.EnableBattleAnimation();
+	}
+
+	public void RemoveMember(int teamId, Character character)
+	{
+		team[teamId].RemoveMember(character);
+		character.characterBattleAnimator.DisableBattleAnimation();
 	}
 
 	public List<Character> GetTeamMember(int teamId)
@@ -118,7 +125,7 @@ public class BattleManager : MonoBehaviour
 		DealTimer();
 		if (isMoving)
 		{
-			if(currentCharacter.IsMovementComplete())
+			if(currentCharacter.characterBattleAnimator.IsMovementComplete())
 			{
 				isMoving = false;
 				WaitSomeTime(waitMoveTime);
