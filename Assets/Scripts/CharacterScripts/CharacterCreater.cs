@@ -25,20 +25,41 @@ public class CharacterCreater : MonoBehaviour
 			}
 	}
 
-	private void InitCharacter(Character character, int teamId, Vector3Int pos)
+	private void InitBattleCharacter(Character character, int teamId, Vector3Int pos)
 	{
 		character.uid = System.Guid.NewGuid().ToString();
 		character.teamId = teamId;
 		character.position = pos;
-		character.characterBattleAnimator.TeleportToPosition();
+		character.characterBattleAnimator.EnableBattleAnimation();
 	}
 
-	public Character CreateCharacter(string characterName, int teamId = 0, Vector3Int pos = new Vector3Int())
+	public Character CreateBattleCharacter(string characterName, int teamId = 0, Vector3Int pos = new Vector3Int())
 	{
 		if (prefabDict.TryGetValue(characterName, out Character character))
 		{
 			Character newCharacter = Instantiate(character, transform);
-			InitCharacter(newCharacter, teamId, pos);
+			InitBattleCharacter(newCharacter, teamId, pos);
+			return newCharacter;
+		}
+		else
+		{
+			Debug.LogError($"Character {characterName} not found!");
+			return null;
+		}
+	}
+
+	private void InitCharacter(Character character)
+	{
+		character.uid = System.Guid.NewGuid().ToString();
+		character.characterBattleAnimator.DisableBattleAnimation();
+	}
+
+	public Character CreateCharacter(string characterName)
+	{
+		if (prefabDict.TryGetValue(characterName, out Character character))
+		{
+			Character newCharacter = Instantiate(character, transform);
+			InitCharacter(newCharacter);
 			return newCharacter;
 		}
 		else
