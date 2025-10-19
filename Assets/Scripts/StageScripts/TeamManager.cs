@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class TeamManager
 {
@@ -12,16 +14,26 @@ public class TeamManager
 
     }
 
-    public void AddMember(Character character)
-    {
-        members.Add(character);
-		character.TeleportToPosition();
+	public void AddMember(Character character)
+	{
+		members.Add(character);
 	}
-
 	public void RemoveMember(Character character)
 	{
-		members.Remove(character);
-    }	
+		foreach (Character _character in members)
+		{
+			if (_character.uid == character.uid)
+			{
+				members.Remove(_character);
+				return;
+			}
+		}
+	}
+
+	public int MemberCount()
+	{
+		return members.Count;
+	}	
 
     public List<Character> GetAliveMembers()
     {
@@ -36,25 +48,11 @@ public class TeamManager
     {
         return members[index];
 	}
-	public int GetNextAlive(int cur)
+	public bool AllDead()
 	{
-		int count = members.Count;
-
-		bool hasAlive = false;
-		for (int i = 0; i < count; i++)
-			if (members[i].isAlive)
-			{
-				hasAlive = true;
-				break;
-			}
-
-		if (!hasAlive)
-			return -1;
-
-		int next = (cur + 1) % count;
-		while (!members[next].isAlive)
-			next = (next + 1) % count;
-
-		return next;
+		foreach (Character character in members)
+			if (character.isAlive)
+				return false;
+		return true;
 	}
 }
