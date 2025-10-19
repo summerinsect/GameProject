@@ -27,17 +27,27 @@ public class StageInputHandler : MonoBehaviour // Handles input specific to the 
 
 	private void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.K))
-			StartBattle();
+		if (!StageManager.instance.isStarted) {
+            if (Input.GetKeyDown(KeyCode.K))
+                StartBattle();
 
-		if (Input.GetMouseButtonDown(0)) {
-			if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
-				return; // UI 已拦截
-			if (selected)
-				ClickWhenSelected(); // 放置或与场景交互
-			else
-				ClickWhenUnselected(); // 点击选择场景物体等（未选中时的操作）
-		}
+            if (Input.GetMouseButtonDown(0)) {
+                if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+                    return; // UI 已拦截
+                if (selected)
+                    ClickWhenSelected(); // 放置或与场景交互
+                else
+                    ClickWhenUnselected(); // 点击选择场景物体等（未选中时的操作）
+            }
+        }
+		else if (!StageManager.instance.isFinished) {
+            // Battle in progress
+        }
+		else if (StageManager.instance.isFinished) {
+			if (Input.GetKeyDown(KeyCode.N)) {
+				GameManager.instance.BattleFinish();
+            }
+        }
 	}
 
 	private void StartBattle()
@@ -78,7 +88,7 @@ public class StageInputHandler : MonoBehaviour // Handles input specific to the 
 			int teamID = BattleManager.instance.GetTeamID(selectedCharacter);
 			Debug.Assert(teamID == 0, "Only player team members can be removed.");
             BattleManager.instance.RemoveMember(selectedCharacter);
-			selectedCharacter.transform.SetPositionAndRotation(new Vector3 (1000, 1000), Quaternion.identity);
+			selectedCharacter.gameObject.SetActive(false);
         }
     }
 
@@ -88,12 +98,12 @@ public class StageInputHandler : MonoBehaviour // Handles input specific to the 
 	}
 
 	public void ClickWhenUnselected() {
-		Debug.Log("Select nothing, click");
+		// Debug.Log("Select nothing, click");
 		Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		Vector2 mousePos2D = new Vector2(mouseWorldPos.x, mouseWorldPos.y);
 		RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero, Mathf.Infinity, gridLayerMask);
         if (hit.collider != null) {
-            Debug.Log("hit grid");
+            // Debug.Log("hit grid");
             GameObject hitObject = hit.collider.gameObject;
             GridScript gridScript = hitObject.GetComponent<GridScript>();
             if (gridScript != null) {
@@ -108,31 +118,32 @@ public class StageInputHandler : MonoBehaviour // Handles input specific to the 
                 }
             }
             else {
-                Debug.Log("hit grid but not hit grid");
+                // Debug.Log("hit grid but not hit grid");
             }
         }
         else {
-            Debug.Log("hit nothing");
+            // Debug.Log("hit nothing");
             DeSelectCharacter();
         }
 
     }		
     public void ClickWhenSelected() {
-		Debug.Log("Select " + selectedCharacter.uid + ", click");
+		// Debug.Log("Select " + selectedCharacter.uid + ", click");
 
 		Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		Vector2 mousePos2D = new Vector2(mouseWorldPos.x, mouseWorldPos.y);
 
 		RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero, Mathf.Infinity, gridLayerMask);
 		if (hit.collider != null) {
-			Debug.Log("hit grid");
+			// Debug.Log("hit grid");
 			GameObject hitObject = hit.collider.gameObject;
 			GridScript gridScript = hitObject.GetComponent<GridScript>();
 			if (gridScript != null) {
 				Vector3Int coordinate = gridScript.coordinate;
 				if (!GridManager.instance.HasCharacter(coordinate)) {
 					RemoveMember();
-					selectedCharacter.position = coordinate;
+                    selectedCharacter.gameObject.SetActive(true);
+                    selectedCharacter.position = coordinate;
 					BattleManager.instance.AddMember(0, selectedCharacter);
 					DeSelectCharacter();
 				}
@@ -149,10 +160,10 @@ public class StageInputHandler : MonoBehaviour // Handles input specific to the 
                 }
 			}
 			else {
-				Debug.Log("hit grid but not hit grid");
+				// Debug.Log("hit grid but not hit grid");
 			}
 		} else {
-			Debug.Log("hit nothing");
+			// Debug.Log("hit nothing");
 			DeSelectCharacter();
 		}
 	}

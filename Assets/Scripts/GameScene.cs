@@ -27,15 +27,18 @@ public class GameScene : MonoBehaviour // Manages scene transitions and initiali
 
 	[Header("≥°æ∞√˚≥∆≈‰÷√")]
 	public string battleSceneName = "BattleScene";
-	public string mainSceneName = "MainScene";
+    public string mainSceneName = "MainScene";
+    public string mapSceneName = "MapScene";
 
-	private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 	{
 		if (scene.name == mainSceneName)
 			InitializeMainScene();
 		if (scene.name == battleSceneName)
 			InitializeBattleScene();
-	}
+		if (scene.name == mapSceneName)
+			InitializeMapScene();
+    }
 
 	public void LoadScene(string sceneName)
 	{
@@ -43,36 +46,36 @@ public class GameScene : MonoBehaviour // Manages scene transitions and initiali
 	}
 
 
-	// Battle Scene
-	public void LoadBattleScene()
-	{
+    #region Battle Scene
+    public void LoadBattleScene() {
 		LoadScene(battleSceneName);
 	}
-	private void InitializeBattleScene()
-	{
-		Debug.Log("Initialize Battle Scene");
-		BattleManager.instance.BattleInit();
-		StageManager.instance.StageInit();
-		GridManager.instance.GridInit();
-		StageLoader.instance.StageInit();
-	}
-
-	// Main Scene
-	public void LoadMainScene()
-	{
-		LoadScene(mainSceneName);
-	}
-	private void InitializeMainScene()
+    private void InitializeBattleScene() {
+        Debug.Log("Initialize Battle Scene");
+        BattleManager.instance.BattleInit();
+        StageManager.instance.StageInit();
+        GridManager.instance.GridInit();
+        StageLoader.instance.StageInit();
+    }
+    #endregion
+    #region Main Scene
+    public void LoadMainScene() {
+        LoadScene(mainSceneName);
+    }
+    private void InitializeMainScene()
 	{
 		Debug.Log("Initialize Main Scene");
 	}
 
-	private void Update()
-	{
-		if (Input.GetKeyDown(KeyCode.F6))
-			LoadMainScene();
+    #endregion
+    #region Map Scene
+    private void InitializeMapScene() {
+		Debug.Log("Initialize Map Scene");
+		UI_MapManager.instance.DrawMap();
+    }
 
-		if (Input.GetKeyDown(KeyCode.F7))
-			LoadBattleScene();
-	}
+    public void LoadMapScene() {
+        LoadScene(mapSceneName);
+    }
+    #endregion
 }

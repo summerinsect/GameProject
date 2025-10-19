@@ -26,14 +26,6 @@ public class StageLoader : MonoBehaviour
 	{
 		BattleManager.instance.AddMember(1, CharacterCreater.instance.CreateCharacter("melee", 1, new Vector3Int(2, 3, -5)));
 		BattleManager.instance.AddMember(1, CharacterCreater.instance.CreateCharacter("melee", 1, new Vector3Int(1, 3, -4)));
-		BattleManager.instance.AddMember(1, CharacterCreater.instance.CreateCharacter("melee", 1, new Vector3Int(-2, 2, 0)));
-		BattleManager.instance.AddMember(1, CharacterCreater.instance.CreateCharacter("melee", 1, new Vector3Int(-1, 2, -1)));
-		BattleManager.instance.AddMember(0, CharacterCreater.instance.CreateCharacter("melee", 0, new Vector3Int(-2, -3, 5)));
-        BagManager.instance.AddMember(CharacterCreater.instance.CreateCharacter("melee"));
-        BagManager.instance.AddMember(CharacterCreater.instance.CreateCharacter("YouKnowWho"));
-        BagManager.instance.AddMember(CharacterCreater.instance.CreateCharacter("melee"));
-        BagManager.instance.AddMember(CharacterCreater.instance.CreateCharacter("YouKnowWho"));
-        BagManager.instance.AddMember(CharacterCreater.instance.CreateCharacter("melee"));
     }
 
 }
