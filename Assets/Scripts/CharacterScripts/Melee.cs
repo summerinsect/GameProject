@@ -5,8 +5,6 @@ using static UnityEngine.GraphicsBuffer;
 
 public class Melee : Character // A melee character that can attack and move
 {
-	[SerializeField] private int attackRange;
-	[SerializeField] private int attackDamage;
 
 	protected override int ProcessSingleRound() 
 	{
@@ -40,7 +38,7 @@ public class Melee : Character // A melee character that can attack and move
 	public void Attack(string targetId)
 	{
 		Debug.Log($"{uid} attacks {targetId} for {attackDamage} damage.");
-		BattleManager.instance.DamageCharacter(targetId, attackDamage);
+		BattleManager.instance.DamageCharacter(targetId, DamageCalculator.instance.CalculateDamage(uid, targetId));
 	}
 	public void Move()
 	{
