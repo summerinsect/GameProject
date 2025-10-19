@@ -5,7 +5,12 @@ using UnityEngine;
 public abstract class Character : MonoBehaviour // Base class for all characters in the game
 {
 	[Header("Attributes")]
+	public int level;
 	public int health;
+	public int attackRange;
+	public int attackDamage;
+	public int speed;
+
 	public string characterName;
 	public string uid;
 	public int teamId;

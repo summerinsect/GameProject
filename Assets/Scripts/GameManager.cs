@@ -38,11 +38,11 @@ public class GameManager : MonoBehaviour {
     }
 
     private void AddInitialCharacters() {
-        BagManager.instance.members.Add(CharacterCreater.instance.CreateCharacter("YouKnowWho"));
-        BagManager.instance.members.Add(CharacterCreater.instance.CreateCharacter("YouKnowWho"));
-        BagManager.instance.members.Add(CharacterCreater.instance.CreateCharacter("YouKnowWho"));
-        BagManager.instance.members.Add(CharacterCreater.instance.CreateCharacter("YouKnowWho"));
-        BagManager.instance.members.Add(CharacterCreater.instance.CreateCharacter("YouKnowWho"));
+        BagManager.instance.AddMember(CharacterCreater.instance.CreateCharacter("YouKnowWho"));
+        BagManager.instance.AddMember(CharacterCreater.instance.CreateCharacter("YouKnowWho"));
+        BagManager.instance.AddMember(CharacterCreater.instance.CreateCharacter("YouKnowWho"));
+        BagManager.instance.AddMember(CharacterCreater.instance.CreateCharacter("YouKnowWho"));
+        BagManager.instance.AddMember(CharacterCreater.instance.CreateCharacter("YouKnowWho"));
     }
 
     public void HandleClickOnMapSlot(MapSlot mapSlot) {

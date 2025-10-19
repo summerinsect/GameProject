@@ -26,7 +26,7 @@ public class CharacterBattleAnimator : MonoBehaviour
 
 	private void Awake()
 	{
-		damageBlinkDuration = 0.1f;
+		damageBlinkDuration = 0.2f;
 		damageBlinkCount = 2;
 		moveSpeed = 2f;
 		spriteRenderer = GetComponent<SpriteRenderer>();
