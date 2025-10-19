@@ -20,8 +20,8 @@ public class StageManager : MonoBehaviour // Manages the stage setup and battle 
 			instance = null;
 	}
 
-	private bool isStarted;
-	private bool isFinished;
+	public bool isStarted;
+    public bool isFinished;
 
 	public void StageInit() // init the stage
 	{
@@ -33,19 +33,23 @@ public class StageManager : MonoBehaviour // Manages the stage setup and battle 
 		isStarted = true;
 	}
 
+	public void FinishBattle() {
+		foreach (var character in BattleManager.instance.GetTeamMember(0)) {
+			BagManager.instance.members.Add(character);
+			character.gameObject.SetActive(false);
+        }
+    }
+
 	void Update()
     {
-        if(isStarted && !isFinished)
+        if (isStarted && !isFinished)
         {
             isFinished = BattleManager.instance.Battle();
-			if(isFinished)
+			if (isFinished) {
 				Debug.Log($"Battle Finished! {BattleManager.instance.GetWinner()} wins!");
+				FinishBattle();
+			}
 
 		}
-		else if(isFinished)
-		{
-
-		}
-
     }
 }
