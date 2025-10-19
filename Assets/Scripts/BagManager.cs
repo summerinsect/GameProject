@@ -25,7 +25,8 @@ public class BagManager : MonoBehaviour
 		Debug.Log($"Add member {_character.uid} to bag");
 		members.Add(_character);
 		_character.characterBattleAnimator.DisableBattleAnimation();
-        UI_BagManager.instance.UpdateSlotUI();
+		if (UI_BagManager.instance != null)
+			UI_BagManager.instance.UpdateSlotUI();
     }
 
     public void RemoveMember(Character _character) {
@@ -34,8 +35,9 @@ public class BagManager : MonoBehaviour
 				members.Remove(_char);
 				break;
             }
-        }
-		UI_BagManager.instance.UpdateSlotUI();
+		}
+		if (UI_BagManager.instance != null)
+			UI_BagManager.instance.UpdateSlotUI();
 	}
 
 }
