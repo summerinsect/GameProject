@@ -28,9 +28,9 @@ public class StageInputHandler : MonoBehaviour // Handles input specific to the 
 	private void Update()
 	{
 		if (!StageManager.instance.isStarted) {
-            if (Input.GetKeyDown(KeyCode.K))
-                StartBattle();
-
+            // if (Input.GetKeyDown(KeyCode.K))
+            //     StartBattle();
+            // already add button to start battle
             if (Input.GetMouseButtonDown(0)) {
                 if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
                     return; // UI ÒÑÀ¹½Ø
@@ -43,16 +43,29 @@ public class StageInputHandler : MonoBehaviour // Handles input specific to the 
 		else if (!StageManager.instance.isFinished) {
             // Battle in progress
         }
-		else if (StageManager.instance.isFinished) {
-			if (Input.GetKeyDown(KeyCode.N)) {
-				GameManager.instance.BattleFinish();
-            }
-        }
-	}
+        // else if (StageManager.instance.isFinished) {
+        // 	if (Input.GetKeyDown(KeyCode.N)) {
+        //         EndBattle();
+        //     }
+        // }
+        // already add button to end battle
+    }
 
-	private void StartBattle()
+    public void EndBattle() {
+        if (BattleManager.instance.GetWinner() == 0) {
+            GameManager.instance.NextLevel();
+        }
+        else {
+            Debug.Log("Game Over. You lost the battle.");
+            GameManager.instance.GameOver();
+        }
+    }
+
+    public void StartBattle()
 	{
-		Debug.Log("Battle Start!");
+		if (StageManager.instance.isStarted)
+			return;	
+        Debug.Log("Battle Start!");
 		StageManager.instance.StartBattle();
 	}
 

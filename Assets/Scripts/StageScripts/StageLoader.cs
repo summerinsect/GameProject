@@ -24,8 +24,8 @@ public class StageLoader : MonoBehaviour
 
 	public void StageInit()
 	{
-		BattleManager.instance.AddMember(1, CharacterCreater.instance.CreateBattleCharacter("melee", 1, new Vector3Int(2, 3, -5)));
-		BattleManager.instance.AddMember(1, CharacterCreater.instance.CreateBattleCharacter("melee", 1, new Vector3Int(1, 3, -4)));
+		BattleManager.instance.AddMember(1, CharacterCreater.instance.CreateBattleCharacter("melee", 1, new Vector3Int(0, 0, 0)));
+		BattleManager.instance.AddMember(1, CharacterCreater.instance.CreateBattleCharacter("melee", 1, new Vector3Int(0, 1, -1)));
     }
 
 }

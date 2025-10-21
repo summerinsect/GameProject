@@ -32,7 +32,7 @@ public class GridManager : MonoBehaviour
 	}
 
 	[SerializeField] private GameObject gridPrefab;
-    public int size;
+    private int size = 5;
 
     public void GridInit()
     {
@@ -40,7 +40,7 @@ public class GridManager : MonoBehaviour
 			for (int y = -size; y <= size; y++) {
 				Vector3Int coordinate = new Vector3Int(x, y, -x - y);
                 if (CheckPosition(coordinate)) {
-					GameObject newGrid = Instantiate(gridPrefab, transform.position + ComputeOffset(coordinate), Quaternion.identity, transform);
+					GameObject newGrid = Instantiate(gridPrefab, transform.position + ComputeOffset(coordinate), gridPrefab.transform.rotation, transform);
 					newGrid.GetComponent<GridScript>().coordinate = coordinate;	
                 }
 			}
@@ -49,9 +49,8 @@ public class GridManager : MonoBehaviour
     {
         int x = coordinate.x, y = coordinate.y, z = coordinate.z;
         if (x + y + z != 0) return false;
-        if (x < -size || x > size) return false;
-        if (y < -size || y > size) return false;
-        if (z < -size || z > size) return false;
+		if (y > 3 || y < -3) return false;
+		if (x - z > 7 || x - z < -7) return false;
         return true;
     }
 
@@ -60,8 +59,8 @@ public class GridManager : MonoBehaviour
 		Debug.Assert(CheckPosition(coordinate), $"Invalid position, coordinate: {coordinate.x}, {coordinate.y}, {coordinate.z}");
 
 		int x = coordinate.x, y = coordinate.y, z = coordinate.z;
-        float xOffset = x * .75f;
-        float yOffset = (y - z) * Mathf.Sqrt(3) / 4f;
+        float xOffset = (x - z) * Mathf.Sqrt(3) / 4f;
+        float yOffset = y * .75f;
         return new Vector3(xOffset, yOffset);
     }
 
@@ -115,5 +114,9 @@ public class GridManager : MonoBehaviour
 		foreach (var target in targets)
             mi = Mathf.Min(mi, Distance(pos, target.position));
         return mi;
+	}
+
+	public void CleanUp() {
+		gameObject.SetActive(false);
 	}
 }

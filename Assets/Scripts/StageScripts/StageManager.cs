@@ -35,21 +35,30 @@ public class StageManager : MonoBehaviour // Manages the stage setup and battle 
 
 	public void FinishBattle() {
 		foreach (var character in BattleManager.instance.GetTeamMember(0)) {
-			BagManager.instance.AddMember(character);
-			//character.gameObject.SetActive(false);
+			if (character.isAlive)
+				BagManager.instance.AddMember(character);
+			else
+				Destroy(character.gameObject);
+            //character.gameObject.SetActive(false);
         }
+		foreach (var character in BattleManager.instance.GetTeamMember(1)) {
+			Destroy(character.gameObject);
+		}
+
+		GridManager.instance.CleanUp();
+		UI_BagManager.instance.CleanUp();
+		UI_BattleSceneManager.instance.ChangeButton();
     }
 
 	void Update()
     {
-        if (isStarted && !isFinished)
-        {
+        if (isStarted && !isFinished) {
             isFinished = BattleManager.instance.Battle();
 			if (isFinished) {
-				Debug.Log($"Battle Finished! {BattleManager.instance.GetWinner()} wins!");
+				int winner = BattleManager.instance.GetWinner();
+				Debug.Log($"Battle Finished! {winner} wins!");
 				FinishBattle();
 			}
-
 		}
     }
 }

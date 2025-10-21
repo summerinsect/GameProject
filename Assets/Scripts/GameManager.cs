@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
     private void Awake() {
         if (instance != null && instance != this) {
             Destroy(gameObject);
+            return;
         }
         instance = this;
         DontDestroyOnLoad(gameObject);
@@ -24,17 +25,10 @@ public class GameManager : MonoBehaviour {
     public int playerPosition;
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.S)) {
-            isGameStarted = true;
-            playerDepth = 0;
-            inBattle = false;
-            inShop = false;
-            inEvent = false;
-            inMap = true;
-            AddInitialCharacters();
-            MapManager.instance.GenerateMap(mapWidth, mapHeight);
-            GameScene.instance.LoadMapScene();
-        } // start game
+        // already add button to start game
+        // if in battle, will be handled by stage input handle
+        // if in map, will be handled by map slot
+        // shop and event are not implemented yet
     }
 
     private void AddInitialCharacters() {
@@ -45,7 +39,27 @@ public class GameManager : MonoBehaviour {
         BagManager.instance.AddMember(CharacterCreater.instance.CreateCharacter("YouKnowWho"));
     }
 
+    public void StartGame() {
+        if (isGameStarted) {
+            Debug.Log("Game Started!");
+            return;
+        }
+        isGameStarted = true;
+        playerDepth = 0;
+        inBattle = false;
+        inShop = false;
+        inEvent = false;
+        inMap = true;
+        AddInitialCharacters();
+        MapManager.instance.GenerateMap(mapWidth, mapHeight);
+        GameScene.instance.LoadMapScene();
+    }
+
     public void HandleClickOnMapSlot(MapSlot mapSlot) {
+        if (!isGameStarted || inBattle || inShop || inEvent || !inMap) {
+            Debug.Log("You are not in map. Too strange!");
+            return;
+        }
         if (mapSlot == null) {
             Debug.Log("Clicked on null map slot. This should not happen.");
             return;
@@ -87,17 +101,29 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void BattleFinish() {
+    public void NextLevel() {
+        playerDepth += 1;
+        if (playerDepth >= mapWidth) {
+            Debug.Log("Congratulations! You have completed the game!");
+            GameOver();
+            return;
+        }
         inBattle = false;
         inShop = false;
         inEvent = false;
         inMap = true;
-        playerDepth += 1;
-        if (playerDepth >= mapWidth) {
-            Debug.Log("Congratulations! You have completed the game!");
-            isGameStarted = false;
-            return;
-        }
         GameScene.instance.LoadMapScene();
+    }
+
+    public void GameOver() {
+        playerDepth = 0;
+        isGameStarted = false;
+        inBattle = false;
+        inShop = false;
+        inEvent = false;
+        inMap = false;
+        BagManager.instance.ClearBag();
+        MapManager.instance.ClearMap();
+        GameScene.instance.LoadMainScene();
     }
 }

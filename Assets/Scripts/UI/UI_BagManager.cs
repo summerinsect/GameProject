@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UI_BagManager : MonoBehaviour {
     public static UI_BagManager instance { get; private set; }
-    private void Awake() // appear in all scenes
+    private void Awake() 
     {
         if (instance != null && instance != this) {
             Destroy(gameObject);
@@ -14,6 +14,7 @@ public class UI_BagManager : MonoBehaviour {
     }
 
     [SerializeField] public Transform bagSlotsParent;
+    [SerializeField] public GameObject bag;
     public UI_BagSlot[] bagSlots;
 
     private void Start() {
@@ -27,5 +28,9 @@ public class UI_BagManager : MonoBehaviour {
         List<Character> members = BagManager.instance.members;
         for (int i = 0; i < members.Count; i++)
             bagSlots[i].UpdateSlot(members[i]);
+    }
+
+    public void CleanUp() {
+        bag.SetActive(false);
     }
 }
