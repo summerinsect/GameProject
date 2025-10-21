@@ -344,7 +344,7 @@ MonoBehaviour:
   maxHealth: 40
   attackRange: 1
   attackDamage: 10
-  speed: 0
+  speed: 2
   health: 0
   characterName: YouKnowWho
   uid: 
