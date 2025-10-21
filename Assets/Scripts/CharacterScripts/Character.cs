@@ -18,6 +18,8 @@ public abstract class Character : MonoBehaviour // Base class for all characters
 
 	public CharacterBattleAnimator characterBattleAnimator;
 
+	public int nextRoundTime;
+
 	public bool isAlive => health > 0;
 
 	protected virtual void Awake()

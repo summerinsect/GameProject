@@ -97,10 +97,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d06d673b3e4178b42909172a96f1f493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level: 0
   health: 100
+  attackRange: 1
+  attackDamage: 10
+  speed: 2
   characterName: YouKnowWho
   uid: 
   teamId: 0
   position: {x: 0, y: 0, z: 0}
-  attackRange: 1
-  attackDamage: 10
+  characterBattleAnimator: {fileID: 0}
+  nextRoundTime: 0

@@ -23,8 +23,6 @@ public class BattleManager : MonoBehaviour
 	}
 
 	public TeamManager[] team = new TeamManager[2]; // team[0]: player, team[1]: enemy
-	private int turn;
-	public int[] current = new int[2];
 
 	private bool isMoving;
 	private bool isAttacking;
@@ -34,6 +32,8 @@ public class BattleManager : MonoBehaviour
 	public float waitAttackTime;
 	private float waitTimer;
 
+	private int preMinTime;
+	public int[] order = new int[2] { 0, 1 };
 	private Character currentCharacter;
 
 
@@ -41,20 +41,19 @@ public class BattleManager : MonoBehaviour
 	{
 		team[0] = new TeamManager();
 		team[1] = new TeamManager();
-		turn = 1; // player first
-		current[0] = -1;
-		current[1] = -1;
+		preMinTime = -1;
 	}
 
 	public void AddMember(int teamId, Character character)
 	{
-		Debug.Log($"Add member {character.uid} to team {teamId}");
+		//Debug.Log($"Add member {character.uid} to team {teamId}");
 		team[teamId].AddMember(character);
 		character.characterBattleAnimator.EnableBattleAnimation();
 	}
 
 	public void RemoveMember(int teamId, Character character)
 	{
+		//Debug.Log($"Remove member {character.uid} from team {teamId}");
 		team[teamId].RemoveMember(character);
 		character.characterBattleAnimator.DisableBattleAnimation();
 	}
@@ -92,9 +91,8 @@ public class BattleManager : MonoBehaviour
 	public void RemoveMember(Character character)
 	{
 		int teamId = GetTeamID(character);
-		if (teamId != -1)
-			team[teamId].RemoveMember(character);
-    }
+		RemoveMember(teamId, character);
+	}
 
     public void DamageCharacter(string uid, int damage)
 	{
@@ -102,6 +100,40 @@ public class BattleManager : MonoBehaviour
 		target.IsDamagedBy(damage);
 	}
 
+	void NextMember()
+	{
+		foreach (int id in order)
+			team[id].shuffle();
+
+		int minTime = Mathf.Min(team[0].MinTime(), team[1].MinTime());
+
+		if(minTime > preMinTime)
+		{
+			preMinTime = minTime;
+			order[0] = 0;
+			order[1] = 1;
+		}
+
+		foreach (int id in order)
+		{
+			bool f = false;
+			foreach (var member in team[id].members)
+				if (member.isAlive && member.nextRoundTime == minTime)
+				{
+					currentCharacter = member;
+					f = true;
+					break;
+				}
+			if(f)
+				break;
+		}
+		Debug.Log($"Current character: {currentCharacter.uid}, time {currentCharacter.nextRoundTime}(Team {GetTeamID(currentCharacter)})");
+		currentCharacter.nextRoundTime += currentCharacter.speed;
+		order[0] ^= 1;
+		order[1] ^= 1;
+	}
+
+	#region Timer
 	void WaitSomeTime(float t)
 	{
 		waitTimer = t;
@@ -114,33 +146,7 @@ public class BattleManager : MonoBehaviour
 	{
 		waitTimer -= Time.deltaTime;
 	}
-	void NextAlive()
-	{
-		current[turn]++;
-		while (current[turn] < team[turn].MemberCount() && !team[turn].GetMember(current[turn]).isAlive)
-			current[turn]++;
-	}
-	bool FindedNextMember()
-	{
-		NextAlive();
-		return current[turn] < team[turn].MemberCount();
-	}
-	void NextMember()
-	{
-		turn ^= 1;
-		while (!FindedNextMember())
-		{
-			turn ^= 1;
-			if (current[0] >= team[0].MemberCount() && current[1] >= team[1].MemberCount())
-			{
-				turn = 0; // player first
-				current[0] = -1;
-				current[1] = -1;
-				Debug.Log("New Round Started");
-			}
-		}
-		currentCharacter = team[turn].GetMember(current[turn]);
-	}
+	#endregion
 	public bool Battle() // bool -> is finished
 	{
 		DealTimer();
