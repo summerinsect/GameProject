@@ -15,6 +15,7 @@ public class CharacterBattleAnimator : MonoBehaviour
 	[SerializeField] private float damageBlinkDuration;
 	[SerializeField] private int damageBlinkCount;
 	private SpriteRenderer spriteRenderer;
+	private Canvas healthBar;
 	private bool isBlinking;
 	private float blinkTimer;
 
@@ -31,7 +32,8 @@ public class CharacterBattleAnimator : MonoBehaviour
 		moveSpeed = 2f;
 		spriteRenderer = GetComponent<SpriteRenderer>();
 		character = GetComponent<Character>();
-		enableBattleAnimation = false;
+		healthBar = GetComponentInChildren<Canvas>();
+        enableBattleAnimation = false;
 	}
 
 	private void Update()
@@ -47,7 +49,8 @@ public class CharacterBattleAnimator : MonoBehaviour
 	{
 		enableBattleAnimation = true;
 		spriteRenderer.enabled = true;
-		TeleportToPosition();
+		healthBar.enabled = true;
+        TeleportToPosition();
 		Debug.Log($"[{gameObject.name}] Battle animation enabled, sprite shown");
 	}
 
@@ -55,7 +58,8 @@ public class CharacterBattleAnimator : MonoBehaviour
 	{
 		enableBattleAnimation = false;
 		spriteRenderer.enabled = false;
-		Debug.Log($"[{gameObject.name}] Battle animation disabled, sprite hidden");
+		healthBar.enabled = false;
+        Debug.Log($"[{gameObject.name}] Battle animation disabled, sprite hidden");
 	}
 
 	public void StartMoveTo(Vector3 targetPosition)
@@ -117,7 +121,7 @@ public class CharacterBattleAnimator : MonoBehaviour
 
 			if (!character.isAlive)
 			{
-				spriteRenderer.enabled = false;
+				DisableBattleAnimation();
 				Debug.Log($"[{gameObject.name}] Character died, sprite hidden");
 			}
 		}
