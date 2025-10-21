@@ -66,20 +66,20 @@ public class GridManager : MonoBehaviour
 
     public bool HasCharacter(Vector3Int pos)
     {
-        foreach (var character in BattleManager.instance.GetTeamMember(0))
+        foreach (var character in BattleManager.instance.GetAliveTeamMember(0))
             if (character.position == pos && character.isAlive)
                 return true;
-        foreach (var character in BattleManager.instance.GetTeamMember(1))
+        foreach (var character in BattleManager.instance.GetAliveTeamMember(1))
             if (character.position == pos && character.isAlive)
                 return true;
         return false;
     }
 
 	public Character FindCharacter(Vector3Int pos) {
-		foreach (var character in BattleManager.instance.GetTeamMember(0))
+		foreach (var character in BattleManager.instance.GetAliveTeamMember(0))
 			if (character.position == pos && character.isAlive)
 				return character;
-		foreach (var character in BattleManager.instance.GetTeamMember(1))
+		foreach (var character in BattleManager.instance.GetAliveTeamMember(1))
 			if (character.position == pos && character.isAlive)
 				return character;
 		return null;

@@ -59,9 +59,14 @@ public class BattleManager : MonoBehaviour
 		character.characterBattleAnimator.DisableBattleAnimation();
 	}
 
-	public List<Character> GetTeamMember(int teamId)
+	public List<Character> GetAliveTeamMember(int teamId)
 	{
 		return team[teamId].GetAliveMembers();
+	}
+
+	public List<Character> GetAllTeamMember(int teamId)
+	{
+		return team[teamId].members;
 	}
 
 	public Character FindCharacter(string uid)
