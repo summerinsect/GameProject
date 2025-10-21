@@ -6,10 +6,12 @@ public abstract class Character : MonoBehaviour // Base class for all characters
 {
 	[Header("Attributes")]
 	public int level;
-	public int health;
+	public int maxHealth;
 	public int attackRange;
 	public int attackDamage;
 	public int speed;
+
+	public int health;
 
 	public string characterName;
 	public string uid;
@@ -17,6 +19,7 @@ public abstract class Character : MonoBehaviour // Base class for all characters
 	public Vector3Int position;
 
 	public CharacterBattleAnimator characterBattleAnimator;
+	public UI_HealthBar healthBarUI;
 
 	public int nextRoundTime;
 
@@ -27,12 +30,15 @@ public abstract class Character : MonoBehaviour // Base class for all characters
 		characterBattleAnimator = GetComponent<CharacterBattleAnimator>();
 		if (characterBattleAnimator == null)
 			characterBattleAnimator = gameObject.AddComponent<CharacterBattleAnimator>();
-	}
+		healthBarUI = GetComponentInChildren<UI_HealthBar>();
+        health = maxHealth;
+    }
 
 	public virtual void IsDamagedBy(int damage)
 	{
 		health -= damage;
 		characterBattleAnimator.PlayDamageEffect();
+		healthBarUI.UpdateHealthUI();
 	}
 
 	public virtual int SingleRound() 
