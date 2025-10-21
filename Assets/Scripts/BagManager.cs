@@ -40,4 +40,10 @@ public class BagManager : MonoBehaviour
 			UI_BagManager.instance.UpdateSlotUI();
 	}
 
+	public void ClearBag() {
+		coin = 0;
+		foreach (var character in members)
+			Destroy(character.gameObject);
+		members = new List<Character>();
+    }
 }

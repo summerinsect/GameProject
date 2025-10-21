@@ -71,7 +71,7 @@ public class GameScene : MonoBehaviour // Manages scene transitions and initiali
     #region Map Scene
     private void InitializeMapScene() {
 		Debug.Log("Initialize Map Scene");
-		UI_MapManager.instance.DrawMap();
+		UI_MapSceneManager.instance.DrawMap();
     }
 
     public void LoadMapScene() {

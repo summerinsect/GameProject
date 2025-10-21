@@ -23,7 +23,6 @@ public class MapManager : MonoBehaviour {
     public List<bool[,]> edges = new List<bool[,]>(); 
     public List<MapSlot> mapSlots = new List<MapSlot>();
 
-    public int depthNow;
     public void GenerateMap(int _mapWidth, int _mapHeight) {
         mapWidth = _mapWidth;
         mapHeight = _mapHeight;
@@ -53,5 +52,13 @@ public class MapManager : MonoBehaviour {
                         pos2++;
             }
         }
+    }
+
+    public void ClearMap() {
+        height = new int[0];
+        vertices = new List<int[]>();
+        types = new List<MapSlotType[]>();
+        edges = new List<bool[,]>();
+        mapSlots = new List<MapSlot>();
     }
 }
