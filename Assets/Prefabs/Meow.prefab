@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d06d673b3e4178b42909172a96f1f493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  price: 10
   level: 0
   maxHealth: 100
   attack: 10
@@ -112,7 +113,8 @@ MonoBehaviour:
   position: {x: 0, y: 0, z: 0}
   characterBattleAnimator: {fileID: 0}
   healthBarUI: {fileID: 0}
---- !u!1 &3100063478185060317
+  nextRoundTime: 0
+--- !u!1 &4974721135906068442
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class Character : MonoBehaviour // Base class for all characters in the game
 {
 	[Header("Attributes")]
+	public int price;
 	public int level;
 	public int maxHealth;
 	public int attack;
@@ -23,7 +24,9 @@ public abstract class Character : MonoBehaviour // Base class for all characters
 	public CharacterBattleAnimator characterBattleAnimator;
 	public UI_HealthBar healthBarUI;
 
-    public bool isAlive => health > 0;
+	public int nextRoundTime;
+
+	public bool isAlive => health > 0;
 
 	protected virtual void Awake()
 	{

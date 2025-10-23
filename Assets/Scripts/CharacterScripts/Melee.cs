@@ -25,7 +25,7 @@ public class Melee : Character // A melee character that can attack and move
 
 	protected string FindTarget()
 	{
-		List<Character> targets = BattleManager.instance.GetTeamMember(teamId ^ 1);
+		List<Character> targets = BattleManager.instance.GetAliveTeamMember(teamId ^ 1);
 
 		foreach (Character target in targets)
 			if(GridManager.instance.Distance(position, target.position) <= attackRange)
@@ -42,7 +42,7 @@ public class Melee : Character // A melee character that can attack and move
 	}
 	public void Move()
 	{
-		List<Character> targets = BattleManager.instance.GetTeamMember(teamId ^ 1);
+		List<Character> targets = BattleManager.instance.GetAliveTeamMember(teamId ^ 1);
 		List<Vector3Int> validPositions = GridManager.instance.ValidPositions(position);
 
 		int minDist = int.MaxValue;
