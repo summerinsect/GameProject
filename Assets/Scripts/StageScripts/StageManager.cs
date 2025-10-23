@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StageManager : MonoBehaviour // Manages the stage setup and battle flow
 {
@@ -20,6 +21,8 @@ public class StageManager : MonoBehaviour // Manages the stage setup and battle 
 			instance = null;
 	}
 
+	public Button startButton;
+
 	public bool isStarted;
     public bool isFinished;
 
@@ -31,6 +34,9 @@ public class StageManager : MonoBehaviour // Manages the stage setup and battle 
 	public void StartBattle() // start the battle
 	{
 		isStarted = true;
+		UI_StatsPanel.instance.gameObject.SetActive(false);
+        UI_BagManager.instance.CleanUp();
+        startButton.gameObject.SetActive(false);
 	}
 
 	public void FinishBattle() {

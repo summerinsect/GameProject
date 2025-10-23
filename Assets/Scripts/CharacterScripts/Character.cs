@@ -7,9 +7,11 @@ public abstract class Character : MonoBehaviour // Base class for all characters
 	[Header("Attributes")]
 	public int level;
 	public int maxHealth;
-	public int attackRange;
-	public int attackDamage;
+	public int attack;
+	public int attackDistance; // ¹¥»÷¾àÀë
+	public int attackRange; // ¹¥»÷·¶Î§
 	public int speed;
+	public string skillDescription;
 
 	public int health;
 

@@ -18,6 +18,6 @@ public class DamageCalculator : MonoBehaviour
 
 	public int CalculateDamage(string attackerId, string defenderId)
 	{
-		return BattleManager.instance.FindCharacter(attackerId).attackDamage;
+		return BattleManager.instance.FindCharacter(attackerId).attack;
 	}
 }
