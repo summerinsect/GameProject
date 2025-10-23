@@ -32,11 +32,11 @@ public class GameManager : MonoBehaviour {
     }
 
     private void AddInitialCharacters() {
-        BagManager.instance.AddMember(CharacterCreater.instance.CreateCharacter("YouKnowWho"));
-        BagManager.instance.AddMember(CharacterCreater.instance.CreateCharacter("YouKnowWho"));
-        BagManager.instance.AddMember(CharacterCreater.instance.CreateCharacter("YouKnowWho"));
-        BagManager.instance.AddMember(CharacterCreater.instance.CreateCharacter("YouKnowWho"));
-        BagManager.instance.AddMember(CharacterCreater.instance.CreateCharacter("YouKnowWho"));
+        BagManager.instance.AddMember(CharacterCreater.instance.CreateCharacter("meow"));
+        BagManager.instance.AddMember(CharacterCreater.instance.CreateCharacter("meow"));
+        BagManager.instance.AddMember(CharacterCreater.instance.CreateCharacter("meow"));
+        BagManager.instance.AddMember(CharacterCreater.instance.CreateCharacter("meow"));
+        BagManager.instance.AddMember(CharacterCreater.instance.CreateCharacter("meow"));
     }
 
     public void StartGame() {
@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour {
         inEvent = false;
         inMap = true;
         AddInitialCharacters();
+        Debug.Log("I want to start game!");
         MapManager.instance.GenerateMap(mapWidth, mapHeight);
         GameScene.instance.LoadMapScene();
     }

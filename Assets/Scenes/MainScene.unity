@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 622112687}
   - component: {fileID: 622112686}
   m_Layer: 0
-  m_Name: UI_MenuManager
+  m_Name: UI_MainSceneManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -680,7 +680,7 @@ GameObject:
   - component: {fileID: 1571086070}
   - component: {fileID: 1571086069}
   m_Layer: 5
-  m_Name: Button
+  m_Name: StartButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -819,7 +819,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterPrefabs:
   - {fileID: 8404939704766937611, guid: ea7b5881472dafe41ac34d10ba4ea1ad, type: 3}
-  - {fileID: 8113630204741279917, guid: eb7a0a6f1c772ed4799e7ffebd97494e, type: 3}
+  - {fileID: 8404939704766937611, guid: 13fa7716061d1c34188306da068fc891, type: 3}
 --- !u!4 &1804763733
 Transform:
   m_ObjectHideFlags: 0
@@ -894,8 +894,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u5F00\u59CB\u6E38\u620F"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: d4ba2a9ef99acad48b802ed08ae9d944, type: 2}
-  m_sharedMaterial: {fileID: 3830228798834549068, guid: d4ba2a9ef99acad48b802ed08ae9d944, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 39c4cebe82614b8469d2d429204a22a8, type: 2}
+  m_sharedMaterial: {fileID: -1513025312771644691, guid: 39c4cebe82614b8469d2d429204a22a8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

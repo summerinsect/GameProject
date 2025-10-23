@@ -101,9 +101,11 @@ MonoBehaviour:
   price: 5
   level: 0
   maxHealth: 40
+  attack: 1
+  attackDistance: 1
   attackRange: 1
-  attackDamage: 10
   speed: 1
+  skillDescription: "\u4F60\u662F\uFF1F"
   health: 0
   characterName: melee
   uid: 

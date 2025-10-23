@@ -37,7 +37,7 @@ public class Melee : Character // A melee character that can attack and move
 
 	public void Attack(string targetId)
 	{
-		Debug.Log($"{uid} attacks {targetId} for {attackDamage} damage.");
+		Debug.Log($"{uid} attacks {targetId} for {attack} damage.");
 		BattleManager.instance.DamageCharacter(targetId, DamageCalculator.instance.CalculateDamage(uid, targetId));
 	}
 	public void Move()
