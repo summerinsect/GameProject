@@ -13,11 +13,13 @@ public class UI_BagManager : MonoBehaviour {
         instance = this;
     }
 
-    [SerializeField] public Transform bagSlotsParent;
-    [SerializeField] public GameObject bag;
+    public GameObject bag;
+    public Transform bagSlotsParent;
     public UI_BagSlot[] bagSlots;
 
     private void Start() {
+        bag = GameObject.FindWithTag("Bag");
+        bagSlotsParent = GameObject.FindWithTag("BagSlotsParent").transform;
         bagSlots = bagSlotsParent.GetComponentsInChildren<UI_BagSlot>();
         UpdateSlotUI();
     }

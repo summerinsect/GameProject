@@ -26,7 +26,13 @@ public class UI_BagSlot : MonoBehaviour, IPointerClickHandler {
     }
 
     public void OnPointerClick(PointerEventData eventData) {
-        if (eventData.button == PointerEventData.InputButton.Left)
-            StageInputHandler.instance.HandleSlotClick(characterScript);
+        if (eventData.button == PointerEventData.InputButton.Left) {
+            if (GameManager.instance.inBattle) {
+                StageInputHandler.instance.HandleSlotClick(characterScript);
+            }
+            else if(GameManager.instance.inShop) {
+                ShopManager.instance.HandleBagSlotClick(characterScript);
+            }
+        }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using static UnityEditor.Progress;
 
 public class ShopManager : MonoBehaviour
@@ -24,7 +25,15 @@ public class ShopManager : MonoBehaviour
 			instance = null;
 	}
 
-	public int reloadCharacterCost;
+    private void Update() {
+        if (Input.GetMouseButtonDown(0)) {
+            if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+                return; // UI ÒÑÀ¹½Ø
+			HandleOtherClick();
+        }
+    }
+
+    public int reloadCharacterCost;
 	public List<Character> shopCharacter = new List<Character>();
 
 	void AddCharacter(string name)
@@ -39,7 +48,7 @@ public class ShopManager : MonoBehaviour
 			// TODO: show info
 			return;
 		}
-
+		BagManager.instance.coin -= reloadCharacterCost;
 		foreach (var character in shopCharacter)
 			Destroy(character.gameObject);
 		shopCharacter.Clear();
@@ -55,7 +64,7 @@ public class ShopManager : MonoBehaviour
 		AddCharacter("melee");
 		AddCharacter("melee");
 		AddCharacter("melee");
-		// TODO: UI update
+		UI_ShopManager.instance.UpdateSlotUI();
 	}
 	public void ShopInit()
 	{
@@ -63,9 +72,35 @@ public class ShopManager : MonoBehaviour
 		shopCharacterInit();
 	}
 
-	public void BuyCharacter(Character c)
+	public Character selectedCharacter;
+
+	public void HandleBagSlotClick(Character _character) {
+		selectedCharacter = null;
+		if (_character == null)
+			UI_StatsPanel.instance.Clear();
+		else
+			UI_StatsPanel.instance.ShowStats(_character);
+	}
+
+	public void HandleShopSlotClick(Character _character) {
+		if (selectedCharacter == _character) {
+			selectedCharacter = null;
+			UI_StatsPanel.instance.Clear();
+		}
+		else {
+			selectedCharacter = _character;
+			UI_StatsPanel.instance.ShowStats(selectedCharacter);
+		}
+    }
+
+	public void HandleOtherClick() {
+		selectedCharacter = null;
+		UI_StatsPanel.instance.Clear();
+	}
+
+	public void BuyCharacter()
 	{
-		if(BagManager.instance.coin < c.price)
+		if(BagManager.instance.coin < selectedCharacter.price)
 		{
 			Debug.Log("Not enough coin!");
 			// TODO: show info
@@ -73,10 +108,16 @@ public class ShopManager : MonoBehaviour
 		} 
 		else
 		{
-			BagManager.instance.coin -= c.price;
-			BagManager.instance.AddMember(c);
-			shopCharacter.Remove(c);
-			// TODO: UI update
+			BagManager.instance.coin -= selectedCharacter.price;
+			BagManager.instance.AddMember(selectedCharacter);
+			shopCharacter.Remove(selectedCharacter);
+			selectedCharacter = null;
+			UI_StatsPanel.instance.Clear();
+			UI_ShopManager.instance.UpdateSlotUI();
 		}
+	}
+
+	public void ExitShop() {
+		GameManager.instance.NextLevel();
 	}
 }
