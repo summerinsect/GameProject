@@ -12,7 +12,7 @@ public enum MapSlotType {
 }
 
 public class MapSlot : MonoBehaviour, IPointerClickHandler {
-    public MapSlotType slotType = MapSlotType.Battle;
+    public MapSlotType slotType;
     public int depth;
     public int position;
     public Image image;
@@ -24,7 +24,9 @@ public class MapSlot : MonoBehaviour, IPointerClickHandler {
         image = GetComponent<Image>();
     }
     public void OnPointerClick(PointerEventData eventData) {
-        Debug.Log("Map Slot Clicked");
-        GameManager.instance.HandleClickOnMapSlot(this);
+        if (eventData.button == PointerEventData.InputButton.Left) {
+            Debug.Log("Map Slot Clicked");
+            GameManager.instance.HandleClickOnMapSlot(this);
+        }
     }
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1325510660964496770}
   - component: {fileID: 428938731025636759}
   - component: {fileID: 7938137046505271799}
-  - component: {fileID: 253213731129034977}
+  - component: {fileID: 4931099975072579856}
   m_Layer: 5
   m_Name: BagSlot
   m_TagString: Untagged
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &253213731129034977
+--- !u!114 &4931099975072579856
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -85,7 +85,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2355146906365684562}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eadf9e9871798c046aea0fd39a116af0, type: 3}
+  m_Script: {fileID: 11500000, guid: 8708381188ba7b24f838ce0e1ea07256, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   characterScript: {fileID: 0}

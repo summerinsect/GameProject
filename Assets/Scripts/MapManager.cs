@@ -33,8 +33,12 @@ public class MapManager : MonoBehaviour {
                 height[i] = 1;
             vertices.Add(new int[height[i]]);
             types.Add(new MapSlotType[height[i]]);
-            for (int j = 0; j < height[i]; j++)
-                types[i][j] = MapSlotType.Battle;
+            for (int j = 0; j < height[i]; j++) {
+                if (Random.Range(0, 100) < 50)
+                    types[i][j] = MapSlotType.Battle;
+                else
+                    types[i][j] = MapSlotType.Shop;
+            }
         }
         for (int i = 1; i < mapWidth; i++) {
             edges.Add(new bool[height[i - 1], height[i]]);

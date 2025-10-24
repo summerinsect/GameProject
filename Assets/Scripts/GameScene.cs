@@ -82,10 +82,11 @@ public class GameScene : MonoBehaviour // Manages scene transitions and initiali
         LoadScene(mapSceneName);
     }
 	#endregion
-	#region ShopScene
-	private void InitializeShopScene()
+	#region Shop Scene
+    private void InitializeShopScene()
 	{
 		Debug.Log("Initialize Shop Scene");
+		UI_ShopManager.instance.InitShopUI();
 		ShopManager.instance.ShopInit();
 	}
 

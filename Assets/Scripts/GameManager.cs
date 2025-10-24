@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour {
                 inShop = true;
                 inEvent = false;
                 inMap = false;
-                // GameScene.instance.LoadShopScene();
+                GameScene.instance.LoadShopScene();
                 break;
             case MapSlotType.Event:
                 inBattle = false;
