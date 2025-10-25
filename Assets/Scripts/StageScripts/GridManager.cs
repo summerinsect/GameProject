@@ -33,6 +33,7 @@ public class GridManager : MonoBehaviour
 
 	[SerializeField] private GameObject gridPrefab;
     private int size = 5;
+	public List<Vector3Int> allPositions;
 
     public void GridInit()
     {
@@ -42,6 +43,7 @@ public class GridManager : MonoBehaviour
                 if (CheckPosition(coordinate)) {
 					GameObject newGrid = Instantiate(gridPrefab, transform.position + ComputeOffset(coordinate), gridPrefab.transform.rotation, transform);
 					newGrid.GetComponent<GridScript>().coordinate = coordinate;	
+					allPositions.Add(coordinate);
                 }
 			}
 	}
@@ -84,24 +86,26 @@ public class GridManager : MonoBehaviour
 				return character;
 		return null;
     }
-	
 
+	public List<Vector3Int> FindNeighbourhood(Vector3Int position, int distance) {
+		List<Vector3Int> neighbourhood = new List<Vector3Int>();
+		foreach (var coordinate in allPositions) {
+			if (Distance(coordinate, position) < distance)
+				neighbourhood.Add(coordinate);
+		}
+		return neighbourhood;
+	}
+	
+	// 找到可行的位置
 	public List<Vector3Int> ValidPositions(Vector3Int cur)
     {
-        List<Vector3Int> res = new List<Vector3Int>();
+        List<Vector3Int> validPositions = new List<Vector3Int>();
         foreach (var dir in directionsArray)
             if (CheckPosition(cur + dir) && !HasCharacter(cur + dir))
-                res.Add(cur + dir);
+                validPositions.Add(cur + dir);
 
-		for (int i = res.Count - 1; i > 0; i--)
-		{
-			int randomIndex = Random.Range(0, i + 1);  // 随机选择 [0, i] 范围内的索引
-			Vector3Int temp = res[i];
-			res[i] = res[randomIndex];
-			res[randomIndex] = temp;
-		}
-
-		return res;
+		Extensions.Shuffle(validPositions);
+		return validPositions;
 	}
 
     public int Distance(Vector3Int a, Vector3Int b) 

@@ -181,7 +181,7 @@ public class BattleManager : MonoBehaviour
 			if (state == 0)
 			{
 				isMoving = true;
-				currentCharacter.InitMove();
+				currentCharacter.MoveAnimation();
 			}
 			else if (state == 1)
 			{

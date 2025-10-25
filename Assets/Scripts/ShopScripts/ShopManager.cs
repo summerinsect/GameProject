@@ -58,12 +58,10 @@ public class ShopManager : MonoBehaviour
 
 	public void shopCharacterInit()
 	{
-		AddCharacter("melee");
-		AddCharacter("melee");
-		AddCharacter("melee");
-		AddCharacter("melee");
-		AddCharacter("melee");
-		AddCharacter("melee");
+		int sellCount = Random.Range(5, 11);
+		List<Character> possibleCharacters = GameManager.instance.shopCharacters;
+		for (int i = 0; i < sellCount; i++)
+			AddCharacter(possibleCharacters[Random.Range(0, possibleCharacters.Count)].characterName);
 		UI_ShopManager.instance.UpdateSlotUI();
 	}
 	public void ShopInit()

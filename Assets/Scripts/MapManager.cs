@@ -31,6 +31,7 @@ public class MapManager : MonoBehaviour {
             height[i] = Random.Range(1, mapHeight + 1);
             if (i == mapWidth - 1)
                 height[i] = 1;
+            // 最后一层一定只有一格
             vertices.Add(new int[height[i]]);
             types.Add(new MapSlotType[height[i]]);
             for (int j = 0; j < height[i]; j++) {
@@ -38,6 +39,12 @@ public class MapManager : MonoBehaviour {
                     types[i][j] = MapSlotType.Battle;
                 else
                     types[i][j] = MapSlotType.Shop;
+                if (i == 0)
+                    types[i][j] = MapSlotType.Shop;
+                if (i == mapWidth - 1)
+                    types[i][j] = MapSlotType.Battle;
+                // 第一层一定全部是商店
+                // 最后一层一定是战斗
             }
         }
         for (int i = 1; i < mapWidth; i++) {
