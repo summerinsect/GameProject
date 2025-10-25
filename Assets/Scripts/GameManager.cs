@@ -31,26 +31,27 @@ public class GameManager : MonoBehaviour {
         // shop and event are not implemented yet
     }
 
-    private void AddInitialCharacters() {
-        BagManager.instance.AddMember(CharacterCreater.instance.CreateCharacter("meow"));
-        BagManager.instance.AddMember(CharacterCreater.instance.CreateCharacter("meow"));
-        BagManager.instance.AddMember(CharacterCreater.instance.CreateCharacter("meow"));
-        BagManager.instance.AddMember(CharacterCreater.instance.CreateCharacter("meow"));
-        BagManager.instance.AddMember(CharacterCreater.instance.CreateCharacter("meow"));
-    }
-
+    //private void AddInitialCharacters() {
+    //    BagManager.instance.AddMember(CharacterCreater.instance.CreateCharacter("meow"));
+    //    BagManager.instance.AddMember(CharacterCreater.instance.CreateCharacter("meow"));
+    //    BagManager.instance.AddMember(CharacterCreater.instance.CreateCharacter("meow"));
+    //    BagManager.instance.AddMember(CharacterCreater.instance.CreateCharacter("meow"));
+    //    BagManager.instance.AddMember(CharacterCreater.instance.CreateCharacter("meow"));
+    //}
+    #region Scene Controller
     public void StartGame() {
         if (isGameStarted) {
             Debug.Log("Game Started!");
             return;
         }
         isGameStarted = true;
+        // BagManager.instance.coin = 20;
         playerDepth = 0;
         inBattle = false;
         inShop = false;
         inEvent = false;
         inMap = true;
-        AddInitialCharacters();
+        // AddInitialCharacters();
         Debug.Log("I want to start game!");
         MapManager.instance.GenerateMap(mapWidth, mapHeight);
         GameScene.instance.LoadMapScene();
@@ -127,4 +128,7 @@ public class GameManager : MonoBehaviour {
         MapManager.instance.ClearMap();
         GameScene.instance.LoadMainScene();
     }
+    #endregion
+
+    public List<Character> shopCharacters = new List<Character>();
 }

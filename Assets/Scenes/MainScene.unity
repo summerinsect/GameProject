@@ -199,7 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2dff95708829244cbe8ee7b665147de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coin: 23
+  coin: 100
   members: []
 --- !u!4 &237643154
 Transform:
@@ -430,6 +430,8 @@ MonoBehaviour:
   mapHeight: 4
   playerDepth: 0
   playerPosition: 0
+  shopCharacters:
+  - {fileID: -9168968787749033272, guid: ea7b5881472dafe41ac34d10ba4ea1ad, type: 3}
 --- !u!1 &1176098106
 GameObject:
   m_ObjectHideFlags: 0
@@ -819,8 +821,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterPrefabs:
-  - {fileID: 8404939704766937611, guid: ea7b5881472dafe41ac34d10ba4ea1ad, type: 3}
-  - {fileID: 8404939704766937611, guid: 13fa7716061d1c34188306da068fc891, type: 3}
+  - {fileID: -9168968787749033272, guid: ea7b5881472dafe41ac34d10ba4ea1ad, type: 3}
+  - {fileID: -156899269751957324, guid: 13fa7716061d1c34188306da068fc891, type: 3}
+  - {fileID: -7727651832468990959, guid: 835c9e28d3adef84c86098c6e256190a, type: 3}
+  - {fileID: 6657206398879140757, guid: 8a3e27a1c4ee59144a921198224dc85e, type: 3}
 --- !u!4 &1804763733
 Transform:
   m_ObjectHideFlags: 0
