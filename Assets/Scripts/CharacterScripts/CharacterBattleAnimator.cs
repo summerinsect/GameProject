@@ -18,19 +18,20 @@ public class CharacterBattleAnimator : MonoBehaviour
 	private Canvas healthBar;
 	private bool isBlinking;
 	private float blinkTimer;
+    public GameObject damagePopupPrefab;
 
 	private Character character;
 
 	public bool IsMoving => isMoving;
 	public bool enableBattleAnimation;
 
-
-	private void Awake()
+    private void Awake()
 	{
 		damageBlinkDuration = 0.2f;
 		damageBlinkCount = 2;
 		moveSpeed = 2f;
 		spriteRenderer = GetComponent<SpriteRenderer>();
+		damagePopupPrefab = Resources.Load<GameObject>("DamagePopup");
 		character = GetComponent<Character>();
 		healthBar = GetComponentInChildren<Canvas>();
         enableBattleAnimation = false;
@@ -99,10 +100,13 @@ public class CharacterBattleAnimator : MonoBehaviour
 		}
 	}
 
-	public void PlayDamageEffect()
+	public void PlayDamageEffect(int damage)
 	{
 		isBlinking = true;
 		blinkTimer = 0f;
+		if (damage == 0)
+			return;
+		CreateDamagePopup(damage);
 	}
 
 	private void UpdateDamageBlinkEffect()
@@ -130,4 +134,21 @@ public class CharacterBattleAnimator : MonoBehaviour
 	{
 		return !IsMoving;
 	}
+
+    private void CreateDamagePopup(int damage) {
+        if (damagePopupPrefab == null) {
+            Debug.LogError("Cannot find Damage Popup Prefab!");
+            return;
+        }
+
+        Vector3 spawnPosition = transform.position;
+        float offsetX = Random.Range(-0.4f, 0.4f);
+        float offsetY = Random.Range(0f, 0.5f);
+        spawnPosition += new Vector3(offsetX, offsetY, 0);
+
+		GameObject canvas = GameObject.Find("Canvas");
+        GameObject popupObject = Instantiate(damagePopupPrefab, spawnPosition, Quaternion.identity, canvas.transform);
+        DamagePopup popupScript = popupObject.GetComponent<DamagePopup>();
+        popupScript.Setup(damage);
+    }
 }

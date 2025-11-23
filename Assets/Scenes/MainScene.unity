@@ -169,7 +169,6 @@ MonoBehaviour:
   mapWidth: 3
   mapHeight: 6
   height: 
-  mapSlots: []
 --- !u!1 &237643152
 GameObject:
   m_ObjectHideFlags: 0
