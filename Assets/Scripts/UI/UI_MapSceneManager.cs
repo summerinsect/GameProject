@@ -42,13 +42,13 @@ public class UI_MapSceneManager : MonoBehaviour {
                 newSlot.transform.SetParent(mapParent, false);
                 newSlot.transform.localPosition = new Vector3(xOffset, yOffset, 0);
                 newSlot.GetComponent<MapSlot>().Setup(MapManager.instance.types[i][j], i, j);
-                newSlot.GetComponent<Image>().sprite = icons[MapManager.instance.types[i][j]];
                 mapSlots[i][j] = newSlot.GetComponent<MapSlot>();
+                mapSlots[i][j].image.sprite = icons[MapManager.instance.types[i][j]];
                 if (i == GameManager.instance.playerDepth && (i == 0 || MapManager.instance.edges[i - 1][GameManager.instance.playerPosition, j])) {
-                    newSlot.GetComponent<MapSlot>().image.color = Color.yellow;
+                    mapSlots[i][j].image.color = Color.yellow;
                 }
                 else {
-                    newSlot.GetComponent<MapSlot>().image.color = Color.black;
+                    mapSlots[i][j].image.color = Color.black;
                 }
             }
         }

@@ -50,7 +50,7 @@ public abstract class Character : MonoBehaviour // Base class for all characters
 		currentHealth -= damage;
         if (!isAlive)
             ActionsWhenDie();
-		characterBattleAnimator.PlayDamageEffect();
+		characterBattleAnimator.PlayDamageEffect(damage);
 		healthBarUI.UpdateHealthUI();
 	}
 
