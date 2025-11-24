@@ -166,10 +166,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a5598708e46a1543a65ade501d586b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapWidth: 3
+  mapWidth: 8
   mapHeight: 6
   height: 
-  mapSlots: []
 --- !u!1 &237643152
 GameObject:
   m_ObjectHideFlags: 0
