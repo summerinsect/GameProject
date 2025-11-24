@@ -61,14 +61,11 @@ public class LLM : MonoBehaviour
 
     public async Task<string> Chat(ChatMessage[] messages)
     {
-        int randomSeed = UnityEngine.Random.Range(0, int.MaxValue);
-        
         var requestBody = new ChatRequest
         {
             model = modelId,
             messages = messages,
             stream = false,
-            seed = randomSeed
 		};
 
         string json = JsonUtility.ToJson(requestBody);
@@ -120,7 +117,7 @@ public class LLM : MonoBehaviour
                 return null;
             }
 
-            Debug.Log($"result (seed: {randomSeed})£º" + content);
+            Debug.Log($"result£º" + content);
             return content;
         }
     }

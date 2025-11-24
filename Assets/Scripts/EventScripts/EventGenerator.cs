@@ -2,95 +2,166 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using System.IO;
+using System.Text;
+
+[System.Serializable]
+public class ChatHistoryWrapper {
+    public List<ChatMessage> messages;
+}
 
 public class EventGenerator : MonoBehaviour
 {
-	public static EventGenerator instance { get; private set; }
-	public string currentEvent;
-	private object lockObj = new object();
-	private List<ChatMessage> chatHistory = new List<ChatMessage>();
-	
-	private void Awake()
-	{
-		if (instance != null && instance != this)
-		{
-			Destroy(gameObject);
-		}
-		instance = this;
-		DontDestroyOnLoad(gameObject);
-	}
-	
-	private void Start()
-	{
-		chatHistory.Add(new ChatMessage
-		{
-			role = "system",
-			content = @"
-请生成一个奇幻游戏事件，该事件需要让玩家做出行动，要求如下：
-- 事件包含一个简短的描述。
-- 事件描述应富有想象力且引人入胜。
-- 事件应包含一个明确的情境或挑战，促使玩家做出选择或采取行动。
-- 事件应该选取不同的主题和场景，避免重复之前的事件。
-返回格式：直接返回一个字符串描述事件，只包含正常的文本和标点符号"
-		});
-		
-		GenerateEvent();
-	}
-	
-	private async void GenerateEvent()
-	{
-		chatHistory.Add(new ChatMessage
-		{
-			role = "user",
-			content = "请按照系统提示词生成事件"
-		});
-		
-		Debug.Log("generating...");
-		
-		var ev = await LLM.instance.Chat(chatHistory.ToArray());
-		
-		if (!string.IsNullOrEmpty(ev))
-		{
-			chatHistory.Add(new ChatMessage
-			{
-				role = "assistant",
-				content = ev
-			});
-			
-			int maxMessages = 1 + (3 * 2);
-			if (chatHistory.Count > maxMessages)
-			{
-				var systemMsg = chatHistory[0];
-				var recentMsgs = chatHistory.GetRange(chatHistory.Count - (maxMessages - 1), maxMessages - 1);
-				chatHistory.Clear();
-				chatHistory.Add(systemMsg);
-				chatHistory.AddRange(recentMsgs);
-			}
-		}
-		
-		lock (lockObj)
-		{
-			currentEvent = ev;
-		}
-		Debug.Log("generation done");
-	}
-	
-	public async Task<string> GetEvent()
-	{
-		while (true)
-		{
-			lock (lockObj)
-			{
-				if (!string.IsNullOrEmpty(currentEvent))
-				{
-					string ev = currentEvent;
-					currentEvent = "";
-					Debug.Log("Event: " + ev);
-					GenerateEvent();
-					return ev;
-				}
-			}
-			await Task.Delay(100);
-		}
-	}
+    public static EventGenerator instance { get; private set; }
+    public string currentEvent;
+    private object lockObj = new object();
+    private List<ChatMessage> chatHistory = new List<ChatMessage>();
+    private const string SystemPromptFileName = "EventSystemPrompt.txt"; // config file in same folder
+    private const string HistoryFileName = "EventHistory.json"; // persisted history file
+
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+        }
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+    
+    private void Start()
+    {
+        string systemPrompt = LoadSystemPrompt();
+        if (string.IsNullOrEmpty(systemPrompt))
+        {
+            Debug.LogError($"Failed to load system prompt file '{SystemPromptFileName}'. EventGenerator will not function correctly.");
+            return;
+        }
+
+        if (!LoadHistory(systemPrompt))
+        {
+            // Initialize fresh history with system prompt
+            chatHistory.Clear();
+            chatHistory.Add(new ChatMessage { role = "system", content = systemPrompt });
+        }
+        GenerateEvent();
+    }
+
+    private string LoadSystemPrompt()
+    {
+        try
+        {
+            string path = Path.Combine(Application.dataPath, "Scripts", "EventScripts", SystemPromptFileName);
+            if (!File.Exists(path))
+            {
+                Debug.LogError($"System prompt file not found at path: {path}");
+                return null;
+            }
+            return File.ReadAllText(path, Encoding.UTF8); // force UTF-8
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error reading system prompt file: {ex.Message}");
+            return null;
+        }
+    }
+
+    private bool LoadHistory(string latestSystemPrompt)
+    {
+        try
+        {
+            string path = Path.Combine(Application.dataPath, "Scripts", "EventScripts", HistoryFileName);
+            if (!File.Exists(path)) return false;
+            string json = File.ReadAllText(path, Encoding.UTF8);
+            ChatHistoryWrapper wrapper = JsonUtility.FromJson<ChatHistoryWrapper>(json);
+            if (wrapper == null || wrapper.messages == null || wrapper.messages.Count == 0)
+                return false;
+            chatHistory = wrapper.messages;
+            // Ensure first message is system prompt and refresh its content
+            if (chatHistory[0].role == "system")
+                chatHistory[0].content = latestSystemPrompt;
+            else
+                chatHistory.Insert(0, new ChatMessage { role = "system", content = latestSystemPrompt });
+            return true;
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogWarning($"Failed to load history: {ex.Message}");
+            return false;
+        }
+    }
+
+    private void SaveHistory()
+    {
+        try
+        {
+            string path = Path.Combine(Application.dataPath, "Scripts", "EventScripts", HistoryFileName);
+            ChatHistoryWrapper wrapper = new ChatHistoryWrapper { messages = chatHistory };
+            string json = JsonUtility.ToJson(wrapper, true);
+            File.WriteAllText(path, json, new UTF8Encoding(false));
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogWarning($"Failed to save history: {ex.Message}");
+        }
+    }
+    
+    private async void GenerateEvent()
+    {
+        chatHistory.Add(new ChatMessage
+        {
+            role = "user",
+            content = "请按照系统提示词生成事件"
+        });
+
+        Debug.Log("History:\n" + string.Join("\n", chatHistory.ConvertAll(m => $"[{m.role}] {m.content}")));
+
+        var ev = await LLM.instance.Chat(chatHistory.ToArray());
+        
+        if (!string.IsNullOrEmpty(ev))
+        {
+            chatHistory.Add(new ChatMessage
+            {
+                role = "assistant",
+                content = ev
+            });
+            
+            int maxMessages = 1 + (3 * 2);
+            if (chatHistory.Count > maxMessages)
+            {
+                var systemMsg = chatHistory[0];
+                var recentMsgs = chatHistory.GetRange(chatHistory.Count - (maxMessages - 1), maxMessages - 1);
+                chatHistory.Clear();
+                chatHistory.Add(systemMsg);
+                chatHistory.AddRange(recentMsgs);
+            }
+        }
+        
+        lock (lockObj)
+        {
+            currentEvent = ev;
+        }
+
+        SaveHistory();
+        Debug.Log("generation done");
+    }
+    
+    public async Task<string> GetEvent()
+    {
+        while (true)
+        {
+            lock (lockObj)
+            {
+                if (!string.IsNullOrEmpty(currentEvent))
+                {
+                    string ev = currentEvent;
+                    currentEvent = "";
+                    Debug.Log("Event: " + ev);
+                    GenerateEvent();
+                    return ev;
+                }
+            }
+            await Task.Delay(100);
+        }
+    }
 }
