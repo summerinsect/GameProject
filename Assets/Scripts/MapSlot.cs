@@ -21,7 +21,7 @@ public class MapSlot : MonoBehaviour, IPointerClickHandler {
         slotType = _type;
         depth = _depth;
         position = _position;
-        image = GetComponent<Image>();
+        // image = GetComponentInChildren<Image>();
     }
     public void OnPointerClick(PointerEventData eventData) {
         if (eventData.button == PointerEventData.InputButton.Left) {
