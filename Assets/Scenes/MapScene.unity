@@ -749,9 +749,9 @@ MonoBehaviour:
   pathLinePrefab: {fileID: 8158110701591333845, guid: 40fbf101d9e15c5428718a0643c1d8f5, type: 3}
   mapParent: {fileID: 320471450}
   icon:
-  - {fileID: 21300000, guid: 0731f39c2fbf8ae4ca5c3764f3eb2092, type: 3}
-  - {fileID: 21300000, guid: c245b04f60bf6c649bd9d1350f38641d, type: 3}
-  - {fileID: 21300000, guid: fa255f184ad21f24b88519290312e630, type: 3}
+  - {fileID: 21300000, guid: 2b31ffe6a1f44f14d90cb6a123fc3dbd, type: 3}
+  - {fileID: 21300000, guid: 1393cac01d95dce4db076654ea10132f, type: 3}
+  - {fileID: 21300000, guid: e798e37c2922ac64fa346bf5dcd6a06a, type: 3}
 --- !u!1 &1601278838
 GameObject:
   m_ObjectHideFlags: 0

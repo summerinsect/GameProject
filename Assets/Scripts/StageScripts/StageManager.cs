@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -36,16 +37,14 @@ public class StageManager : MonoBehaviour // Manages the stage setup and battle 
 	public void StartBattle() // start the battle
 	{
 		isStarted = true;
-		UI_StatsPanel.instance.gameObject.SetActive(false);
-        UI_BagManager.instance.CleanUp();
-        startButton.gameObject.SetActive(false);
-		foreach (var character in BattleManager.instance.GetAllTeamMember(0))
+        UI_BattleSceneManager.instance.ChangeUIForStart();
+        foreach (var character in BattleManager.instance.GetAllTeamMember(0))
 			character.ActionsWhenStart();
 		foreach (var character in BattleManager.instance.GetAllTeamMember(1))
 			character.ActionsWhenStart();
     }
 
-	public void FinishBattle() {
+	public void FinishBattle(int winner) {
 		foreach (var character in BattleManager.instance.GetAllTeamMember(0)) {
 			if (character.isAlive) {
 				character.ActionsWhenEnd();
@@ -60,8 +59,7 @@ public class StageManager : MonoBehaviour // Manages the stage setup and battle 
 		}
 
 		GridManager.instance.CleanUp();
-		UI_BagManager.instance.CleanUp();
-		UI_BattleSceneManager.instance.ChangeButton();
+		UI_BattleSceneManager.instance.ChangeUIForFinish(winner);
     }
 
 	void Update()
@@ -71,7 +69,7 @@ public class StageManager : MonoBehaviour // Manages the stage setup and battle 
 			if (isFinished) {
 				int winner = BattleManager.instance.GetWinner();
 				Debug.Log($"Battle Finished! {winner} wins!");
-				FinishBattle();
+				FinishBattle(winner);
 			}
 		}
     }

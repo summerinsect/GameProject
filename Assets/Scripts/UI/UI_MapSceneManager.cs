@@ -45,7 +45,7 @@ public class UI_MapSceneManager : MonoBehaviour {
                 mapSlots[i][j] = newSlot.GetComponent<MapSlot>();
                 mapSlots[i][j].image.sprite = icons[MapManager.instance.types[i][j]];
                 if (i == GameManager.instance.playerDepth && (i == 0 || MapManager.instance.edges[i - 1][GameManager.instance.playerPosition, j])) {
-                    mapSlots[i][j].image.color = Color.yellow;
+                    mapSlots[i][j].image.color = Color.red;
                 }
                 else {
                     mapSlots[i][j].image.color = Color.black;

@@ -60,7 +60,7 @@ public class ShopManager : MonoBehaviour
 
 	public void shopCharacterInit()
 	{
-		int sellCount = Random.Range(5, 11);
+		int sellCount = 6;
 		List<Character> possibleCharacters = GameManager.instance.shopCharacters;
 		for (int i = 0; i < sellCount; i++)
 			AddCharacter(possibleCharacters[Random.Range(0, possibleCharacters.Count)].characterName);

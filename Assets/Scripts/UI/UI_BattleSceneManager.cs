@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,6 +18,8 @@ public class UI_BattleSceneManager : MonoBehaviour {
     public Button startButton;
     public Button endButton;
 
+    public TextMeshProUGUI characterCountText;
+    private Coroutine flashCoroutine;
     public void Start() {
         if (startButton != null) {
             startButton.onClick.RemoveAllListeners();
@@ -29,13 +32,19 @@ public class UI_BattleSceneManager : MonoBehaviour {
         UpdateCharacterCountText();
     }
 
-    public void ChangeButton() {
+    public void ChangeUIForStart() {
+        UI_StatsPanel.instance.gameObject.SetActive(false);
+        UI_BagManager.instance.CleanUp();
         startButton.gameObject.SetActive(false);
-        endButton.gameObject.SetActive(true);
+        characterCountText.gameObject.SetActive(false);
     }
 
-    public TextMeshProUGUI characterCountText;
-    private Coroutine flashCoroutine;
+    public void ChangeUIForFinish(int winner) {
+        startButton.gameObject.SetActive(false);
+        endButton.gameObject.SetActive(true);
+        if (winner == 1)
+            endButton.GetComponentInChildren<TextMeshProUGUI>().text = "游戏结束";
+    }
 
     public void UpdateCharacterCountText() {
         characterCountText.text = "上场角色数：" + StageInputHandler.instance.currentCharacterCount.ToString() + "/" + StageManager.instance.maxCharacterCount.ToString();
