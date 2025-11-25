@@ -36,7 +36,7 @@ public class UI_ShopManager : MonoBehaviour {
     private Coroutine displayCoroutine;
 
     public void UpdateCoinText() {
-        coinText.text = "½ð±Ò£º" + BagManager.instance.coin.ToString();
+        coinText.text = BagManager.instance.coin.ToString();
     }
 
     public void ShowInfo(string message) {
