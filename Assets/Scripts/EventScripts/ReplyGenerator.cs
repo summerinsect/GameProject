@@ -32,10 +32,15 @@ public class ReplyGenerator : MonoBehaviour
 		if (instance != null && instance != this)
 		{
 			Destroy(gameObject);
+			return;
 		}
 		instance = this;
+		DontDestroyOnLoad(gameObject);
+	}
 
-		string systemPrompt = LoadSystemPrompt();
+	private async void Start()
+	{
+		string systemPrompt = await FileManager.ReadConfigTextAsync(SystemPromptFileName);
 		if (string.IsNullOrEmpty(systemPrompt))
 		{
 			Debug.LogError($"Failed to load system prompt file '{SystemPromptFileName}'. ReplyGenerator will not function correctly.");
@@ -46,27 +51,6 @@ public class ReplyGenerator : MonoBehaviour
 			role = "system",
 			content = systemPrompt
 		});
-	}
-
-	private string LoadSystemPrompt()
-	{
-		try
-		{
-			// Build path relative to Assets folder
-			string path = Path.Combine(Application.dataPath, "Scripts", "EventScripts", SystemPromptFileName);
-			if (!File.Exists(path))
-			{
-				Debug.LogError($"System prompt file not found at path: {path}");
-				return null;
-			}
-			// Force UTF-8 decoding to avoid mojibake with Chinese characters
-			return File.ReadAllText(path, Encoding.UTF8);
-		}
-		catch (Exception ex)
-		{
-			Debug.LogError($"Error reading system prompt file: {ex.Message}");
-			return null;
-		}
 	}
 
 	public void InitEvent(string ev)
