@@ -16,22 +16,23 @@ public class EventGenerator : MonoBehaviour
     public string currentEvent;
     private object lockObj = new object();
     private List<ChatMessage> chatHistory = new List<ChatMessage>();
-    private const string SystemPromptFileName = "EventSystemPrompt.txt"; // config file in same folder
-    private const string HistoryFileName = "EventHistory.json"; // persisted history file
+    private const string SystemPromptFileName = "EventSystemPrompt.txt"; // config file in StreamingAssets
+    private const string HistoryFileName = "EventHistory.json"; // persisted history file in persistentDataPath
 
     private void Awake()
     {
         if (instance != null && instance != this)
         {
             Destroy(gameObject);
+            return;
         }
         instance = this;
         DontDestroyOnLoad(gameObject);
     }
     
-    private void Start()
+    private async void Start()
     {
-        string systemPrompt = LoadSystemPrompt();
+        string systemPrompt = await FileManager.ReadConfigTextAsync(SystemPromptFileName);
         if (string.IsNullOrEmpty(systemPrompt))
         {
             Debug.LogError($"Failed to load system prompt file '{SystemPromptFileName}'. EventGenerator will not function correctly.");
@@ -47,30 +48,11 @@ public class EventGenerator : MonoBehaviour
         GenerateEvent();
     }
 
-    private string LoadSystemPrompt()
-    {
-        try
-        {
-            string path = Path.Combine(Application.dataPath, "Scripts", "EventScripts", SystemPromptFileName);
-            if (!File.Exists(path))
-            {
-                Debug.LogError($"System prompt file not found at path: {path}");
-                return null;
-            }
-            return File.ReadAllText(path, Encoding.UTF8); // force UTF-8
-        }
-        catch (System.Exception ex)
-        {
-            Debug.LogError($"Error reading system prompt file: {ex.Message}");
-            return null;
-        }
-    }
-
     private bool LoadHistory(string latestSystemPrompt)
     {
         try
         {
-            string path = Path.Combine(Application.dataPath, "Scripts", "EventScripts", HistoryFileName);
+            string path = FileManager.GetSavePath(HistoryFileName);
             if (!File.Exists(path)) return false;
             string json = File.ReadAllText(path, Encoding.UTF8);
             ChatHistoryWrapper wrapper = JsonUtility.FromJson<ChatHistoryWrapper>(json);
@@ -95,7 +77,7 @@ public class EventGenerator : MonoBehaviour
     {
         try
         {
-            string path = Path.Combine(Application.dataPath, "Scripts", "EventScripts", HistoryFileName);
+            string path = FileManager.GetSavePath(HistoryFileName);
             ChatHistoryWrapper wrapper = new ChatHistoryWrapper { messages = chatHistory };
             string json = JsonUtility.ToJson(wrapper, true);
             File.WriteAllText(path, json, new UTF8Encoding(false));
