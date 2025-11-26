@@ -8,10 +8,6 @@ public class UI_BagSlot : MonoBehaviour, IPointerClickHandler {
     public Character characterScript;
     public Image image;
 
-    public void Start() {
-        image = GetComponent<Image>();
-    }
-
     public void UpdateSlot(Character _character) {
         characterScript = _character;
         SpriteRenderer sr = characterScript.GetComponent<SpriteRenderer>();

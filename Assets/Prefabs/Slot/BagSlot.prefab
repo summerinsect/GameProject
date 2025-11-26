@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterScript: {fileID: 0}
-  image: {fileID: 0}
+  image: {fileID: 7938137046505271799}
 --- !u!114 &5617888769167007924
 MonoBehaviour:
   m_ObjectHideFlags: 0

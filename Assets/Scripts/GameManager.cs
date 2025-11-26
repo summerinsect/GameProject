@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour {
             return;
         }
         isGameStarted = true;
-        // BagManager.instance.coin = 20;
+        BagManager.instance.coin = 999;
         playerDepth = 0;
         inBattle = false;
         inShop = false;
