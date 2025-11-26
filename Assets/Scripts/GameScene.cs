@@ -12,6 +12,7 @@ public class GameScene : MonoBehaviour // Manages scene transitions and initiali
 		if (instance != null && instance != this)
 		{
 			Destroy(gameObject);
+			return;
 		}
 		instance = this;
 		DontDestroyOnLoad(gameObject);
