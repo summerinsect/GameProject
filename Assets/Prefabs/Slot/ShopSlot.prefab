@@ -85,6 +85,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4610749799160645715}
   - component: {fileID: 820174905703728537}
+  - component: {fileID: 8453327640486046041}
   m_Layer: 5
   m_Name: ShopSlot
   m_TagString: Untagged
@@ -101,7 +102,7 @@ RectTransform:
   m_GameObject: {fileID: 5534823674395860415}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.88, y: 0.88, z: 0.88}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8264132559678665710}
@@ -132,7 +133,22 @@ MonoBehaviour:
   characterScript: {fileID: 0}
   characterName: {fileID: 143342900161777519}
   characterImage: {fileID: 1944600927195446532}
+  coinImage: {fileID: 4365873762600221526}
   characterPrice: {fileID: 1002929453903761540}
+--- !u!114 &8453327640486046041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5534823674395860415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74d6f02e50752f040ac013a980f63fc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetScale: {x: 1.03, y: 1.03, z: 1}
+  scaleSpeed: 0.1
 --- !u!1 &6071907358118991577
 GameObject:
   m_ObjectHideFlags: 0
@@ -198,7 +214,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8cb469acc18271043809cf50050f0497, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4b83be19ccbf5a14caa8a0ce16a47e5c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

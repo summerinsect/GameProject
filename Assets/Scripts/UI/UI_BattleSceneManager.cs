@@ -20,6 +20,8 @@ public class UI_BattleSceneManager : MonoBehaviour {
 
     public TextMeshProUGUI characterCountText;
     private Coroutine flashCoroutine;
+
+    public float gridScale;
     public void Start() {
         if (startButton != null) {
             startButton.onClick.RemoveAllListeners();
@@ -37,9 +39,24 @@ public class UI_BattleSceneManager : MonoBehaviour {
         UI_BagManager.instance.CleanUp();
         startButton.gameObject.SetActive(false);
         characterCountText.gameObject.SetActive(false);
+        EnlargeGrid(gridScale);
+    }
+
+
+    public void EnlargeGrid(float scale) {
+        GridManager.instance.transform.localScale *= scale;
+        foreach (var character in BattleManager.instance.GetAllTeamMember(0)) {
+            character.transform.localScale *= scale;
+            character.transform.position = GridManager.instance.ComputeOffset(character.position);
+        }
+        foreach (var character in BattleManager.instance.GetAllTeamMember(1)) {
+            character.transform.localScale *= scale;
+            character.transform.position = GridManager.instance.ComputeOffset(character.position);
+        }
     }
 
     public void ChangeUIForFinish(int winner) {
+        EnlargeGrid(1f / gridScale);
         startButton.gameObject.SetActive(false);
         endButton.gameObject.SetActive(true);
         if (winner == 1)
