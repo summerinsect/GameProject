@@ -64,6 +64,8 @@ public class GridManager : MonoBehaviour
 		int x = coordinate.x, y = coordinate.y, z = coordinate.z;
         float xOffset = (x - z) * Mathf.Sqrt(3) / 4f;
         float yOffset = y * .75f;
+		xOffset *= transform.localScale.x;
+		yOffset *= transform.localScale.y;	
         return new Vector3(xOffset, yOffset);
     }
 
