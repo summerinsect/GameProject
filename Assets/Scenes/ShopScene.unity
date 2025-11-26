@@ -503,6 +503,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BagSlot (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 7938137046505271799, guid: 00e0ae037b128ce438686dedbfbc5969, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5e49aecf8a5a54d46956c5b8a31cc1c3, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -605,6 +609,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BagSlot (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 7938137046505271799, guid: 00e0ae037b128ce438686dedbfbc5969, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a4c7b095049c71b4485253ba67b7026c, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -917,6 +925,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BagSlot
       objectReference: {fileID: 0}
+    - target: {fileID: 7938137046505271799, guid: 00e0ae037b128ce438686dedbfbc5969, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f94ba374e504f0940b5c765a6c4bcf47, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1085,6 +1097,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BagSlot (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 7938137046505271799, guid: 00e0ae037b128ce438686dedbfbc5969, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2749ac5f92a142a4abb02050a4c11833, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1512,6 +1528,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BagSlot (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 7938137046505271799, guid: 00e0ae037b128ce438686dedbfbc5969, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 31736213279daaa4bbcaa648a9a21ed0, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1900,6 +1920,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BagSlot (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7938137046505271799, guid: 00e0ae037b128ce438686dedbfbc5969, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 434fbf27ea5995b4aad3afb5de895832, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1941,6 +1965,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2105773924}
   - {fileID: 1546911230}
   - {fileID: 1488095160}
   m_Father: {fileID: 1137846739}
@@ -2093,6 +2118,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BagSlot (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7938137046505271799, guid: 00e0ae037b128ce438686dedbfbc5969, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4256e07a7b25951469be21cbf4f05cc5, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2680,6 +2709,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 718308858}
   m_CullTransparentMesh: 1
+--- !u!1 &732417678
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 732417679}
+  - component: {fileID: 732417681}
+  - component: {fileID: 732417680}
+  m_Layer: 5
+  m_Name: FadePanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &732417679
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 732417678}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.001081, y: 1.001081, z: 1.001081}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1140331444}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &732417680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 732417678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &732417681
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 732417678}
+  m_CullTransparentMesh: 1
 --- !u!1 &739046063
 GameObject:
   m_ObjectHideFlags: 0
@@ -2950,6 +3054,7 @@ GameObject:
   - component: {fileID: 788930698}
   - component: {fileID: 788930697}
   - component: {fileID: 788930696}
+  - component: {fileID: 788930699}
   m_Layer: 5
   m_Name: Button_ReloadShop
   m_TagString: Untagged
@@ -2967,7 +3072,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 498866883}
   - {fileID: 1860499837}
@@ -3072,6 +3177,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 788930694}
   m_CullTransparentMesh: 1
+--- !u!114 &788930699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 788930694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74d6f02e50752f040ac013a980f63fc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetScale: {x: 1.2, y: 1.2, z: 1}
+  scaleSpeed: 0.1
 --- !u!1 &827174360
 GameObject:
   m_ObjectHideFlags: 0
@@ -3293,6 +3412,7 @@ GameObject:
   m_Component:
   - component: {fileID: 839120291}
   - component: {fileID: 839120292}
+  - component: {fileID: 839120293}
   m_Layer: 0
   m_Name: UI_ShopManager
   m_TagString: Untagged
@@ -3331,6 +3451,20 @@ MonoBehaviour:
   shopSlots: []
   coinText: {fileID: 742509653}
   infoText: {fileID: 949103784}
+--- !u!114 &839120293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 839120290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0403b2a5c43a9d84d9539d46f9357dbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeDuration: 1.5
+  fadePanel: {fileID: 732417680}
 --- !u!1 &849934810
 GameObject:
   m_ObjectHideFlags: 0
@@ -3498,6 +3632,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BagSlot (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 7938137046505271799, guid: 00e0ae037b128ce438686dedbfbc5969, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: afecfb02042ac314a8b0c40426743aab, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3654,6 +3792,7 @@ GameObject:
   - component: {fileID: 1046738906}
   - component: {fileID: 1046738905}
   - component: {fileID: 1046738904}
+  - component: {fileID: 1046738907}
   m_Layer: 5
   m_Name: Button_ExitShop
   m_TagString: Untagged
@@ -3671,7 +3810,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 835422661}
   - {fileID: 1670759965}
@@ -3776,6 +3915,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1046738902}
   m_CullTransparentMesh: 1
+--- !u!114 &1046738907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1046738902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74d6f02e50752f040ac013a980f63fc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetScale: {x: 1.2, y: 1.2, z: 1}
+  scaleSpeed: 0.1
 --- !u!1 &1071804424
 GameObject:
   m_ObjectHideFlags: 0
@@ -4053,7 +4206,6 @@ RectTransform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 575357552}
-  - {fileID: 2105773924}
   - {fileID: 1645445799}
   - {fileID: 18920617}
   - {fileID: 1481616248}
@@ -4062,7 +4214,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 0.000061035156, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 320, y: 1080}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1137846740
@@ -4237,6 +4389,7 @@ RectTransform:
   - {fileID: 369527600}
   - {fileID: 949103783}
   - {fileID: 108091317}
+  - {fileID: 732417679}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4438,6 +4591,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BagSlot (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 7938137046505271799, guid: 00e0ae037b128ce438686dedbfbc5969, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: acf5b1be826646240a7120c843db608b, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4808,6 +4965,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BagSlot (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 7938137046505271799, guid: 00e0ae037b128ce438686dedbfbc5969, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4b83be19ccbf5a14caa8a0ce16a47e5c, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5114,6 +5275,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BagSlot (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 7938137046505271799, guid: 00e0ae037b128ce438686dedbfbc5969, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 36654f9f059c4ea42b258c7f04d28073, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5600,7 +5765,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 120}
+  m_AnchoredPosition: {x: 0, y: 100}
   m_SizeDelta: {x: 0, y: 500}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1488095161
@@ -5652,7 +5817,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1546911229}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5923,6 +6088,7 @@ GameObject:
   - component: {fileID: 1574507752}
   - component: {fileID: 1574507751}
   - component: {fileID: 1574507750}
+  - component: {fileID: 1574507753}
   m_Layer: 5
   m_Name: Button_Buy
   m_TagString: Untagged
@@ -5940,7 +6106,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 644478705}
   - {fileID: 1100262762}
@@ -6045,6 +6211,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1574507748}
   m_CullTransparentMesh: 1
+--- !u!114 &1574507753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1574507748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74d6f02e50752f040ac013a980f63fc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetScale: {x: 1.2, y: 1.2, z: 1}
+  scaleSpeed: 0.1
 --- !u!1 &1574695895
 GameObject:
   m_ObjectHideFlags: 0
@@ -6371,6 +6551,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BagSlot (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7938137046505271799, guid: 00e0ae037b128ce438686dedbfbc5969, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: df1d58b7211e0ef44898de7b8bf187ac, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6549,7 +6733,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f363f2f6b70e9cc43b168cf1da906a96, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f6ee06a9a61c394459f7f65a198b509f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7017,6 +7201,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BagSlot (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 7938137046505271799, guid: 00e0ae037b128ce438686dedbfbc5969, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5eef8a04b2b06c04fa0bdeea7945d5ab, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7690,6 +7878,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BagSlot (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 7938137046505271799, guid: 00e0ae037b128ce438686dedbfbc5969, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7c0a96192b22ffa43ab08d146fef68e7, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7730,7 +7922,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1137846739}
+  m_Father: {fileID: 575357552}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

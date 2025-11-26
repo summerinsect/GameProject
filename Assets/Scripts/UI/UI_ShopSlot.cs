@@ -9,6 +9,7 @@ public class UI_ShopSlot : MonoBehaviour, IPointerClickHandler {
     public Character characterScript;
     public TextMeshProUGUI characterName;
     public Image characterImage;
+    public Image coinImage;
     public TextMeshProUGUI characterPrice;
 
     public void UpdateSlot(Character _character) {
@@ -17,6 +18,7 @@ public class UI_ShopSlot : MonoBehaviour, IPointerClickHandler {
         SpriteRenderer sr = characterScript.GetComponent<SpriteRenderer>();
         characterImage.sprite = sr.sprite;
         characterImage.color = sr.color;
+        coinImage.color = Color.white;
         characterPrice.text = _character.price.ToString();
     }
 
@@ -25,6 +27,7 @@ public class UI_ShopSlot : MonoBehaviour, IPointerClickHandler {
         characterName.text = "";
         characterImage.sprite = null;
         characterImage.color = Color.clear;
+        coinImage.color = Color.clear;
         characterPrice.text = "";
     }
 

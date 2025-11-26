@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
-using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 
 public class BattleManager : MonoBehaviour

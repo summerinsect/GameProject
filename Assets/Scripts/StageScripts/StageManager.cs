@@ -58,8 +58,8 @@ public class StageManager : MonoBehaviour // Manages the stage setup and battle 
 			Destroy(character.gameObject);
 		}
 
-		GridManager.instance.CleanUp();
 		UI_BattleSceneManager.instance.ChangeUIForFinish(winner);
+		GridManager.instance.CleanUp();
     }
 
 	void Update()
