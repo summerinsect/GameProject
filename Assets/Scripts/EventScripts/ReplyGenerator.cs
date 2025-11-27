@@ -11,6 +11,9 @@ public class EventOutcome
 {
 	public int gold;
 	public int hp;
+	public int attack;
+	public int level;
+	public string events;
 }
 
 [Serializable]
@@ -58,7 +61,7 @@ public class ReplyGenerator : MonoBehaviour
 		eventDescription = ev;
 	}
 
-	public async Task<string> GenerateReply(string playerAction)
+	public async Task<EventReply> GenerateReply(string playerAction)
 	{
 		chatHistory.Add(new ChatMessage
 		{
@@ -99,6 +102,6 @@ public class ReplyGenerator : MonoBehaviour
 			return null;
 		}
 		
-		return eventReply.narrative;
+		return eventReply;
 	}
 }

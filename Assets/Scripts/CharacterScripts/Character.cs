@@ -35,6 +35,7 @@ public abstract class Character : MonoBehaviour // Base class for all characters
 
 	protected virtual void Awake()
 	{
+        level = 1;
 		characterBattleAnimator = GetComponent<CharacterBattleAnimator>();
 		if (characterBattleAnimator == null)
 			characterBattleAnimator = gameObject.AddComponent<CharacterBattleAnimator>();
@@ -92,6 +93,11 @@ public abstract class Character : MonoBehaviour // Base class for all characters
     public void MoveAnimation() {
         Vector3 targetWorldPos = GridManager.instance.ComputeOffset(position);
         characterBattleAnimator.StartMoveTo(targetWorldPos);
+    }
+
+    public virtual void LevelUp() {
+        if (level < 3)
+            level += 1;
     }
 
     #region Action Logic

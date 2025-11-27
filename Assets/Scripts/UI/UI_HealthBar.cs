@@ -32,7 +32,8 @@ public class UI_HealthBar : MonoBehaviour
         float height = healthBar.GetComponent<RectTransform>().rect.height;
         float healthPercent = 1.0f * character.currentHealth / character.maxHealth;
         float shieldPercent = 1.0f * character.shield / character.maxHealth;
-        fillHealth.GetComponent<RectTransform>().sizeDelta = new Vector2(healthPercent * totalLength, height);
-        fillShield.GetComponent<RectTransform>().sizeDelta = new Vector2((healthPercent + shieldPercent) * totalLength, height);
+        shieldPercent = Mathf.Min(shieldPercent, 1.0f);
+        fillHealth.GetComponent<RectTransform>().sizeDelta = new Vector2(healthPercent * totalLength, 0);
+        fillShield.GetComponent<RectTransform>().sizeDelta = new Vector2(shieldPercent * totalLength, 0);
     }
 }

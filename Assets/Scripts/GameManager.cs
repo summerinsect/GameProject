@@ -103,6 +103,14 @@ public class GameManager : MonoBehaviour {
         GameScene.instance.LoadMapScene();
     }
 
+    public void FromEventToBattle() {
+        inBattle = true;
+        inShop = false;
+        inEvent = false;
+        inMap = false;
+        GameScene.instance.LoadBattleScene();
+    }
+
     public void GameOver() {
         playerDepth = 0;
         isGameStarted = false;

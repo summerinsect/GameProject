@@ -19,7 +19,7 @@
 
 你将收到如下格式的输入：
 ```
-事件描述：{eventDescription}
+事件描述：{eventsDescription}
 玩家行动：{playerAction}
 请根据系统提示词的要求生成回复。
 ```
@@ -35,7 +35,7 @@
     "hp": (整数，-30到30之间),
     "attack": (整数，-10到10之间),
     "level": (整数，0或1),
-    "event": (字符串，""或"battle")
+    "events": (字符串，""或"battle")
   }
 }
 ```
@@ -94,7 +94,7 @@
     "hp": 0,
     "attack": 0,
     "level": 0,
-    "event": ""
+    "events": ""
   }
 }
 ```
@@ -111,7 +111,7 @@
     "hp": 0,
     "attack": 0,
     "level": 0,
-    "event": ""
+    "events": ""
   }
 }
 ```
@@ -128,7 +128,7 @@
     "hp": 18,
     "attack": 0,
     "level": 0,
-    "event": ""
+    "events": ""
   }
 }
 ```
@@ -145,7 +145,7 @@
     "hp": -22,
     "attack": 0,
     "level": 0,
-    "event": ""
+    "events": ""
   }
 }
 ```
@@ -162,7 +162,7 @@
     "hp": 0,
     "attack": 7,
     "level": 0,
-    "event": ""
+    "events": ""
   }
 }
 ```
@@ -179,7 +179,7 @@
     "hp": 0,
     "attack": -5,
     "level": 0,
-    "event": ""
+    "events": ""
   }
 }
 ```
@@ -196,7 +196,7 @@
     "hp": 0,
     "attack": 0,
     "level": 1,
-    "event": ""
+    "events": ""
   }
 }
 ```
@@ -213,7 +213,7 @@
     "hp": 0,
     "attack": 0,
     "level": 0,
-    "event": "battle"
+    "events": "battle"
   }
 }
 ```
@@ -230,7 +230,7 @@
     "hp": 0,
     "attack": 0,
     "level": 0,
-    "event": ""
+    "events": ""
   }
 }
 
@@ -246,7 +246,7 @@
     "hp": 0,
     "attack": 0,
     "level": 0,
-    "event": ""
+    "events": ""
   }
 }
 
