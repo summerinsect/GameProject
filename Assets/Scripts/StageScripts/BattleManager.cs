@@ -30,7 +30,7 @@ public class BattleManager : MonoBehaviour
 	public float waitAttackTime;
 	private float waitTimer;
 
-	private int preMinTime;
+	// private int preMinTime;
 	public int[] order = new int[2] { 0, 1 };
 	private Character currentCharacter;
 
@@ -39,7 +39,7 @@ public class BattleManager : MonoBehaviour
 	{
 		team[0] = new TeamManager();
 		team[1] = new TeamManager();
-		preMinTime = -1;
+		// preMinTime = -1;
 	}
 
 	public void AddMember(int teamId, Character character)
@@ -99,16 +99,19 @@ public class BattleManager : MonoBehaviour
 		target.IsDamagedBy(damage);
 	}
 
+	public int currentTime = 0;
+
 	void NextMember()
 	{
+		/*
 		foreach (int id in order)
 			team[id].shuffle();
 
-		int minTime = Mathf.Min(team[0].MinTime(), team[1].MinTime());
+		currentTime = Mathf.Min(team[0].MinTime(), team[1].MinTime());
 
-		if(minTime > preMinTime)
+		if(currentTime > preMinTime)
 		{
-			preMinTime = minTime;
+			preMinTime = currentTime;
 			order[0] = 0;
 			order[1] = 1;
 		}
@@ -117,7 +120,7 @@ public class BattleManager : MonoBehaviour
 		{
 			bool f = false;
 			foreach (var member in team[id].members)
-				if (member.isAlive && member.nextRoundTime == minTime)
+				if (member.isAlive && member.nextRoundTime == currentTime)
 				{
 					currentCharacter = member;
 					f = true;
@@ -126,9 +129,12 @@ public class BattleManager : MonoBehaviour
 			if(f)
 				break;
 		}
+		*/
+		currentCharacter = ActionBar.instance.GetNextMember();
 		Debug.Log($"Current character: {currentCharacter.uid}, time {currentCharacter.nextRoundTime}(Team {GetTeamID(currentCharacter)})");
 		currentCharacter.nextRoundTime += currentCharacter.speed;
-		order[0] ^= 1;
+        ActionBar.instance.UpdateActionBar();
+        order[0] ^= 1;
 		order[1] ^= 1;
 	}
 

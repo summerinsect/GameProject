@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour {
             return;
         }
         isGameStarted = true;
-        // BagManager.instance.coin = 20;
+        BagManager.instance.coin = 999;
         playerDepth = 0;
         inBattle = false;
         inShop = false;
@@ -101,6 +101,14 @@ public class GameManager : MonoBehaviour {
         inEvent = false;
         inMap = true;
         GameScene.instance.LoadMapScene();
+    }
+
+    public void FromEventToBattle() {
+        inBattle = true;
+        inShop = false;
+        inEvent = false;
+        inMap = false;
+        GameScene.instance.LoadBattleScene();
     }
 
     public void GameOver() {

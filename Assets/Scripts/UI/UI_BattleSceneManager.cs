@@ -17,6 +17,7 @@ public class UI_BattleSceneManager : MonoBehaviour {
 
     public Button startButton;
     public Button endButton;
+    public ActionBar actionBar;
 
     public TextMeshProUGUI characterCountText;
     private Coroutine flashCoroutine;
@@ -39,6 +40,7 @@ public class UI_BattleSceneManager : MonoBehaviour {
         UI_BagManager.instance.CleanUp();
         startButton.gameObject.SetActive(false);
         characterCountText.gameObject.SetActive(false);
+        actionBar.gameObject.SetActive(true);
         EnlargeGrid(gridScale);
     }
 
@@ -59,6 +61,7 @@ public class UI_BattleSceneManager : MonoBehaviour {
         EnlargeGrid(1f / gridScale);
         startButton.gameObject.SetActive(false);
         endButton.gameObject.SetActive(true);
+        actionBar.gameObject.SetActive(false);
         if (winner == 1)
             endButton.GetComponentInChildren<TextMeshProUGUI>().text = "”Œœ∑Ω· ¯";
     }

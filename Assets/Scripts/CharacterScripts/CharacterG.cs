@@ -14,6 +14,7 @@ public class CharacterG : Character {
             if (neighborCharacter != null && neighborCharacter.teamId != teamId) {
                 BattleManager.instance.DamageCharacter(neighborCharacter.uid, DamageCalculator.instance.CalculateDamage(uid, neighborCharacter.uid, 0.5f, 1));
                 neighborCharacter.nextRoundTime += neighborCharacter.speed;
+                ActionBar.instance.UpdateActionBar();
             }
         }
         currentHealth = -1;

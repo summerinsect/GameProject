@@ -25,6 +25,7 @@ public class StageManager : MonoBehaviour // Manages the stage setup and battle 
 	public int maxCharacterCount;
 
 	public Button startButton;
+	public ActionBar actionBar;
 
 	public bool isStarted;
     public bool isFinished;
@@ -38,6 +39,7 @@ public class StageManager : MonoBehaviour // Manages the stage setup and battle 
 	{
 		isStarted = true;
         UI_BattleSceneManager.instance.ChangeUIForStart();
+		actionBar.InitActionBar();
         foreach (var character in BattleManager.instance.GetAllTeamMember(0))
 			character.ActionsWhenStart();
 		foreach (var character in BattleManager.instance.GetAllTeamMember(1))

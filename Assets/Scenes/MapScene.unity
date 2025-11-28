@@ -824,7 +824,7 @@ MonoBehaviour:
   height: 
   mapSlotPrefab: {fileID: 2422196889756309462, guid: aab38583e71af3341b71598f91c0479a, type: 3}
   pathLinePrefab: {fileID: 8158110701591333845, guid: 40fbf101d9e15c5428718a0643c1d8f5, type: 3}
-  mapParent: {fileID: 320471450}
+  mapSlotParent: {fileID: 320471450}
   icon:
   - {fileID: 21300000, guid: 2b31ffe6a1f44f14d90cb6a123fc3dbd, type: 3}
   - {fileID: 21300000, guid: 1393cac01d95dce4db076654ea10132f, type: 3}
