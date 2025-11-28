@@ -35,9 +35,9 @@ public class MapManager : MonoBehaviour {
             types.Add(new MapSlotType[height[i]]);
             for (int j = 0; j < height[i]; j++) {
                 int r = Random.Range(0, 100);
-				if (r < 1)
+				if (r < 33)
                     types[i][j] = MapSlotType.Battle;
-                else if (r < 2)
+                else if (r < 66)
 					types[i][j] = MapSlotType.Shop;
                 else
                     types[i][j] = MapSlotType.Event;

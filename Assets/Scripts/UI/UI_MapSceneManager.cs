@@ -20,12 +20,26 @@ public class UI_MapSceneManager : MonoBehaviour {
 
     public GameObject mapSlotPrefab;
     public GameObject pathLinePrefab;
-    public Transform mapParent;
+    public RectTransform mapSlotParent;
     public List<MapSlot[]> mapSlots = new List<MapSlot[]>();
 
     public List<Sprite> icon = new List<Sprite>();
     public Dictionary<MapSlotType, Sprite> icons = new Dictionary<MapSlotType, Sprite>();
 
+    public void SetContentPosition(int depth) {
+        Vector2 newPosition = mapSlotParent.anchoredPosition;
+        if (depth <= 3) {
+            newPosition.x = 0;
+        }
+        else if (depth >= mapWidth - 4) {
+            newPosition.x = -1920;
+        }
+        else {
+            newPosition.x = -300 * (depth - 3);
+        }
+        Debug.Log(newPosition);
+        mapSlotParent.anchoredPosition = newPosition;
+    }
     public void DrawMap() {
         icons[MapSlotType.Battle] = icon[0];
         icons[MapSlotType.Event] = icon[1];
@@ -39,7 +53,7 @@ public class UI_MapSceneManager : MonoBehaviour {
             for (int j = 0; j < height[i]; j++) {
                 float yOffset = j * 150 - height[i] * 75 + 75;
                 GameObject newSlot = Instantiate(mapSlotPrefab);
-                newSlot.transform.SetParent(mapParent, false);
+                newSlot.transform.SetParent(mapSlotParent, false);
                 newSlot.transform.localPosition = new Vector3(xOffset, yOffset, 0);
                 newSlot.GetComponent<MapSlot>().Setup(MapManager.instance.types[i][j], i, j);
                 mapSlots[i][j] = newSlot.GetComponent<MapSlot>();
@@ -58,7 +72,7 @@ public class UI_MapSceneManager : MonoBehaviour {
                     if (MapManager.instance.edges[i - 1][j, k] == true) {
                         Vector3 startPos = mapSlots[i - 1][j].GetComponent<RectTransform>().anchoredPosition3D + new Vector3(100, 0, 0);
                         Vector3 endPos = mapSlots[i][k].GetComponent<RectTransform>().anchoredPosition3D;
-                        GameObject newLine = Instantiate(pathLinePrefab, mapParent);
+                        GameObject newLine = Instantiate(pathLinePrefab, mapSlotParent);
                         LineRenderer lr = newLine.GetComponent<LineRenderer>();
                         lr.SetPosition(0, startPos);
                         lr.SetPosition(1, endPos);
@@ -66,5 +80,6 @@ public class UI_MapSceneManager : MonoBehaviour {
                 }
             }
         }
+        SetContentPosition(GameManager.instance.playerDepth);
     }
 }

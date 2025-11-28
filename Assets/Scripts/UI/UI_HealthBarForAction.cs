@@ -5,25 +5,15 @@ using UnityEngine.Assertions;
 using UnityEngine.UI;
 using TMPro;
 
-public class UI_HealthBar : MonoBehaviour
-{
+public class UI_HealthBarForAction : MonoBehaviour {
     public Character character;
     public GameObject healthBar;
     public GameObject fillHealth;
     public GameObject fillShield;
+    public GameObject healthText;
 
-    private void Awake() {
-        character = GetComponentInParent<Character>();
-        healthBar = transform.Find("HealthBar").gameObject;
-        fillHealth = transform.Find("HealthBar/Fill_Health").gameObject;
-        fillShield = transform.Find("HealthBar/Fill_Shield").gameObject;
-    }
-
-    private void OnEnable() {
-        UpdateHealthUI();
-    }
-
-    public void UpdateHealthUI() {
+    public void UpdateHealthUI(Character _character) {
+        character = _character;
         if (character.teamId == 0)
             fillHealth.GetComponent<Image>().color = Color.green;
         else
@@ -36,5 +26,6 @@ public class UI_HealthBar : MonoBehaviour
         shieldPercent = Mathf.Min(shieldPercent, 1.0f);
         fillHealth.GetComponent<RectTransform>().sizeDelta = new Vector2(healthPercent * totalLength, 0);
         fillShield.GetComponent<RectTransform>().sizeDelta = new Vector2(shieldPercent * totalLength, 0);
+        healthText.GetComponent<TextMeshProUGUI>().text = character.currentHealth.ToString() + "/" + character.maxHealth.ToString();
     }
 }
