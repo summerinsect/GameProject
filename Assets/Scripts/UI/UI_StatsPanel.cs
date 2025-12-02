@@ -35,6 +35,8 @@ public class UI_StatsPanel : MonoBehaviour {
         attack.text = character.attack.ToString();
         attackDistance.text = character.attackDistance.ToString();
         attackRange.text = character.attackRange.ToString();
+        if (character.attackRange == -1)
+            attackRange.text = "Ãÿ ‚";
         speed.text = character.speed.ToString();
         skillDescription.text = character.skillDescription;
     }

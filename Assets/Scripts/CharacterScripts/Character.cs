@@ -29,6 +29,7 @@ public abstract class Character : MonoBehaviour // Base class for all characters
 	public CharacterBattleAnimator characterBattleAnimator;
 	public UI_HealthBar healthBarUI;
 
+    public int moveInterval;
 	public int nextRoundTime;
 
 	public bool isAlive => currentHealth > 0;
@@ -41,6 +42,7 @@ public abstract class Character : MonoBehaviour // Base class for all characters
 			characterBattleAnimator = gameObject.AddComponent<CharacterBattleAnimator>();
 		healthBarUI = GetComponentInChildren<UI_HealthBar>();
         currentHealth = currentMaxHealth = maxHealth;
+        moveInterval = Mathf.FloorToInt(20000f / speed);
     }
 
 	public virtual void IsDamagedBy(int damage)
