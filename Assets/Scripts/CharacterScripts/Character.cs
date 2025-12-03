@@ -108,7 +108,7 @@ public abstract class Character : MonoBehaviour // Base class for all characters
         List<Character> enemies = BattleManager.instance.GetAliveTeamMember(teamId ^ 1);
 		Extensions.Shuffle(enemies);
         foreach (Character enemy in enemies)
-            if (GridManager.instance.Distance(position, enemy.position) <= attackRange)
+            if (GridManager.instance.Distance(position, enemy.position) <= attackDistance)
                 return enemy.position;
         return null;
     }
