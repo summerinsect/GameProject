@@ -25,11 +25,12 @@ public class StageLoader : MonoBehaviour
 	public void StageInit() {
 		int playerDepth = GameManager.instance.playerDepth;
 		string levelId;
-		if (Random.Range(0, 100) < 50)
-			levelId = "Test_01";
-		else
-			levelId = "Test_02";
+		//if (Random.Range(0, 100) < 50)
+		//	levelId = "Test_01";
+		//else
+		//	levelId = "Test_02";
 		// 关卡根据深度随机选择
+		levelId = "Test_03";
 		TextAsset jsonAsset = Resources.Load<TextAsset>("Levels/" + levelId);
         string jsonText = jsonAsset.text;
         LevelConfig data = JsonUtility.FromJson<LevelConfig>(jsonText);

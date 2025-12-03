@@ -97,7 +97,7 @@ public class ActionBar : MonoBehaviour {
         UpdateActionBar();
     }
 
-    public IEnumerator MoveActionBar(float timeToMove = .25f) {
+    public IEnumerator MoveActionBar(float timeToMove = .4f) {
         float timeElapsed = 0;
         startPosition.Clear();
         targetPosition.Clear();
@@ -112,13 +112,8 @@ public class ActionBar : MonoBehaviour {
             foreach (ActionBarSlot slot in actionBarSlots) {
                 if (slot.isActiveAndEnabled == false)
                     continue;
-                if (slot.rank > oldRank[slot]) {
-                    slot.ClearSlotUI();
-                }
-                else {
-                    slot.rectTransform.anchoredPosition = Vector2.Lerp(startPosition[slot], targetPosition[slot], t);
-                    slot.UpdateSlotUI();
-                }
+                slot.rectTransform.anchoredPosition = Vector2.Lerp(startPosition[slot], targetPosition[slot], t);
+                slot.UpdateSlotUI();
             }
             timeElapsed += Time.deltaTime;
             yield return null;
