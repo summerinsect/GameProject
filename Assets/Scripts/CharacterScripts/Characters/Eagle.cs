@@ -1,4 +1,5 @@
 
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,12 +20,28 @@ public class Eagle : Character {
     }
     public override void AttackLogic(Vector3Int? _targetPosition, float ratio = 1) {
         if (_targetPosition == null) return;
+        StartCoroutine(AttackLogic(_targetPosition.Value));
+    }
+
+    private IEnumerator AttackLogic(Vector3Int attackPosition) {
+        characterBattleAnimator.Attack(GridManager.instance.ComputeOffset(attackPosition));
         List<Character> enemies = BattleManager.instance.GetAliveTeamMember(teamId ^ 1);
-        int dir = Compare(position, _targetPosition.Value);
+        int dir = Compare(position, attackPosition);
         foreach (Character enemy in enemies)
             if (Compare(position, enemy.position) == dir) {
                 string targetId = enemy.uid;
-                BattleManager.instance.DamageCharacter(targetId, DamageCalculator.instance.CalculateDamage(uid, targetId, ratio));
+                BattleManager.instance.DamageCharacter(targetId, DamageCalculator.instance.CalculateDamage(uid, targetId, 1));
+            }
+        float timer = 0f;
+        while (timer < .3f) {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        foreach (Character enemy in enemies)
+            if (Compare(position, enemy.position) == dir && enemy.position != attackPosition) {
+                Vector3 attackWorldPosition = GridManager.instance.ComputeOffset(attackPosition);
+                Vector3 enemyWorldPosition = GridManager.instance.ComputeOffset(enemy.position);
+                characterBattleAnimator.CreateProjectile(attackWorldPosition, enemyWorldPosition);
             }
     }
 }

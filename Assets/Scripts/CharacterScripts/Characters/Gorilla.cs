@@ -7,6 +7,7 @@ public class Gorilla : Character {
     public override void AttackLogic(Vector3Int? _targetPosition, float ratio = 1.0f) {
         if (_targetPosition == null) return;
         Vector3Int attackPosition = _targetPosition.Value;
+        characterBattleAnimator.Attack(GridManager.instance.ComputeOffset(attackPosition));
         List<Character> enemies = BattleManager.instance.GetAliveTeamMember(teamId ^ 1);
         foreach (Character enemy in enemies)
             if (GridManager.instance.Distance(attackPosition, enemy.position) < attackRange) {

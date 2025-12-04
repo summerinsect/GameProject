@@ -151,4 +151,40 @@ public class CharacterBattleAnimator : MonoBehaviour
         DamagePopup popupScript = popupObject.GetComponent<DamagePopup>();
         popupScript.Setup(damage);
     }
+
+	public float projectileLifetime = 0.3f;
+
+    public void Attack(Vector3 targetPosition, int projectileType = 1) {
+        StartCoroutine(MoveAtAttack(targetPosition - transform.position));
+        CreateProjectile(transform.position, targetPosition, projectileType);
+    }
+
+    public void CreateProjectile(Vector3 startPosition, Vector3 targetPosition, int projectileType = 1) {
+        GameObject newProjectile = Instantiate(Resources.Load<GameObject>($"Projectile{projectileType}"), startPosition, Quaternion.identity);
+        Projectile projectileScript = newProjectile.GetComponent<Projectile>();
+        float rotationAngle = Mathf.Atan2(targetPosition.y - startPosition.y, targetPosition.x - startPosition.x) * Mathf.Rad2Deg;
+        newProjectile.transform.rotation = Quaternion.Euler(0, 0, rotationAngle);
+        projectileScript.lifetime = projectileLifetime;
+        projectileScript.velocity = (targetPosition - startPosition) / projectileLifetime;
+    }
+
+
+    public float moveAttackDuration = .1f;
+	public float moveAttackSpeed = 3f;
+
+	public IEnumerator MoveAtAttack(Vector3 direction) {
+		float timeElapsed = 0f;
+		direction = direction.normalized;
+		while (timeElapsed < moveAttackDuration) {
+			transform.position += direction * moveAttackSpeed * Time.deltaTime;
+			timeElapsed += Time.deltaTime;
+            yield return null;
+		}
+		timeElapsed = 0f;
+		while (timeElapsed < moveAttackDuration) {
+			transform.position -= direction * moveAttackSpeed * Time.deltaTime;
+			timeElapsed += Time.deltaTime;
+			yield return null;
+		}
+	}
 }

@@ -39,7 +39,8 @@ public class GameManager : MonoBehaviour {
         inMap = true;
         // AddInitialCharacters();
         Debug.Log("I want to start game!");
-        MapManager.instance.GenerateMap(mapWidth, mapHeight);
+        // MapManager.instance.GenerateMap(mapWidth, mapHeight);
+        MapManager.instance.GenerateMap();
         GameScene.instance.LoadMapScene();
     }
 
