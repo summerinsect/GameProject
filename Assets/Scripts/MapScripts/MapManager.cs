@@ -67,6 +67,61 @@ public class MapManager : MonoBehaviour {
         }
     }
 
+    public void GenerateMap() {
+        GameManager.instance.mapWidth = mapWidth = 12;
+        GameManager.instance.mapHeight = mapHeight = 4;
+        height = new int[] { 1, 2, 3, 4, 4, 3, 2, 1, 2, 3, 2, 1 };
+        for (int i = 0; i < mapWidth; i++) {
+            vertices.Add(new int[height[i]]);
+            types.Add(new MapSlotType[height[i]]);
+            if (i == 0) types[0][0] = MapSlotType.Shop;
+            else if (height[i] == 1) types[i][0] = MapSlotType.Battle;
+            else {
+                if (height[i] == 2) {
+                    types[i][0] = MapSlotType.Battle;
+                    if (i == 1 || i == 8) types[i][1] = MapSlotType.Event;
+                    else types[i][1] = MapSlotType.Shop;
+                }
+                else if (height[i] == 3) {
+                    types[i][0] = MapSlotType.Battle;
+                    types[i][1] = MapSlotType.Event;
+                    types[i][2] = MapSlotType.Shop;
+                }
+                else {
+                    types[i][0] = MapSlotType.Battle;
+                    types[i][1] = MapSlotType.Event;
+                    types[i][2] = MapSlotType.Shop;
+                    types[i][3] = MapSlotType.Battle;
+                }
+                Extensions.Shuffle(types[i]);
+            }
+        }
+        for (int i = 1; i < mapWidth; i++) {
+            edges.Add(new bool[height[i - 1], height[i]]);
+            if (height[i - 1] == height[i] + 1) {
+                for (int j = 0; j < height[i]; j++) {
+                    edges[i - 1][j, j] = true;
+                    edges[i - 1][j + 1, j] = true;
+                }
+            }
+            else if (height[i - 1] + 1 == height[i]) {
+                for (int j = 0; j < height[i - 1]; j++) {
+                    edges[i - 1][j, j] = true;
+                    edges[i - 1][j, j + 1] = true;
+                }
+            }
+            else if (height[i - 1] == height[i]) {
+                for (int j = 0; j < height[i - 1]; j++) {
+                    edges[i - 1][j, j] = true;
+                    if (j < height[i] - 1)
+                        edges[i - 1][j, j + 1] = true;
+                    if (j > 0)
+                        edges[i - 1][j, j - 1] = true;
+                }
+            }
+        }
+    }
+
     public void ClearMap() {
         height = new int[0];
         vertices = new List<int[]>();

@@ -132,7 +132,7 @@ public class BattleManager : MonoBehaviour
 		*/
 		currentCharacter = ActionBar.instance.GetNextMember();
 		Debug.Log($"Current character: {currentCharacter.uid}, time {currentCharacter.nextRoundTime}(Team {GetTeamID(currentCharacter)})");
-		currentCharacter.nextRoundTime += currentCharacter.speed;
+		currentCharacter.nextRoundTime += currentCharacter.moveInterval;
         ActionBar.instance.UpdateActionBar();
         order[0] ^= 1;
 		order[1] ^= 1;

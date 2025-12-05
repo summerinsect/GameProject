@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -58,11 +59,60 @@ public class ShopManager : MonoBehaviour
 	public void shopCharacterInit()
 	{
 		int sellCount = 6;
-		List<Character> possibleCharacters = GameManager.instance.shopCharacters;
-		for (int i = 0; i < sellCount; i++)
-			AddCharacter(possibleCharacters[Random.Range(0, possibleCharacters.Count)].characterName);
-		UI_ShopManager.instance.UpdateSlotUI();
-	}
+		int depth = GameManager.instance.playerDepth;
+        List<Character> possibleCharacters = GameManager.instance.shopCharacters;
+		int characterCount = possibleCharacters.Count;
+        int[] weight = new int [characterCount];
+		for (int j = 0; j < sellCount; j++) {
+			int totalWeight = 0;
+			for (int i = 0; i < characterCount; i++) {
+				bool alreadyInShop = false;
+				foreach (var character in shopCharacter) {
+					if (character.characterName == possibleCharacters[i].characterName) {
+						alreadyInShop = true;
+					}
+                }
+				if (alreadyInShop) {
+					weight[i] = 0;
+					continue;
+				}
+                weight[i] = (100 - possibleCharacters[i].price) * 50 + (depth - 1) * 100;
+				int level = BagManager.instance.FindCharacterLevel(possibleCharacters[i].characterName) + 1;
+				if (depth >= 8) {
+					weight[i] /= level;
+				}
+				else if (depth >= 5) {
+					weight[i] /= level * level;
+				}
+				else if (depth >= 2) {
+					weight[i] /= level * level * level;
+				}
+				else {
+					if (level >= 2)
+						weight[i] = 0;
+				}
+				if (level == 4)
+					weight[i] = 0;
+				totalWeight += weight[i];
+            }
+			if (totalWeight == 0) break;
+			int r = Random.Range(0, totalWeight);
+			for (int i = 0; i < characterCount; i++) {
+				r -= weight[i];
+				if (r < 0) {
+					Character newCharacter = CharacterCreater.instance.CreateCharacter(possibleCharacters[i].characterName);
+					int level = BagManager.instance.FindCharacterLevel(newCharacter.characterName) + 1;
+					if (level >= 2) newCharacter.LevelUp();
+					if (level >= 3) newCharacter.LevelUp();
+					Debug.Assert(level <= 3, "Character level in shop should not exceed 3");
+                    shopCharacter.Add(newCharacter);
+					Debug.Log($"Add character {newCharacter.characterName} with level {level}");
+					break;
+				}
+            }
+        }
+        UI_ShopManager.instance.UpdateSlotUI();
+    }
 	public void ShopInit()
 	{
 		reloadCharacterCost = 2;
@@ -110,13 +160,25 @@ public class ShopManager : MonoBehaviour
 		{
 			BagManager.instance.coin -= selectedCharacter.price;
 			UI_ShopManager.instance.UpdateCoinText();
-			BagManager.instance.AddMember(selectedCharacter);
-			shopCharacter.Remove(selectedCharacter);
-            UI_ShopManager.instance.ShowInfo($"购买 {selectedCharacter.characterName} 成功");
+			if (selectedCharacter.level == 1) {
+				BagManager.instance.AddMember(selectedCharacter);
+				UI_ShopManager.instance.ShowInfo($"购买 {selectedCharacter.characterName} 成功");
+			}
+			else {
+				List<Character> bagCharacters = BagManager.instance.members;
+				foreach (var character in bagCharacters) {
+					if (character.characterName == selectedCharacter.characterName) {
+						Debug.Assert(character.level == selectedCharacter.level - 1, "Character levels do not match for upgrade");
+						character.LevelUp();
+					}
+				}
+                UI_ShopManager.instance.ShowInfo($"升级 {selectedCharacter.characterName} 成功");
+            }
+            shopCharacter.Remove(selectedCharacter);
             selectedCharacter = null;
-			UI_StatsPanel.instance.Clear();
-			UI_ShopManager.instance.UpdateSlotUI();
-		}
+            UI_StatsPanel.instance.Clear();
+            UI_ShopManager.instance.UpdateSlotUI();
+        }
 	}
 
 	public void ExitShop() {

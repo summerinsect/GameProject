@@ -29,6 +29,7 @@ public abstract class Character : MonoBehaviour // Base class for all characters
 	public CharacterBattleAnimator characterBattleAnimator;
 	public UI_HealthBar healthBarUI;
 
+    public int moveInterval;
 	public int nextRoundTime;
 
 	public bool isAlive => currentHealth > 0;
@@ -41,6 +42,7 @@ public abstract class Character : MonoBehaviour // Base class for all characters
 			characterBattleAnimator = gameObject.AddComponent<CharacterBattleAnimator>();
 		healthBarUI = GetComponentInChildren<UI_HealthBar>();
         currentHealth = currentMaxHealth = maxHealth;
+        moveInterval = Mathf.FloorToInt(20000f / speed);
     }
 
 	public virtual void IsDamagedBy(int damage)
@@ -106,7 +108,7 @@ public abstract class Character : MonoBehaviour // Base class for all characters
         List<Character> enemies = BattleManager.instance.GetAliveTeamMember(teamId ^ 1);
 		Extensions.Shuffle(enemies);
         foreach (Character enemy in enemies)
-            if (GridManager.instance.Distance(position, enemy.position) <= attackRange)
+            if (GridManager.instance.Distance(position, enemy.position) <= attackDistance)
                 return enemy.position;
         return null;
     }
@@ -115,6 +117,9 @@ public abstract class Character : MonoBehaviour // Base class for all characters
     public virtual void AttackLogic(Vector3Int? _targetPosition, float ratio = 1.0f) {
 		if (_targetPosition == null) return;
 		Vector3Int attackPosition = _targetPosition.Value;
+
+        characterBattleAnimator.Attack(GridManager.instance.ComputeOffset(attackPosition));
+
         List<Character> enemies = BattleManager.instance.GetAliveTeamMember(teamId ^ 1);
         foreach (Character enemy in enemies)
             if (GridManager.instance.Distance(attackPosition, enemy.position) < attackRange) {

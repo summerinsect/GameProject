@@ -1,0 +1,6 @@
+{
+    "maxCharacterCount": 4,
+    "enemyList": [
+        {"name": "剑齿突击者", "xPos": 0, "yPos": 2, "zPos": -2}
+    ]
+}

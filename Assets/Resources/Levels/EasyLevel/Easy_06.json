@@ -1,0 +1,8 @@
+{
+    "maxCharacterCount": 4,
+    "enemyList": [
+        {"name": "石斧战士", "xPos": 0, "yPos": 0, "zPos": 0},
+        {"name": "毒箭射手", "xPos": -1, "yPos": 3, "zPos": -2},
+        {"name": "猎头祭司", "xPos": 1, "yPos": 1, "zPos": -2}
+    ]
+}

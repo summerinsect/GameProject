@@ -1,0 +1,8 @@
+{
+    "maxCharacterCount": 4,
+    "enemyList": [
+        {"name": "剑齿突击者", "xPos": -1, "yPos": 2, "zPos": -1},
+        {"name": "石斧战士", "xPos": 0, "yPos": 0, "zPos": 0},
+        {"name": "碎骨者", "xPos": 4, "yPos": -1, "zPos": -3}
+    ]
+}

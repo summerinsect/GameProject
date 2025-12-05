@@ -20,20 +20,29 @@ public class StageLoader : MonoBehaviour
 			instance = null;
 	}
 
-	public int levelId;
-
 	public void StageInit() {
 		int playerDepth = GameManager.instance.playerDepth;
 		string levelId;
-		if (Random.Range(0, 100) < 50)
-			levelId = "Test_01";
-		else
-			levelId = "Test_02";
-		// 关卡根据深度随机选择
+		if (playerDepth <= 4) {
+			levelId = "EasyLevel/Easy_0" + Random.Range(1, 7).ToString();
+		}
+		else if (playerDepth <= 7) {
+            levelId = "MediumLevel/Medium_0" + Random.Range(1, 8).ToString();
+        }
+		else if (playerDepth == 8) {
+            levelId = "SmallBoss";
+        }
+		else if (playerDepth <= 11) {
+            levelId = "HardLevel/Hard_0" + Random.Range(1, 6).ToString();
+        }
+		else {
+			// playerDepth = 12
+			levelId = "BigBoss";
+		}
+		Debug.Log(levelId);
 		TextAsset jsonAsset = Resources.Load<TextAsset>("Levels/" + levelId);
         string jsonText = jsonAsset.text;
         LevelConfig data = JsonUtility.FromJson<LevelConfig>(jsonText);
-
         StageManager.instance.maxCharacterCount = data.maxCharacterCount;
 		Debug.Log(data.enemyList);
 		foreach (var enemy in data.enemyList) {

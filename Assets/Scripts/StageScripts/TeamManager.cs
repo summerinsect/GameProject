@@ -33,7 +33,7 @@ public class TeamManager
 	public void AddMember(Character character)
 	{
 		members.Add(character);
-		character.nextRoundTime = character.speed;
+		character.nextRoundTime = character.moveInterval;
 	}
 	public void RemoveMember(Character character)
 	{
