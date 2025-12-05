@@ -1,0 +1,9 @@
+{
+    "maxCharacterCount": 5,
+    "enemyList": [
+        {"name": "亡语者", "xPos": 1, "yPos": 1, "zPos": -2},
+        {"name": "亡语者", "xPos": 2, "yPos": -1, "zPos": -1},
+        {"name": "亡语者", "xPos": -1, "yPos": -1, "zPos": 2},
+        {"name": "亡语者", "xPos": -2, "yPos": 1, "zPos": 1}
+    ]
+}

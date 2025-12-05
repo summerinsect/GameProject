@@ -46,4 +46,12 @@ public class BagManager : MonoBehaviour
 			Destroy(character.gameObject);
 		members = new List<Character>();
     }
+
+	public int FindCharacterLevel(string characterName) {
+		foreach (var character in members) {
+			if (character.characterName == characterName)
+				return character.level;
+		}
+		return 0;
+    }
 }

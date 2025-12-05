@@ -1,0 +1,9 @@
+{
+    "maxCharacterCount": 5,
+    "enemyList": [
+        {"name": "古树守卫", "xPos": 1, "yPos": 2, "zPos": -3},
+        {"name": "飞羽武士", "xPos": 1, "yPos": 3, "zPos": -4},
+        {"name": "炽热飞龙", "xPos": 2, "yPos": 2, "zPos": -4},
+        {"name": "投石巨猿", "xPos": 0, "yPos": 0, "zPos": 0}
+    ]
+}

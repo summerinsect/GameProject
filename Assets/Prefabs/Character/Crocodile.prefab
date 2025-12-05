@@ -98,9 +98,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 196b0a3b57bff01419be0d9aa5b3cb88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 4
+  price: 13
   level: 0
-  maxHealth: 1200
+  maxHealth: 800
   attack: 50
   attackDistance: 1
   attackRange: 1

@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c4ae35e43d878b47a034615e59cb8e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 2
+  price: 9
   level: 0
   maxHealth: 1260
   attack: 40
@@ -116,6 +116,7 @@ MonoBehaviour:
   position: {x: 0, y: 0, z: 0}
   characterBattleAnimator: {fileID: 0}
   healthBarUI: {fileID: 0}
+  moveInterval: 0
   nextRoundTime: 0
   attackModifier: []
   damageModifier: []
