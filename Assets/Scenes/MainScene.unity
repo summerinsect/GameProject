@@ -166,8 +166,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a5598708e46a1543a65ade501d586b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapWidth: 8
-  mapHeight: 6
+  mapWidth: 12
+  mapHeight: 4
   height: 
 --- !u!1 &168270116
 GameObject:
@@ -1151,6 +1151,9 @@ MonoBehaviour:
   - {fileID: 4984917859783168005, guid: 1b0b871ca8698f04bab735d6407a33f1, type: 3}
   - {fileID: 7934279137872116936, guid: 8e411af0ba3cb6445b54c69595cb3714, type: 3}
   - {fileID: 5116216875919323073, guid: 9828c6cdfb22f5a439993dd6387cf2a9, type: 3}
+  - {fileID: -1455399816777445017, guid: d62411b24326fba4ead140718f3b6a2c, type: 3}
+  - {fileID: 971988314942887914, guid: 5f6eb9918da10b64d95042f34cf6623b, type: 3}
+  - {fileID: 21039076648760659, guid: 62eed7a242f16c74387492c82e56fc58, type: 3}
 --- !u!4 &1804763733
 Transform:
   m_ObjectHideFlags: 0

@@ -14,6 +14,7 @@ public class Cheetah : Character {
     }
 
     protected override int ProcessSingleRound() {
+        RemoveEffect();
         Vector3Int? targetId = FindTargetLogic();
         if (targetId != null) {
             AttackLogic(targetId);

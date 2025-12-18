@@ -21,6 +21,7 @@ public class UI_BattleSceneManager : MonoBehaviour {
     public GameObject reward;
     public GameObject bag;
     public GameObject statsPanel;
+    public GameObject bossUI;
 
     public TextMeshProUGUI characterCountText;
     private Coroutine flashCoroutine;
@@ -65,11 +66,15 @@ public class UI_BattleSceneManager : MonoBehaviour {
         startButton.gameObject.SetActive(false);
         endButton.gameObject.SetActive(true);
         actionBar.gameObject.SetActive(false);
+        if (GameManager.instance.playerDepth == 11)
+            bossUI.gameObject.SetActive(false);
+        if (winner == 1) {
+            endButton.GetComponentInChildren<TextMeshProUGUI>().text = "游戏结束";
+            return;
+        }
         reward.gameObject.SetActive(true);
         statsPanel.gameObject.SetActive(true);
         bag.gameObject.SetActive(true);
-        if (winner == 1)
-            endButton.GetComponentInChildren<TextMeshProUGUI>().text = "游戏结束";
     }
 
     public void UpdateCharacterCountText() {

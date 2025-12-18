@@ -35,9 +35,9 @@ public class MapManager : MonoBehaviour {
             types.Add(new MapSlotType[height[i]]);
             for (int j = 0; j < height[i]; j++) {
                 int r = Random.Range(0, 100);
-				if (r < 33)
+				if (r < 0)
                     types[i][j] = MapSlotType.Battle;
-                else if (r < 66)
+                else if (r < 100)
 					types[i][j] = MapSlotType.Shop;
                 else
                     types[i][j] = MapSlotType.Event;
@@ -65,7 +65,7 @@ public class MapManager : MonoBehaviour {
                         pos2++;
             }
         }
-    }
+    } // 用于各种测试
 
     public void GenerateMap() {
         GameManager.instance.mapWidth = mapWidth = 12;

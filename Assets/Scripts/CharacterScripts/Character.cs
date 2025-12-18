@@ -70,6 +70,7 @@ public abstract class Character : MonoBehaviour // Base class for all characters
 	}
 
 	protected virtual int ProcessSingleRound() {
+        RemoveEffect();
         Vector3Int? targetId = FindTargetLogic();
         if (targetId != null) {
             AttackLogic(targetId);
@@ -89,7 +90,10 @@ public abstract class Character : MonoBehaviour // Base class for all characters
     // 战斗结束时（清buff）
     public virtual void ActionsWhenEnd() {
         shield = 0;
-        attackModifier = damageModifier = takeDamageModifier = healthModifier = new List<float>();
+        attackModifier = new List<float>();
+        damageModifier = new List<float>();
+        takeDamageModifier = new List<float>();
+        healthModifier = new List<float>();
         ClearEffect();
     }
 

@@ -10,6 +10,7 @@ public class Chameleon : Character {
         skillCount = 0;
     }
     protected override int ProcessSingleRound() {
+        RemoveEffect();
         Vector3Int? targetId = FindTargetLogic();
         if (targetId != null) {
             AttackLogic(targetId);

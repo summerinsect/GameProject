@@ -47,7 +47,8 @@ public class BattleManager : MonoBehaviour
 		//Debug.Log($"Add member {character.uid} to team {teamId}");
 		team[teamId].AddMember(character);
 		character.characterBattleAnimator.EnableBattleAnimation();
-		character.healthBarUI.UpdateHealthUI();
+		if (character.healthBarUI != null)
+            character.healthBarUI.UpdateHealthUI();
 	}
 
 	public void RemoveMember(int teamId, Character character)
@@ -220,4 +221,7 @@ public class BattleManager : MonoBehaviour
         OnCharacterDied?.Invoke(diedCharacter);
         Debug.Log($"EVENT: Unit {diedCharacter.name} has died.");
     }
+
+    public Dictionary<string, Character> attackedByRed = new Dictionary<string, Character>();
+    public Dictionary<string, Character> attackedByGreen = new Dictionary<string, Character>();
 }

@@ -23,20 +23,20 @@ public class StageLoader : MonoBehaviour
 	public void StageInit() {
 		int playerDepth = GameManager.instance.playerDepth;
 		string levelId;
-		if (playerDepth <= 4) {
+		if (playerDepth <= 3) {
 			levelId = "EasyLevel/Easy_0" + Random.Range(1, 7).ToString();
 		}
-		else if (playerDepth <= 7) {
+		else if (playerDepth <= 6) {
             levelId = "MediumLevel/Medium_0" + Random.Range(1, 8).ToString();
         }
-		else if (playerDepth == 8) {
+		else if (playerDepth == 7) {
             levelId = "SmallBoss";
         }
-		else if (playerDepth <= 11) {
+		else if (playerDepth <= 10) {
             levelId = "HardLevel/Hard_0" + Random.Range(1, 6).ToString();
         }
 		else {
-			// playerDepth = 12
+			// playerDepth = 11
 			levelId = "BigBoss";
 		}
 		Debug.Log(levelId);
