@@ -18,6 +18,9 @@ public class UI_BattleSceneManager : MonoBehaviour {
     public Button startButton;
     public Button endButton;
     public ActionBar actionBar;
+    public GameObject reward;
+    public GameObject bag;
+    public GameObject statsPanel;
 
     public TextMeshProUGUI characterCountText;
     private Coroutine flashCoroutine;
@@ -36,8 +39,8 @@ public class UI_BattleSceneManager : MonoBehaviour {
     }
 
     public void ChangeUIForStart() {
-        UI_StatsPanel.instance.gameObject.SetActive(false);
-        UI_BagManager.instance.CleanUp();
+        statsPanel.gameObject.SetActive(false);
+        bag.gameObject.SetActive(false);
         startButton.gameObject.SetActive(false);
         characterCountText.gameObject.SetActive(false);
         actionBar.gameObject.SetActive(true);
@@ -62,6 +65,9 @@ public class UI_BattleSceneManager : MonoBehaviour {
         startButton.gameObject.SetActive(false);
         endButton.gameObject.SetActive(true);
         actionBar.gameObject.SetActive(false);
+        reward.gameObject.SetActive(true);
+        statsPanel.gameObject.SetActive(true);
+        bag.gameObject.SetActive(true);
         if (winner == 1)
             endButton.GetComponentInChildren<TextMeshProUGUI>().text = "”Œœ∑Ω· ¯";
     }

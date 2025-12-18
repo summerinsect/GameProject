@@ -14,7 +14,8 @@ public abstract class Character : MonoBehaviour // Base class for all characters
 	public int attackDistance; // ¹¥»÷¾àÀë
 	public int attackRange; // ¹¥»÷·¶Î§
 	public int speed;
-	public string skillDescription;
+    [TextArea(1, 3)]
+    public string skillDescription;
 	public string characterName;
 
     public int currentAttack;
@@ -98,8 +99,13 @@ public abstract class Character : MonoBehaviour // Base class for all characters
     }
 
     public virtual void LevelUp() {
-        if (level < 3)
-            level += 1;
+        Debug.Assert(level < 3, "Character has reached max level.");
+        level += 1;
+        price += 5;
+        int addHealth = Mathf.Max(200, Mathf.FloorToInt(maxHealth * 0.2f));
+        maxHealth += addHealth;
+        currentHealth += addHealth;
+        attack += 20;
     }
 
     #region Action Logic

@@ -31,8 +31,4 @@ public class UI_BagManager : MonoBehaviour {
         for (int i = 0; i < members.Count; i++)
             bagSlots[i].UpdateSlot(members[i]);
     }
-
-    public void CleanUp() {
-        bag.SetActive(false);
-    }
 }
