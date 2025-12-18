@@ -122,6 +122,16 @@ public class MapManager : MonoBehaviour {
         }
     }
 
+    public void ModifySuccessors(MapSlotType mapSlotType) {
+        int playerDepth = GameManager.instance.playerDepth;
+        int playerPosition = GameManager.instance.playerPosition;
+        for (int i = 0; i < height[playerDepth + 1]; i++) {
+            if (edges[playerDepth][playerPosition, i]) {
+                types[playerDepth + 1][i] = mapSlotType;
+            }
+        }
+    }
+
     public void ClearMap() {
         height = new int[0];
         vertices = new List<int[]>();

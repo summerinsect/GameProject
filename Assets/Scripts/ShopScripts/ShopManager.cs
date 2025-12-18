@@ -115,7 +115,7 @@ public class ShopManager : MonoBehaviour
     }
 	public void ShopInit()
 	{
-		reloadCharacterCost = 2;
+		reloadCharacterCost = 5;
 		shopCharacterInit();
         UI_ShopManager.instance.UpdateCoinText();
     }
