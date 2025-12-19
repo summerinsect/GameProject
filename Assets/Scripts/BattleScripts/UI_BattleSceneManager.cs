@@ -30,11 +30,11 @@ public class UI_BattleSceneManager : MonoBehaviour {
     public void Start() {
         if (startButton != null) {
             startButton.onClick.RemoveAllListeners();
-            startButton.onClick.AddListener(StageInputHandler.instance.StartBattle);
+            startButton.onClick.AddListener(InputHandler.instance.StartBattle);
         }
         if (endButton != null) {
             endButton.onClick.RemoveAllListeners();
-            endButton.onClick.AddListener(StageInputHandler.instance.EndBattle);
+            endButton.onClick.AddListener(InputHandler.instance.EndBattle);
         }
         UpdateCharacterCountText();
     }
@@ -80,7 +80,7 @@ public class UI_BattleSceneManager : MonoBehaviour {
     }
 
     public void UpdateCharacterCountText() {
-        characterCountText.text = "上场角色数：" + StageInputHandler.instance.currentCharacterCount.ToString() + "/" + StageManager.instance.maxCharacterCount.ToString();
+        characterCountText.text = "上场角色数：" + InputHandler.instance.currentCharacterCount.ToString() + "/" + StageManager.instance.maxCharacterCount.ToString();
     }
 
     public void StartFlashText() {
