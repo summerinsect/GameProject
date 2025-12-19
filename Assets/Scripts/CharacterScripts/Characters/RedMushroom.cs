@@ -21,11 +21,11 @@ public class RedMushroom : Character {
                 string targetId = enemy.uid;
                 enemy.ModifyAttack(-0.2f, 2);
                 if (BattleManager.instance.attackedByGreen.ContainsKey(targetId)) {
-                    BattleManager.instance.DamageCharacter(targetId, DamageCalculator.instance.CalculateDamage(uid, targetId, ratio + 1f));
+                    BattleManager.instance.DamageCharacter(targetId, DamageCalculator.instance.CalculateDamage(uid, targetId, ratio + 1f), uid);
                     BattleManager.instance.attackedByGreen.Remove(targetId);
                 }
                 else {
-                    BattleManager.instance.DamageCharacter(targetId, DamageCalculator.instance.CalculateDamage(uid, targetId, ratio));
+                    BattleManager.instance.DamageCharacter(targetId, DamageCalculator.instance.CalculateDamage(uid, targetId, ratio), uid);
                     BattleManager.instance.attackedByRed[targetId] = enemy;
                 }
             }

@@ -45,6 +45,8 @@ public class UI_BattleSceneManager : MonoBehaviour {
         startButton.gameObject.SetActive(false);
         characterCountText.gameObject.SetActive(false);
         actionBar.gameObject.SetActive(true);
+        if (GameManager.instance.playerDepth == 11)
+            bossUI.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
         EnlargeGrid(gridScale);
     }
 

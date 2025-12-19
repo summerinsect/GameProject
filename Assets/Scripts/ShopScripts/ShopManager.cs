@@ -162,7 +162,8 @@ public class ShopManager : MonoBehaviour
 			UI_ShopManager.instance.UpdateCoinText();
 			if (selectedCharacter.level == 1) {
 				BagManager.instance.AddMember(selectedCharacter);
-				UI_ShopManager.instance.ShowInfo($"购买 {selectedCharacter.characterName} 成功");
+				GameManager.instance.characterCount += 1;
+                UI_ShopManager.instance.ShowInfo($"购买 {selectedCharacter.characterName} 成功");
 			}
 			else {
 				List<Character> bagCharacters = BagManager.instance.members;
@@ -172,6 +173,7 @@ public class ShopManager : MonoBehaviour
 						character.LevelUp();
 					}
 				}
+				GameManager.instance.levelUpCount += 1;
                 UI_ShopManager.instance.ShowInfo($"升级 {selectedCharacter.characterName} 成功");
             }
             shopCharacter.Remove(selectedCharacter);

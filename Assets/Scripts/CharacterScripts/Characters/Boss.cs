@@ -14,7 +14,7 @@ public class Boss : Character {
         moveInterval = Mathf.FloorToInt(20000f / speed);
     }
 
-    public override void IsDamagedBy(int damage) {
+    public override int IsDamagedBy(int damage) {
         int shieldDecrease = Math.Min(shield, damage);
         shield -= shieldDecrease;
         damage -= shieldDecrease;
@@ -23,6 +23,7 @@ public class Boss : Character {
             ActionsWhenDie();
         characterBattleAnimator.PlayDamageEffect(damage);
         UpdateHealthUI();
+        return damage;
     }
 
     public GameObject healthBar;
@@ -88,7 +89,7 @@ public class Boss : Character {
                     enemy.nextRoundTime += Mathf.FloorToInt(0.2f * enemy.moveInterval);
                     ActionBar.instance.UpdateActionBar();
                 }
-                BattleManager.instance.DamageCharacter(targetId, DamageCalculator.instance.CalculateDamage(uid, targetId, ratio));
+                BattleManager.instance.DamageCharacter(targetId, DamageCalculator.instance.CalculateDamage(uid, targetId, ratio), uid);
             }
     }
 }

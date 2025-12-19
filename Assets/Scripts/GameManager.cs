@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
     public static GameManager instance { get; private set; }
@@ -24,23 +26,55 @@ public class GameManager : MonoBehaviour {
     public int playerDepth;
     public int playerPosition;
 
+    public bool victory;
+
+    public DateTime startTime;
+
+    public int battleCount;
+    public int eventCount;
+    public int coinCount;
+    public int characterCount;
+    public int levelUpCount;
+    public Dictionary<string, (string, int)> damageCount = new Dictionary<string, (string, int)>();
+
+    public void InitGame() {
+        BagManager.instance.coin = 60;
+        victory = false;
+        startTime = DateTime.Now;
+        playerDepth = 0;
+        battleCount = 0;
+        eventCount = 0;
+        coinCount = 0;
+        characterCount = 0;
+        levelUpCount = 0;
+        damageCount.Clear();
+        MapManager.instance.GenerateMap();
+    }
+
+    public void UpdateDamageCount(string _attacker, string _attackerName, int _damage) {
+        if (damageCount.ContainsKey(_attacker)) {
+            var entry = damageCount[_attacker];
+            damageCount[_attacker] = (entry.Item1, entry.Item2 + _damage);
+        } 
+        else {
+            damageCount[_attacker] = (_attackerName, _damage);
+        }
+    }
+
+
     #region Scene Controller
     public void StartGame() {
         if (isGameStarted) {
             Debug.Log("Game Started!");
             return;
         }
+        InitGame();
         isGameStarted = true;
-        BagManager.instance.coin = 60;
-        playerDepth = 0;
         inBattle = false;
         inShop = false;
         inEvent = false;
         inMap = true;
-        // AddInitialCharacters();
-        Debug.Log("I want to start game!");
         // MapManager.instance.GenerateMap(mapWidth, mapHeight);
-        MapManager.instance.GenerateMap();
         GameScene.instance.LoadMapScene();
     }
 
@@ -126,4 +160,6 @@ public class GameManager : MonoBehaviour {
     #endregion
 
     public List<Character> shopCharacters = new List<Character>();
+
+    
 }

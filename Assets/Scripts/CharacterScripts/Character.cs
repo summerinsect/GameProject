@@ -46,7 +46,7 @@ public abstract class Character : MonoBehaviour // Base class for all characters
         moveInterval = Mathf.FloorToInt(20000f / speed);
     }
 
-	public virtual void IsDamagedBy(int damage)
+	public virtual int IsDamagedBy(int damage)
 	{
         int shieldDecrease = Math.Min(shield, damage);
         shield -= shieldDecrease;
@@ -56,6 +56,7 @@ public abstract class Character : MonoBehaviour // Base class for all characters
             ActionsWhenDie();
 		characterBattleAnimator.PlayDamageEffect(damage);
 		healthBarUI.UpdateHealthUI();
+        return damage;
 	}
 
     // 战斗开始时（初始化）
@@ -134,7 +135,7 @@ public abstract class Character : MonoBehaviour // Base class for all characters
         foreach (Character enemy in enemies)
             if (GridManager.instance.Distance(attackPosition, enemy.position) < attackRange) {
                 string targetId = enemy.uid;
-                BattleManager.instance.DamageCharacter(targetId, DamageCalculator.instance.CalculateDamage(uid, targetId, ratio));
+                BattleManager.instance.DamageCharacter(targetId, DamageCalculator.instance.CalculateDamage(uid, targetId, ratio), uid);
             }
     }
 	

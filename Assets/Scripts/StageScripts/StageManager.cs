@@ -62,6 +62,18 @@ public class StageManager : MonoBehaviour // Manages the stage setup and battle 
 		foreach (var character in BattleManager.instance.GetAllTeamMember(1)) {
 			Destroy(character.gameObject);
 		}
+		if (winner == 0) {
+			GameManager.instance.battleCount++;
+        }
+
+		if (winner == 1) {
+			GameScene.instance.LoadResultScene();
+			return; // should not happen
+        }
+		if (GameManager.instance.playerDepth == 11) {
+			GameManager.instance.victory = true;
+			GameScene.instance.LoadResultScene();
+		}
 
 		UI_BattleSceneManager.instance.ChangeUIForFinish(winner);
 		GridManager.instance.CleanUp();

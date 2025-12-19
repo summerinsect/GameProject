@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BattleManager : MonoBehaviour
 {
@@ -94,11 +95,14 @@ public class BattleManager : MonoBehaviour
 		RemoveMember(teamId, character);
 	}
 
-    public void DamageCharacter(string uid, int damage)
+    public void DamageCharacter(string uid, int damage, string attackerUid)
 	{
 		Character target = FindCharacter(uid);
-		target.IsDamagedBy(damage);
-	}
+		int realDamage = target.IsDamagedBy(damage);
+		Character attacker = FindCharacter(attackerUid);
+		if (GetTeamID(attacker) == 0)
+			GameManager.instance.UpdateDamageCount(attacker.uid, attacker.characterName, realDamage);
+    }
 
 	public int currentTime = 0;
 

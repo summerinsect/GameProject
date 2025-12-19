@@ -12,7 +12,7 @@ public class Hippo : Character {
         foreach (var neighbor in neighborPosition) {
             Character neighborCharacter = GridManager.instance.FindCharacter(neighbor);
             if (neighborCharacter != null && neighborCharacter.teamId != teamId) {
-                BattleManager.instance.DamageCharacter(neighborCharacter.uid, DamageCalculator.instance.CalculateDamage(uid, neighborCharacter.uid, 0.5f, 1));
+                BattleManager.instance.DamageCharacter(neighborCharacter.uid, DamageCalculator.instance.CalculateDamage(uid, neighborCharacter.uid, 0.5f, 1), uid);
                 neighborCharacter.nextRoundTime += neighborCharacter.moveInterval;
                 ActionBar.instance.UpdateActionBar();
             }

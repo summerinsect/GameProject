@@ -6,8 +6,8 @@ using UnityEngine.TextCore.Text;
 public class CharacterCreater : MonoBehaviour
 {
 	public static CharacterCreater instance { get; private set; }
-	[SerializeField] private List<Character> characterPrefabs = new List<Character>();
-	[SerializeField] private Dictionary<string, Character> prefabDict = new Dictionary<string, Character>();
+	public List<Character> characterPrefabs = new List<Character>();
+	public Dictionary<string, Character> prefabDict = new Dictionary<string, Character>();
 
 	private int characterNumber = 0;
 	private void Awake()

@@ -54,6 +54,7 @@ public class RewardSlot : MonoBehaviour, IPointerClickHandler {
         switch (rewardType) {
             case 0:
                 BagManager.instance.coin += rewardData;
+                GameManager.instance.coinCount += rewardData;
                 break;
             case 1:
                 foreach (var character in BagManager.instance.members) {

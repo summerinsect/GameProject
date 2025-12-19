@@ -55,6 +55,7 @@ public class EventManager : MonoBehaviour {
     }
 
     public void HandleEventOutcome(EventOutcome outcome) {
+        GameManager.instance.eventCount++;
         Character selected = null;
         int bagNumber = BagManager.instance.members.Count;
         if (bagNumber > 0)
@@ -62,6 +63,7 @@ public class EventManager : MonoBehaviour {
         if (outcome.gold > 0) {
             LLMReturnText.text += $"\n获得了 {outcome.gold} 金币！";
             BagManager.instance.coin += outcome.gold;
+            GameManager.instance.coinCount += outcome.gold;
         }
         if (outcome.gold < 0) {
             LLMReturnText.text += $"\n失去了 {-outcome.gold} 金币……";
@@ -125,6 +127,7 @@ public class EventManager : MonoBehaviour {
             else {
                 if (selected.level < 3) {
                     LLMReturnText.text += $"\n{selected.characterName} 的等级提升了！";
+                    GameManager.instance.levelUpCount += 1;
                     selected.LevelUp();
                 }
                 else {
