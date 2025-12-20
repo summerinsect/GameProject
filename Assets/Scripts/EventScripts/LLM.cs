@@ -57,7 +57,7 @@ public class LLM : MonoBehaviour
 
     [Header("API settings")]
     public string apiKey = "sk-zM-NQtQ8f4qe7mhYag60lQ";
-    private const string apiUrl = "https://llmapi.paratera.com/v1/chat/completions";
+    public const string apiUrl = "https://llmapi.paratera.com/v1/chat/completions";
     public string modelId = "Qwen3-Next-80B-A3B-Instruct";
 
     public async Task<string> Chat(ChatMessage[] messages)

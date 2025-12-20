@@ -4,9 +4,9 @@ using Unity.Jobs;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class StageInputHandler : MonoBehaviour // Handles input specific to the battle scene
+public class InputHandler : MonoBehaviour // Handles input specific to the battle scene
 {
-	public static StageInputHandler instance { get; private set; }
+	public static InputHandler instance { get; private set; }
 
 	public bool selected;
 	public bool selectedInBag;

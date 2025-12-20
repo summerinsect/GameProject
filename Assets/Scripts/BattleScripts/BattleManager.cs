@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BattleManager : MonoBehaviour
 {
@@ -47,7 +48,8 @@ public class BattleManager : MonoBehaviour
 		//Debug.Log($"Add member {character.uid} to team {teamId}");
 		team[teamId].AddMember(character);
 		character.characterBattleAnimator.EnableBattleAnimation();
-		character.healthBarUI.UpdateHealthUI();
+		if (character.healthBarUI != null)
+            character.healthBarUI.UpdateHealthUI();
 	}
 
 	public void RemoveMember(int teamId, Character character)
@@ -93,11 +95,14 @@ public class BattleManager : MonoBehaviour
 		RemoveMember(teamId, character);
 	}
 
-    public void DamageCharacter(string uid, int damage)
+    public void DamageCharacter(string uid, int damage, string attackerUid)
 	{
 		Character target = FindCharacter(uid);
-		target.IsDamagedBy(damage);
-	}
+		int realDamage = target.IsDamagedBy(damage);
+		Character attacker = FindCharacter(attackerUid);
+		if (GetTeamID(attacker) == 0)
+			GameManager.instance.UpdateDamageCount(attacker.uid, attacker.characterName, realDamage);
+    }
 
 	public int currentTime = 0;
 
@@ -220,4 +225,7 @@ public class BattleManager : MonoBehaviour
         OnCharacterDied?.Invoke(diedCharacter);
         Debug.Log($"EVENT: Unit {diedCharacter.name} has died.");
     }
+
+    public Dictionary<string, Character> attackedByRed = new Dictionary<string, Character>();
+    public Dictionary<string, Character> attackedByGreen = new Dictionary<string, Character>();
 }

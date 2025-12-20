@@ -30,7 +30,7 @@ public class Eagle : Character {
         foreach (Character enemy in enemies)
             if (Compare(position, enemy.position) == dir) {
                 string targetId = enemy.uid;
-                BattleManager.instance.DamageCharacter(targetId, DamageCalculator.instance.CalculateDamage(uid, targetId, 1));
+                BattleManager.instance.DamageCharacter(targetId, DamageCalculator.instance.CalculateDamage(uid, targetId, 1), uid);
             }
         float timer = 0f;
         while (timer < .3f) {

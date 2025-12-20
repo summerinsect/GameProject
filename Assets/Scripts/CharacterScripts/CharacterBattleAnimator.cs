@@ -50,7 +50,8 @@ public class CharacterBattleAnimator : MonoBehaviour
 	{
 		enableBattleAnimation = true;
 		spriteRenderer.enabled = true;
-		healthBar.enabled = true;
+		if (healthBar != null)
+            healthBar.enabled = true;
         TeleportToPosition();
 		Debug.Log($"[{gameObject.name}] Battle animation enabled, sprite shown");
 	}
@@ -59,7 +60,8 @@ public class CharacterBattleAnimator : MonoBehaviour
 	{
 		enableBattleAnimation = false;
 		spriteRenderer.enabled = false;
-		healthBar.enabled = false;
+		if (healthBar != null)
+            healthBar.enabled = false;
         Debug.Log($"[{gameObject.name}] Battle animation disabled, sprite hidden");
 	}
 

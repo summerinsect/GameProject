@@ -32,8 +32,9 @@ public class GameScene : MonoBehaviour // Manages scene transitions and initiali
     public string mapSceneName = "MapScene";
 	public string ShopSceneName = "ShopScene";
 	public string EventSceneName = "EventScene";
+	public string ResultSceneName = "ResultScene";
 
-	private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 	{
 		if (scene.name == mainSceneName)
 			InitializeMainScene();
@@ -45,8 +46,9 @@ public class GameScene : MonoBehaviour // Manages scene transitions and initiali
 			InitializeShopScene();
 		if (scene.name == EventSceneName)
 			InitializeEventScene();
-
-	}
+		if (scene.name == ResultSceneName)
+			InitializeResultScene();
+    }
 
 	public void LoadScene(string sceneName)
 	{
@@ -110,7 +112,15 @@ public class GameScene : MonoBehaviour // Manages scene transitions and initiali
 	{
 		LoadScene(EventSceneName);
 	}
-	#endregion
+    #endregion
+    #region Result Scene
+    private void InitializeResultScene() {
+        Debug.Log("Initialize Result Scene");
+    }
 
+    public void LoadResultScene() {
+        LoadScene(ResultSceneName);
+    }
+    #endregion
 
 }

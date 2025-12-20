@@ -12,7 +12,7 @@ public class Gorilla : Character {
         foreach (Character enemy in enemies)
             if (GridManager.instance.Distance(attackPosition, enemy.position) < attackRange) {
                 string targetId = enemy.uid;
-                BattleManager.instance.DamageCharacter(targetId, DamageCalculator.instance.CalculateDamage(uid, targetId, ratio));
+                BattleManager.instance.DamageCharacter(targetId, DamageCalculator.instance.CalculateDamage(uid, targetId, ratio), uid);
                 Vector3Int nextPosition = 2 * enemy.position - position;
                 if (GridManager.instance.CheckPosition(nextPosition) && !GridManager.instance.HasCharacter(nextPosition)) {
                     enemy.position = nextPosition;

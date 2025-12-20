@@ -21,6 +21,7 @@ public class UI_BattleSceneManager : MonoBehaviour {
     public GameObject reward;
     public GameObject bag;
     public GameObject statsPanel;
+    public GameObject bossUI;
 
     public TextMeshProUGUI characterCountText;
     private Coroutine flashCoroutine;
@@ -29,11 +30,11 @@ public class UI_BattleSceneManager : MonoBehaviour {
     public void Start() {
         if (startButton != null) {
             startButton.onClick.RemoveAllListeners();
-            startButton.onClick.AddListener(StageInputHandler.instance.StartBattle);
+            startButton.onClick.AddListener(InputHandler.instance.StartBattle);
         }
         if (endButton != null) {
             endButton.onClick.RemoveAllListeners();
-            endButton.onClick.AddListener(StageInputHandler.instance.EndBattle);
+            endButton.onClick.AddListener(InputHandler.instance.EndBattle);
         }
         UpdateCharacterCountText();
     }
@@ -44,6 +45,8 @@ public class UI_BattleSceneManager : MonoBehaviour {
         startButton.gameObject.SetActive(false);
         characterCountText.gameObject.SetActive(false);
         actionBar.gameObject.SetActive(true);
+        if (GameManager.instance.playerDepth == 11)
+            bossUI.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
         EnlargeGrid(gridScale);
     }
 
@@ -65,15 +68,19 @@ public class UI_BattleSceneManager : MonoBehaviour {
         startButton.gameObject.SetActive(false);
         endButton.gameObject.SetActive(true);
         actionBar.gameObject.SetActive(false);
+        if (GameManager.instance.playerDepth == 11)
+            bossUI.gameObject.SetActive(false);
+        if (winner == 1) {
+            endButton.GetComponentInChildren<TextMeshProUGUI>().text = "游戏结束";
+            return;
+        }
         reward.gameObject.SetActive(true);
         statsPanel.gameObject.SetActive(true);
         bag.gameObject.SetActive(true);
-        if (winner == 1)
-            endButton.GetComponentInChildren<TextMeshProUGUI>().text = "游戏结束";
     }
 
     public void UpdateCharacterCountText() {
-        characterCountText.text = "上场角色数：" + StageInputHandler.instance.currentCharacterCount.ToString() + "/" + StageManager.instance.maxCharacterCount.ToString();
+        characterCountText.text = "上场角色数：" + InputHandler.instance.currentCharacterCount.ToString() + "/" + StageManager.instance.maxCharacterCount.ToString();
     }
 
     public void StartFlashText() {

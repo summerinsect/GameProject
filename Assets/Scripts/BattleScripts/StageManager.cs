@@ -26,14 +26,17 @@ public class StageManager : MonoBehaviour // Manages the stage setup and battle 
 
 	public Button startButton;
 	public ActionBar actionBar;
+    public GameObject bossUI;
 
-	public bool isStarted;
+    public bool isStarted;
     public bool isFinished;
 
 	public void StageInit() // init the stage
 	{
 		isStarted = false;
 		isFinished = false;
+        if (GameManager.instance.playerDepth == 11)
+            bossUI.gameObject.SetActive(true);
     }
 	public void StartBattle() // start the battle
 	{
@@ -58,6 +61,18 @@ public class StageManager : MonoBehaviour // Manages the stage setup and battle 
         }
 		foreach (var character in BattleManager.instance.GetAllTeamMember(1)) {
 			Destroy(character.gameObject);
+		}
+		if (winner == 0) {
+			GameManager.instance.battleCount++;
+        }
+
+		if (winner == 1) {
+			GameScene.instance.LoadResultScene();
+			return; // should not happen
+        }
+		if (GameManager.instance.playerDepth == 11) {
+			GameManager.instance.victory = true;
+			GameScene.instance.LoadResultScene();
 		}
 
 		UI_BattleSceneManager.instance.ChangeUIForFinish(winner);
