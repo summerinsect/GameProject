@@ -164,6 +164,7 @@ public class ShopManager : MonoBehaviour
 				BagManager.instance.AddMember(selectedCharacter);
 				GameManager.instance.characterCount += 1;
                 UI_ShopManager.instance.ShowInfo($"购买 {selectedCharacter.characterName} 成功");
+				shopCharacter.Remove(selectedCharacter);
 			}
 			else {
 				List<Character> bagCharacters = BagManager.instance.members;
@@ -175,8 +176,9 @@ public class ShopManager : MonoBehaviour
 				}
 				GameManager.instance.levelUpCount += 1;
                 UI_ShopManager.instance.ShowInfo($"升级 {selectedCharacter.characterName} 成功");
+                shopCharacter.Remove(selectedCharacter);
+                Destroy(selectedCharacter.gameObject);
             }
-            shopCharacter.Remove(selectedCharacter);
             selectedCharacter = null;
             UI_StatsPanel.instance.Clear();
             UI_ShopManager.instance.UpdateSlotUI();
