@@ -64,8 +64,10 @@ public class StageManager : MonoBehaviour // Manages the stage setup and battle 
 		}
 		if (winner == 0) {
 			GameManager.instance.battleCount++;
-        }
-
+			if (GameManager.instance.playerDepth == 7) {
+				AchievementManager.instance.Achieve(0);
+			}
+		}
 		if (winner == 1) {
 			GameScene.instance.LoadResultScene();
 			return; // should not happen

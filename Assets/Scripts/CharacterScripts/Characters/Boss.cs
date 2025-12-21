@@ -52,8 +52,10 @@ public class Boss : Character {
 
     protected override int ProcessSingleRound() {
         RemoveEffect();
-        if (skillCount >= 1)
+        if (skillCount >= 1) {
             shield = Mathf.FloorToInt(0.25f * maxHealth);
+            UpdateHealthUI();
+        }
         if (shield > 0) {
             skillCount = 0;
             attackDistance = 4;

@@ -23,7 +23,6 @@ public class Hippo : Character {
     public override void LevelUp() {
         Debug.Assert(level < 3, "Character has reached max level.");
         level += 1;
-        maxHealth -= 200;
         price -= 2;
         attack += 20;
     }

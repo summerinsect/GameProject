@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour {
     public int characterCount;
     public int levelUpCount;
     public Dictionary<string, (string, int)> damageCount = new Dictionary<string, (string, int)>();
+    public Dictionary<string, int> characterAppear = new Dictionary<string, int>();
 
     public void InitGame() {
         BagManager.instance.coin = 60;
@@ -48,6 +49,7 @@ public class GameManager : MonoBehaviour {
         characterCount = 0;
         levelUpCount = 0;
         damageCount.Clear();
+        characterAppear.Clear();
         MapManager.instance.GenerateMap();
     }
 

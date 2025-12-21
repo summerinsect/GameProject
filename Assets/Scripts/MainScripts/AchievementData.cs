@@ -11,9 +11,14 @@ public class AchievementData : MonoBehaviour {
             return;
         }
         instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     public Sprite[] images = new Sprite[14];
     [TextArea(1, 3)]
     public string[] achievements = new string[14];
+
+    public Sprite locked;
+    [TextArea(1, 3)]
+    public string lockedText;
 }
