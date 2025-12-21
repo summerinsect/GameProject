@@ -163,9 +163,16 @@ public class ShopManager : MonoBehaviour
 			if (selectedCharacter.level == 1) {
 				BagManager.instance.AddMember(selectedCharacter);
 				GameManager.instance.characterCount += 1;
-                UI_ShopManager.instance.ShowInfo($"购买 {selectedCharacter.characterName} 成功");
+				UI_ShopManager.instance.ShowInfo($"购买 {selectedCharacter.characterName} 成功");
 				shopCharacter.Remove(selectedCharacter);
-			}
+				string newName = selectedCharacter.characterName;
+				if (GameManager.instance.characterAppear.ContainsKey(newName) == false) {
+					GameManager.instance.characterAppear[newName] = 1;
+					if (GameManager.instance.characterAppear.Count >= 14) {
+						AchievementManager.instance.Achieve(6);
+					}
+				}
+            }
 			else {
 				List<Character> bagCharacters = BagManager.instance.members;
 				foreach (var character in bagCharacters) {
@@ -175,10 +182,10 @@ public class ShopManager : MonoBehaviour
 					}
 				}
 				GameManager.instance.levelUpCount += 1;
-                UI_ShopManager.instance.ShowInfo($"升级 {selectedCharacter.characterName} 成功");
-                shopCharacter.Remove(selectedCharacter);
-                Destroy(selectedCharacter.gameObject);
-            }
+				UI_ShopManager.instance.ShowInfo($"升级 {selectedCharacter.characterName} 成功");
+				shopCharacter.Remove(selectedCharacter);
+				Destroy(selectedCharacter.gameObject);
+			}
             selectedCharacter = null;
             UI_StatsPanel.instance.Clear();
             UI_ShopManager.instance.UpdateSlotUI();

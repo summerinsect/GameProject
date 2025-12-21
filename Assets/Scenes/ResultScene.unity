@@ -4789,7 +4789,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeDuration: 0.5
-  fadePanel: {fileID: 0}
+  fadePanel: {fileID: 1264243895}
 --- !u!1001 &1679604774
 PrefabInstance:
   m_ObjectHideFlags: 0

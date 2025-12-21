@@ -90,6 +90,36 @@ public class ResultManager : MonoBehaviour {
             timeScore.transform.Find("Number").GetComponent<TextMeshProUGUI>().text = "";
         }
         totalScore.transform.Find("Number").GetComponent<TextMeshProUGUI>().text = $"{score}";
+
+        // check achievements
+        if (GameManager.instance.victory) {
+            AchievementManager.instance.Achieve(1);
+            if (totalSeconds <= 120) {
+                AchievementManager.instance.Achieve(4);
+            }
+            if (score >= 1250) {
+                AchievementManager.instance.Achieve(5);
+            }
+            int count3star = 0;
+            foreach (var character in BagManager.instance.members) {
+                if (character.level == 3) {
+                    count3star++;
+                }
+            }
+            if (count3star >= 2) {
+                AchievementManager.instance.Achieve(7);
+            }
+            if (GameManager.instance.coinCount >= 120) {
+                AchievementManager.instance.Achieve(8);
+            }
+            if (GameManager.instance.coinCount <= 20) {
+                AchievementManager.instance.Achieve(9);
+            }
+            if (BagManager.instance.members.Count == GameManager.instance.characterCount) {
+                AchievementManager.instance.Achieve(11);
+            }
+        }
+        
     }
 
     private void SetDamageCount() {
@@ -108,6 +138,9 @@ public class ResultManager : MonoBehaviour {
                     damageSlots[i].transform.Find("DamageNumber").GetComponent<TextMeshProUGUI>().text = $"{entry.Value.Item2}";
                 }
             }
+            if (maxDamage >= 10000) {
+                AchievementManager.instance.Achieve(10);
+            }
             if (maxDamage == 0)
                 break;
             foreach (var entry in damageCount) {
@@ -121,6 +154,7 @@ public class ResultManager : MonoBehaviour {
                 }
             }
         }
+        
     }
 
     public void ReturnHome() {

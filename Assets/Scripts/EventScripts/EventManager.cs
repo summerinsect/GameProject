@@ -64,6 +64,9 @@ public class EventManager : MonoBehaviour {
             LLMReturnText.text += $"\n获得了 {outcome.gold} 金币！";
             BagManager.instance.coin += outcome.gold;
             GameManager.instance.coinCount += outcome.gold;
+            if (outcome.gold >= 27) {
+                AchievementManager.instance.Achieve(2);
+            }
         }
         if (outcome.gold < 0) {
             LLMReturnText.text += $"\n失去了 {-outcome.gold} 金币……";
@@ -71,6 +74,9 @@ public class EventManager : MonoBehaviour {
             if (BagManager.instance.coin < 0) {
                 BagManager.instance.coin = 0;
                 LLMReturnText.text += "（金币最多减少到0）";
+            }
+            if (outcome.gold <= -9) {
+                AchievementManager.instance.Achieve(3);
             }
         }
         if (outcome.hp > 0) {
@@ -83,6 +89,9 @@ public class EventManager : MonoBehaviour {
                 if (selected.currentHealth > selected.maxHealth) {
                     selected.currentHealth = selected.maxHealth;
                     LLMReturnText.text += "（生命值不能超过上限）";
+                }
+                if (outcome.hp >= 135) {
+                    AchievementManager.instance.Achieve(2);
                 }
             }
         }
@@ -97,6 +106,9 @@ public class EventManager : MonoBehaviour {
                     selected.currentHealth = 1;
                     LLMReturnText.text += "（生命值至多减少到1）";
                 }
+                if (outcome.hp <= -45) {
+                    AchievementManager.instance.Achieve(3);
+                }
             }
         }
         if (outcome.attack > 0) {
@@ -105,6 +117,10 @@ public class EventManager : MonoBehaviour {
             }
             else {
                 LLMReturnText.text += $"\n{selected.characterName} 提高了 {outcome.attack} 攻击力！";
+                selected.attack += outcome.attack;
+                if (outcome.attack >= 18) {
+                    AchievementManager.instance.Achieve(2);
+                }
             }
         }
         if (outcome.attack < 0) {
@@ -118,6 +134,9 @@ public class EventManager : MonoBehaviour {
                     selected.attack = 1;
                     LLMReturnText.text += "（攻击力至多减少到1）";
                 }
+                if (outcome.attack <= -9) {
+                    AchievementManager.instance.Achieve(3);
+                }
             }
         }
         if (outcome.level == 1) {
@@ -129,6 +148,7 @@ public class EventManager : MonoBehaviour {
                     LLMReturnText.text += $"\n{selected.characterName} 的等级提升了！";
                     GameManager.instance.levelUpCount += 1;
                     selected.LevelUp();
+                    AchievementManager.instance.Achieve(2);
                 }
                 else {
                     LLMReturnText.text += $"\n{selected.characterName} 已经达到满级，无法再提升了……";
@@ -139,6 +159,7 @@ public class EventManager : MonoBehaviour {
             nextLevelButton.GetComponentInChildren<TextMeshProUGUI>().text = "进入战斗";
             nextLevelButton.onClick.RemoveAllListeners();
             nextLevelButton.onClick.AddListener(GameManager.instance.FromEventToBattle);
+            AchievementManager.instance.Achieve(12);
         }
     }
 }

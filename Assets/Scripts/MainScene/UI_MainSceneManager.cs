@@ -4,12 +4,23 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class UI_MainSceneManager : MonoBehaviour {
+    public static UI_MainSceneManager instance { get; private set; }
+
+    private void Awake() {
+        if (instance != null && instance != this) {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+    }
+
     public void StartGame() {
         GameManager.instance.StartGame();
     }
 
     public GameObject rules;
     public GameObject achievements;
+    public GameObject[] achievementSlots = new GameObject[14];
 
     public void ShowRules() {
         rules.SetActive(true);
@@ -21,6 +32,7 @@ public class UI_MainSceneManager : MonoBehaviour {
 
     public void ShowAchievements() {
         achievements.SetActive(true);
+        AchievementManager.instance.UpdateAchievementUI();
     }
 
     public void HideAchievements() {
