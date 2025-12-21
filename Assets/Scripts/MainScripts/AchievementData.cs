@@ -11,6 +11,7 @@ public class AchievementData : MonoBehaviour {
             return;
         }
         instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     public Sprite[] images = new Sprite[14];

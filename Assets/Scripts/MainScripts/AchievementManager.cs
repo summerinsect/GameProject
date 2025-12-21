@@ -15,7 +15,7 @@ public class AchievementManager : MonoBehaviour {
     public static AchievementManager instance { get; private set; }
 
     private const string achievementFileName = "achievement.json";
-    private bool[] achievementStatus = new bool[14];
+    public bool[] achievementStatus = new bool[14];
 
     private void Awake() {
         if (instance != null && instance != this) {
@@ -69,7 +69,7 @@ public class AchievementManager : MonoBehaviour {
     public void Achieve(int index) {
         ReadData();
         if (Get(index)) return; // already achieved
-        // To do: show info
+        ShowAchievement(index);
         Set(index, true);
         SaveData();
     }
@@ -77,6 +77,7 @@ public class AchievementManager : MonoBehaviour {
     public GameObject[] achievementSlots = new GameObject[14];
 
     public void UpdateAchievementUI() {
+        ReadData();
         achievementSlots = UI_MainSceneManager.instance.achievementSlots;
         for (int i = 0; i < achievementSlots.Length; i++) {
             if (Get(i)) {
@@ -91,5 +92,62 @@ public class AchievementManager : MonoBehaviour {
                     achievementSlots[i].transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = AchievementData.instance.lockedText;
             }
         }
+    }
+
+    public void ResetAchievements() {
+        for (int i = 0; i < achievementStatus.Length; i++) {
+            achievementStatus[i] = false;
+        }
+        SaveData();
+    }
+
+    public GameObject achievementSlotPrefab;
+    public bool isShowingAchievement = false;
+    public Queue<int> achievementQueue = new Queue<int>();
+
+    public void ShowAchievement() {
+        if (achievementQueue.Count > 0 && !isShowingAchievement) {
+            int index = achievementQueue.Dequeue();
+            StartCoroutine(ShowAchievementCoroutine(index));
+        }
+    }
+
+    public void ShowAchievement(int index) {
+        if (isShowingAchievement) {
+            achievementQueue.Enqueue(index);
+        } else {
+            StartCoroutine(ShowAchievementCoroutine(index));
+        }
+    }
+
+    public IEnumerator ShowAchievementCoroutine(int index, float enterTime = 0.5f, float showTime = 3f) {
+        isShowingAchievement = true;
+        GameObject achievementSlot = Instantiate(achievementSlotPrefab, GameObject.Find("Canvas").transform);
+        achievementSlot.transform.Find("Image").GetComponent<Image>().sprite = AchievementData.instance.images[index];
+        achievementSlot.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = AchievementData.instance.achievements[index];
+        achievementSlot.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -150);
+        float elapsedTime = 0f;
+        while (elapsedTime < enterTime) {
+            elapsedTime += Time.deltaTime;
+            float newY = Mathf.Lerp(-150, 0, elapsedTime / enterTime);
+            achievementSlot.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, newY);
+            yield return null;
+        }
+        achievementSlot.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
+        elapsedTime = 0;
+        while (elapsedTime < showTime) {
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        elapsedTime = 0f;
+        while (elapsedTime < enterTime) {
+            elapsedTime += Time.deltaTime;
+            float newY = Mathf.Lerp(0, -150, elapsedTime / enterTime);
+            achievementSlot.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, newY);
+            yield return null;
+        }
+        Destroy(achievementSlot);
+        isShowingAchievement = false;
+        ShowAchievement();
     }
 }

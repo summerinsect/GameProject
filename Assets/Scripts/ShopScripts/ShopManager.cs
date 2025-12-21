@@ -169,7 +169,7 @@ public class ShopManager : MonoBehaviour
 				if (GameManager.instance.characterAppear.ContainsKey(newName) == false) {
 					GameManager.instance.characterAppear[newName] = 1;
 					if (GameManager.instance.characterAppear.Count >= 14) {
-						AchievementManager.instance.Achieve(6);
+						AchievementManager.instance.Achieve(7);
 					}
 				}
             }

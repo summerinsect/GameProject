@@ -107,7 +107,7 @@ public class ResultManager : MonoBehaviour {
                 }
             }
             if (count3star >= 2) {
-                AchievementManager.instance.Achieve(7);
+                AchievementManager.instance.Achieve(6);
             }
             if (GameManager.instance.coinCount >= 120) {
                 AchievementManager.instance.Achieve(8);

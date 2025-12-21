@@ -37,7 +37,12 @@ public class UI_MainSceneManager : MonoBehaviour {
 
     public void HideAchievements() {
         achievements.SetActive(false);
-    }   
+    }
+    
+    public void ResetAchievements() {
+        AchievementManager.instance.ResetAchievements();
+        AchievementManager.instance.UpdateAchievementUI();
+    }
 
     public void QuitGame() {
         // 1. 让编译后的正式版游戏退出
