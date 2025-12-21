@@ -98,14 +98,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98c729f68c3f8f84b8ef8a48178b1651, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 18
+  price: 12
   level: 0
-  maxHealth: 640
-  attack: 85
+  maxHealth: 600
+  attack: 80
   attackDistance: 1
   attackRange: 1
   speed: 105
-  skillDescription: "\u8FC5\u6377\u7684\u730E\u8C79\uFF0C\u80FD\u7A7F\u900F\u9632\u7EBF\u5BFB\u627E\u6700\u8FDC\u7684\u76EE\u6807\u3002\n\u6280\u80FD\uFF1A\u6BCF\u653B\u51FB3\u6B21\uFF0C\u653B\u51FB1\u6B21\u6700\u8FDC\u7684\u654C\u65B9\u76EE\u6807\u3002"
+  skillDescription: "\u8FC5\u6377\u7684\u730E\u8C79\uFF0C\u80FD\u7A7F\u900F\u9632\u7EBF\u5BFB\u627E\u6700\u8FDC\u7684\u76EE\u6807\u3002\n\u6280\u80FD\uFF1A\u6BCF\u653B\u51FB2\u6B21\uFF0C\u653B\u51FB1\u6B21\u6700\u8FDC\u7684\u654C\u65B9\u76EE\u6807\u3002"
   characterName: "\u7A81\u88AD\u730E\u8C79"
   currentAttack: 0
   currentMaxHealth: 0

@@ -1,9 +1,6 @@
 {
     "maxCharacterCount": 5,
     "enemyList": [
-        {"name": "剑齿突击者", "xPos": 2, "yPos": 3, "zPos": -5},
-        {"name": "毒箭射手", "xPos": 3, "yPos": 1, "zPos": -4},
-        {"name": "炽热飞龙", "xPos": 4, "yPos": -1, "zPos": -3},
-        {"name": "突袭猎豹", "xPos": 5, "yPos": -3, "zPos": -2}
+        {"name": "亡语者", "xPos": 0, "yPos": 0, "zPos": 0}
     ]
 }
