@@ -62,6 +62,7 @@ public abstract class Character : MonoBehaviour // Base class for all characters
     // 战斗开始时（初始化）
     public virtual void ActionsWhenStart() {
         currentAttack = attack;
+        currentMaxHealth = maxHealth;
     }
 
 	public virtual int SingleRound() 

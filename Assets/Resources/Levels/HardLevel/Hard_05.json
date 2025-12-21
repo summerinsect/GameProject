@@ -4,6 +4,6 @@
         {"name": "古树守卫", "xPos": 2, "yPos": 1, "zPos": -3},
         {"name": "古树守卫", "xPos": 3, "yPos": 0, "zPos": -3},
         {"name": "伏击者", "xPos": 2, "yPos": 0, "zPos": -2},
-        {"name": "猎头祭司", "xPos": 3, "yPos": 0, "zPos": -3}
+        {"name": "猎头祭司", "xPos": 3, "yPos": -1, "zPos": -4}
     ]
 }

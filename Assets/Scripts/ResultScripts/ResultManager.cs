@@ -69,12 +69,12 @@ public class ResultManager : MonoBehaviour {
         score += GameManager.instance.coinCount;
         coinScore.transform.Find("Number").GetComponent<TextMeshProUGUI>().text = $"{GameManager.instance.coinCount}";
         if (GameManager.instance.victory) {
-            if (totalSeconds <= 600) {
+            if (totalSeconds <= 240) {
                 score += 200;
                 timeScore.transform.Find("Text").GetComponent<TextMeshProUGUI>().text = "光速";
                 timeScore.transform.Find("Number").GetComponent<TextMeshProUGUI>().text = "200";
             }
-            else if (totalSeconds <= 900) {
+            else if (totalSeconds <= 360) {
                 score += 100;
                 timeScore.transform.Find("Text").GetComponent<TextMeshProUGUI>().text = "高速";
                 timeScore.transform.Find("Number").GetComponent<TextMeshProUGUI>().text = "100";

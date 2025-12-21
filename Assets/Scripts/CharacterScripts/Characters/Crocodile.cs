@@ -2,15 +2,18 @@
 using System;
 
 public class Crocodile : Character {
-    // 场上每有一个单位死亡时，本场战斗内最大生命值和攻击力永久提升10%
+    int skillCount;
+
     public override void ActionsWhenStart() {
         base.ActionsWhenStart();
+        skillCount = 0;
         BattleManager.instance.OnCharacterDied += Skill;
     }
 
     public void Skill(Character _character) {
-        ModifyAttack(0.1f, 10000);
-        ModifyHealth(0.1f, 10000);
+        ModifyAttack(0.07f, 10000);
+        ModifyHealth(0.07f, 10000);
+        ++skillCount;
     }
 
     public override void ActionsWhenDie() {
@@ -20,6 +23,10 @@ public class Crocodile : Character {
 
     public override void ActionsWhenEnd() {
         BattleManager.instance.OnCharacterDied -= Skill;
+        for (int i = 0; i < skillCount; i++) {
+            attack = currentAttack;
+            maxHealth = currentMaxHealth;
+        }
         base.ActionsWhenEnd();
     }
 }

@@ -19,7 +19,7 @@ public class Cheetah : Character {
         if (targetId != null) {
             AttackLogic(targetId);
             skillCount++;
-            if (skillCount == 3) {
+            if (skillCount == 2) {
                 AttackFarthest();
                 skillCount = 0;
             }
@@ -41,8 +41,10 @@ public class Cheetah : Character {
         }
         Extensions.Shuffle(enemies);
         foreach (var enemy in enemies)
-            if (GridManager.instance.Distance(position, enemy.position) == maxDistance)
+            if (GridManager.instance.Distance(position, enemy.position) == maxDistance) {
                 AttackLogic(enemy.position);
+                break;
+            }
         skillCount = 0;
     }
 }

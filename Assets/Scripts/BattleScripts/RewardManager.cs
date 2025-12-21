@@ -21,12 +21,12 @@ public class RewardManager : MonoBehaviour {
     public TextMeshProUGUI coinNumber;
 
     private void Start() {
-        data[0, 0] = 10; data[0, 1] = 15; data[0, 2] = 20;
-        data[1, 0] = 5; data[1, 1] = 10; data[1, 2] = 15;
-        data[2, 0] = 3; data[2, 1] = 6; data[2, 2] = 9;
-        data[3, 0] = 3; data[3, 1] = 6; data[3, 2] = 9;
-        data[4, 0] = 3; data[4, 1] = 6; data[4, 2] = 9;
-        data[5, 0] = 0; data[5, 1] = 0; data[5, 2] = 1;
+        data[0, 0] = 10; data[0, 1] = 15; data[0, 2] = 20; // 金币
+        data[1, 0] = 5; data[1, 1] = 10; data[1, 2] = 15; // 回复生命值
+        data[2, 0] = 3; data[2, 1] = 6; data[2, 2] = 9; // 提升攻击力
+        data[3, 0] = 3; data[3, 1] = 6; data[3, 2] = 9; // 提升最大生命值
+        data[4, 0] = 3; data[4, 1] = 6; data[4, 2] = 9; // 提升速度
+        data[5, 0] = 0; data[5, 1] = 0; data[5, 2] = 1; // 修改下一关
         playerDepth = GameManager.instance.playerDepth;
         coinNumber.text = BagManager.instance.coin.ToString();
         GenerateRewards();
@@ -60,6 +60,8 @@ public class RewardManager : MonoBehaviour {
 
     public void GenerateRewards() {
         weight[0] = 2; weight[1] = 2; weight[2] = 1; weight[3] = 1; weight[4] = 1;
+        if (playerDepth == 10)
+            weight[4] = 0;
         rewardSlots[0].SetReward(0, data[0, GetDataIndex()]);
         rewardSlots[1].SetReward(0, data[0, GetDataIndex()]);
         rewardSlots[2].SetReward(0, data[0, GetDataIndex()]);
