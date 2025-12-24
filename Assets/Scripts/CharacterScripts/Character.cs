@@ -46,18 +46,21 @@ public abstract class Character : MonoBehaviour // Base class for all characters
         moveInterval = Mathf.FloorToInt(20000f / speed);
     }
 
-	public virtual int IsDamagedBy(int damage)
-	{
+	public virtual int IsDamagedBy(int damage) {
         int shieldDecrease = Math.Min(shield, damage);
         shield -= shieldDecrease;
         damage -= shieldDecrease;
-		currentHealth -= damage;
+        currentHealth -= damage;
         if (!isAlive)
             ActionsWhenDie();
-		characterBattleAnimator.PlayDamageEffect(damage);
-		healthBarUI.UpdateHealthUI();
+        characterBattleAnimator.PlayDamageEffect(damage);
+        UpdateHealthUI();
         return damage;
-	}
+    }
+
+    public virtual void UpdateHealthUI() {
+        healthBarUI.UpdateHealthUI();
+    }
 
     // 战斗开始时（初始化）
     public virtual void ActionsWhenStart() {
@@ -259,6 +262,7 @@ public abstract class Character : MonoBehaviour // Base class for all characters
         currentHealth = Mathf.FloorToInt(currentRatio * currentMaxHealth);
         if (currentHealth <= 0)
             currentHealth = 1;
+        UpdateHealthUI();
     }
     #endregion
 

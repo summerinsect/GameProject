@@ -30,7 +30,7 @@ public class Boss : Character {
     public GameObject fillHealth;
     public GameObject fillShield;
 
-    private void UpdateHealthUI() {
+    public override void UpdateHealthUI() {
         float totalLength = healthBar.GetComponent<RectTransform>().rect.width;
         float height = healthBar.GetComponent<RectTransform>().rect.height;
         float healthPercent = 1.0f * currentHealth / maxHealth;

@@ -12,7 +12,7 @@ public class Rhino : Character {
             Character neighborCharacter = GridManager.instance.FindCharacter(neighbor);
             if (neighborCharacter != null && neighborCharacter.teamId == teamId) {
                 neighborCharacter.shield = neighborCharacter.maxHealth / 4;
-                neighborCharacter.healthBarUI.UpdateHealthUI();
+                neighborCharacter.UpdateHealthUI();
             }
         }
     }

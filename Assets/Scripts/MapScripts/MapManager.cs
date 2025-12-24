@@ -130,7 +130,7 @@ public class MapManager : MonoBehaviour {
                 types[playerDepth + 1][i] = mapSlotType;
             }
         }
-        if (playerDepth == 7) {
+        if (playerDepth == 6) {
             AchievementManager.instance.Achieve(13);
         }
     }

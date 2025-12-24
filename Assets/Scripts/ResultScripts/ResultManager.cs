@@ -74,7 +74,7 @@ public class ResultManager : MonoBehaviour {
                 timeScore.transform.Find("Text").GetComponent<TextMeshProUGUI>().text = "光速";
                 timeScore.transform.Find("Number").GetComponent<TextMeshProUGUI>().text = "200";
             }
-            else if (totalSeconds <= 360) {
+            else if (totalSeconds <= 480) {
                 score += 100;
                 timeScore.transform.Find("Text").GetComponent<TextMeshProUGUI>().text = "高速";
                 timeScore.transform.Find("Number").GetComponent<TextMeshProUGUI>().text = "100";
@@ -109,7 +109,7 @@ public class ResultManager : MonoBehaviour {
             if (count3star >= 2) {
                 AchievementManager.instance.Achieve(6);
             }
-            if (GameManager.instance.coinCount >= 120) {
+            if (GameManager.instance.coinCount >= 188) {
                 AchievementManager.instance.Achieve(8);
             }
             if (GameManager.instance.coinCount <= 20) {
