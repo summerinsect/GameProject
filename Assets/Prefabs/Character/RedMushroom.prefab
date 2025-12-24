@@ -100,7 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   price: 0
   level: 0
-  maxHealth: 1800
+  maxHealth: 1500
   attack: 60
   attackDistance: 3
   attackRange: 2

@@ -18,6 +18,7 @@ public class Vulture : Character {
             if (skillCount == 2) {
                 Character defender = GridManager.instance.FindCharacter(targetId.Value);
                 defender.ModifyTakenDamage(0.5f, 2);
+                skillCount = 0;
             }
             return 1;
         }

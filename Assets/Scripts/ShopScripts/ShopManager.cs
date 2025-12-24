@@ -76,15 +76,15 @@ public class ShopManager : MonoBehaviour
 					weight[i] = 0;
 					continue;
 				}
-                weight[i] = (100 - possibleCharacters[i].price) * 50 + (depth - 1) * 100;
+                weight[i] = (70 - possibleCharacters[i].price) * 50 + depth * 100;
 				int level = BagManager.instance.FindCharacterLevel(possibleCharacters[i].characterName) + 1;
-				if (depth >= 8) {
+				if (depth >= 7) {
 					weight[i] /= level;
 				}
-				else if (depth >= 5) {
+				else if (depth >= 4) {
 					weight[i] /= level * level;
 				}
-				else if (depth >= 2) {
+				else if (depth >= 1) {
 					weight[i] /= level * level * level;
 				}
 				else {

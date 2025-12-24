@@ -26,19 +26,22 @@ public class RewardManager : MonoBehaviour {
         data[2, 0] = 3; data[2, 1] = 6; data[2, 2] = 9; // 提升攻击力
         data[3, 0] = 3; data[3, 1] = 6; data[3, 2] = 9; // 提升最大生命值
         data[4, 0] = 3; data[4, 1] = 6; data[4, 2] = 9; // 提升速度
-        data[5, 0] = 0; data[5, 1] = 0; data[5, 2] = 1; // 修改下一关
+        data[5, 0] = 0; data[5, 1] = 1; data[5, 2] = 1; // 修改下一关
         playerDepth = GameManager.instance.playerDepth;
         coinNumber.text = BagManager.instance.coin.ToString();
         GenerateRewards();
     }
 
-    private int GetDataIndex() {
+    private int GetDataIndex(bool special = false) {
+        if (special) {
+            return Random.Range(0, 2);
+        }
         int w0, w1;
-        if (playerDepth <= 4) {
+        if (playerDepth <= 3) {
             w0 = 65;
             w1 = 95;
         }
-        else if (playerDepth <= 8) {
+        else if (playerDepth <= 6) {
             w0 = 30;
             w1 = 80;
         }
@@ -83,7 +86,7 @@ public class RewardManager : MonoBehaviour {
                 }
             }
             weight[id] = 0;
-            rewardSlots[i].SetReward(id + 1, data[id + 1, GetDataIndex()]);
+            rewardSlots[i].SetReward(id + 1, data[id + 1, GetDataIndex(id == 4)]);
         }
         Extensions.Shuffle(rewardSlots);
         for (int i = 0; i < rewardSlots.Length; i++) {

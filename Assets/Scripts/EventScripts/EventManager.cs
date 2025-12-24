@@ -42,6 +42,8 @@ public class EventManager : MonoBehaviour {
 
     public async void HandleInputCompletion()
 	{
+        endInputButton.onClick.RemoveAllListeners();
+        endInputButton.gameObject.SetActive(false);
         LLMReturnText.text = "ÇëµÈ´ý¡­¡­";
 		EventReply eventReply = await ReplyGenerator.instance.GenerateReply(userInputField.text);
         LLMReturnText.text = eventReply.narrative;
